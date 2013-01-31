@@ -2,7 +2,7 @@
 {
 	08FB7793FE84155DC02AAC07 /* Project object */ = {
 		activeArchitecturePreference = i386;
-		activeBuildConfigurationName = Debug;
+		activeBuildConfigurationName = Release;
 		activeExecutable = 220F5BB20C0716DC005EC17E /* cliclick */;
 		activeTarget = 8DD76F960486AA7600D96B5E /* cliclick */;
 		addToTargets = (
@@ -132,7 +132,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					720,
+					1341,
 					60,
 					20,
 					48,
@@ -149,8 +149,8 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 381352223;
-			PBXWorkspaceStateSaveDate = 381352223;
+			PBXPerProjectTemplateStateSaveDate = 381360292;
+			PBXWorkspaceStateSaveDate = 381360292;
 		};
 		sourceControlManager = 220F5B4B0C071551005EC17E /* Source Control */;
 		userBuildSettings = {
