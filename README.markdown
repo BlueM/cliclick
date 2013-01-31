@@ -5,4 +5,4 @@ cliclick (short for “Command Line Interface Click”) is a tool for executing 
 
 For more information, please take a look at [cliclick’s homepage](http://www.bluem.net/jump/cliclick/)
 
-Author: Carsten Blüm, Website: www.bluem.net(http://www.bluem.net) 
+Author: Carsten Blüm, Website: www.bluem.net 
