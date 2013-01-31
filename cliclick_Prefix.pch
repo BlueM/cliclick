@@ -1,0 +1,12 @@
+//
+// Prefix header for all source files of the 'cliclick' target in the 'cliclick' project.
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <Cocoa/Cocoa.h>
+#endif
+
+#define MODE_REGULAR 0
+#define MODE_VERBOSE 1
+#define MODE_TEST 2
