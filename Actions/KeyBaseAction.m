@@ -41,7 +41,125 @@
          shortcut, shortcut, shortcut];
     }
     
-    NSDictionary *keycodes = [NSDictionary dictionaryWithObjectsAndKeys:@"59", @"ctrl", @"55", @"cmd", @"58", @"alt", @"36", @"return", @"53", @"esc", nil];
+    NSDictionary *keycodes = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"59", @"ctrl",
+                              @"55", @"cmd",
+                              @"58", @"alt",
+                              @"36", @"return",
+                              @"53", @"esc",
+                              // Based on http://web.archive.org/web/20100501161453/http://www.classicteck.com/rbarticles/mackeyboard.php
+                              @"0", @"a",
+                              @"1", @"s",
+                              @"2", @"d",
+                              @"3", @"f",
+                              @"4", @"h",
+                              @"5", @"g",
+                              @"6", @"z",
+                              @"7", @"x",
+                              @"8", @"c",
+                              @"9", @"v",
+                              // 10 what are you?
+                              @"11", @"b",
+                              @"12", @"q",
+                              @"13", @"w",
+                              @"14", @"e",
+                              @"15", @"r",
+                              @"16", @"y",
+                              @"17", @"t",
+                              @"18", @"1",
+                              @"19", @"2",
+                              @"20", @"3",
+                              @"21", @"4",
+                              @"22", @"6",
+                              @"23", @"5",
+                              @"24", @"=",
+                              @"25", @"9",
+                              @"26", @"7",
+                              @"27", @"-",
+                              @"28", @"8",
+                              @"29", @"0",
+                              @"30", @"]",
+                              @"31", @"o",
+                              @"32", @"u",
+                              @"33", @"[",
+                              @"34", @"i",
+                              @"35", @"p",
+                              // return is above
+                              @"37", @"l",
+                              @"38", @"j",
+                              @"39", @"'",
+                              @"40", @"k",
+                              @"41", @";",
+                              @"42", @"\\",
+                              @"43", @"comma",
+                              @"44", @"/",
+                              @"45", @"n",
+                              @"46", @"m",
+                              @"47", @".",
+                              @"48", @"tab",
+                              @"49", @"space",
+                              @"50", @"tilde",
+                              @"51", @"delete",
+                              // esc is above
+                              // cmd is above
+                              // More unmappped
+                              @"56", @"shift",
+                              @"57", @"capslock",
+                              // menu/alt/option is above
+                              // control is above
+                              // More unmapped
+                              @"63", @"fn",
+                              // More unmapped
+                              @"65", @"decimal",
+                              // More unmapped
+                              @"67", @"multiply",
+                              // More unmapped
+                              @"69", @"add",
+                              // More unmapped
+                              @"75", @"divide",
+                              @"76", @"enter",
+                              // More unmapped
+                              @"78", @"subtract",
+                              // More unmapped
+                              @"81", @"numequal",
+                              @"82", @"num0",
+                              @"83", @"num1",
+                              @"84", @"num2",
+                              @"85", @"num3",
+                              @"86", @"num4",
+                              @"87", @"num5",
+                              @"88", @"num6",
+                              @"89", @"num7",
+                              // More unmapped
+                              @"91", @"num8",
+                              @"92", @"num9",
+                              // More unmapped
+                              @"96", @"f5",
+                              @"97", @"f6",
+                              @"98", @"f7",
+                              @"99", @"f3",
+                              @"100", @"f8",
+                              @"101", @"f9",
+                              @"103", @"f11",
+                              // More unmapped
+                              @"109", @"f10",
+                              @"110", @"winapp",
+                              @"111", @"f12",
+                              // More unmapped
+                              @"114", @"help",
+                              @"115", @"home",
+                              @"116", @"pageup",
+                              @"117", @"backspace",
+                              @"118", @"f4",
+                              @"119", @"end",
+                              @"120", @"f2",
+                              @"121", @"pagedown",
+                              @"122", @"f1",
+                              @"123", @"left",
+                              @"124", @"right",
+                              @"125", @"down",
+                              @"126", @"up",
+                              nil];
     NSArray *keys = [data componentsSeparatedByString:@","];
     NSUInteger i, count = [keys count];
     
