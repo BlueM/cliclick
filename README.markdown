@@ -115,7 +115,7 @@ down",
 
 
 You now have make, make install and make clean available:
-
+```
 Walters-MacBook-Pro:cliclick wschrep$ make install
 cc  -include cliclick_Prefix.pch -I Actions   -c -o Actions/ClickAction.o Actions/ClickAction.m
 cc  -include cliclick_Prefix.pch -I Actions   -c -o Actions/DoubleclickAction.o Actions/DoubleclickAction.m
@@ -167,4 +167,4 @@ cliclick.m:264:12: warning: format string is not a string literal (potentially i
 gcc -o cliclick Actions/ClickAction.o Actions/DoubleclickAction.o Actions/KeyBaseAction.o Actions/KeyDownAction.o Actions/KeyPressAction.o Actions/KeyUpAction.o Actions/MouseBaseAction.o Actions/MoveAction.o Actions/PrintAction.o Actions/TripleclickAction.o Actions/WaitAction.o ActionExecutor.o cliclick.o -framework Cocoa
 cp cliclick /usr/local/bin/
 Walters-MacBook-Pro:cliclick wschrep$ 
-
+```
