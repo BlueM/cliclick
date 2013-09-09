@@ -13,10 +13,8 @@ make clean -> cleans up removes all binary files
 Author: Carsten Blüm, Website: www.bluem.net 
 Contributer: Walter Schreppers.
 
-Added Makefile and extended the base key class. It used to only support cmd, enter, esc but in this version we basically added most
-known keycodes (space, arrows up down left right). Here's the full list of supported keys now:
-
-
+Added Makefile and extended the KeyBaseAction class. It used to only support cmd, enter, esc but in this version we basically added most
+known keycodes (space, arrows up down left right, function keys etc.). Here's the full list of supported keys now:
  
 ctrl
 cmd
@@ -71,7 +69,7 @@ k
 n 
 m 
 . 
-`
+\\`
 delete
 .
 *
