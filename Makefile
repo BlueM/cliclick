@@ -14,5 +14,5 @@ install: cliclick
 	cp cliclick /usr/local/bin/
 
 clean:
-	@rm -vf *.o *~
+	@rm -vf *.o Actions/*.o *~
 	@rm -vf cliclick
