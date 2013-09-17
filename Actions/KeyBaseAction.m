@@ -84,6 +84,7 @@
 -(NSString *)actionDescriptionString:(NSString *)keyName {    
     [NSException raise:@"InvalidCommandException"
                 format:@"To be implemented by subclasses"];
+    return @"Will never be reached, but makes Xcode happy ;-)";
 }
 
 -(void)performActionWithKeycode:(CGKeyCode)code {

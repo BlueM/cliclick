@@ -36,7 +36,4 @@
 
 +(NSString *)commandListShortcut;
 
--(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode;
-
 @end

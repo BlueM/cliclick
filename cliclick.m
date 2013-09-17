@@ -35,7 +35,6 @@
 
 void error();
 void help();
-float dblclickfactor();
 void printMouseLocation();
 NSArray* parseCommandsFile(NSString *filepath);
 NSString* buildDateInMDYFormat();
@@ -70,10 +69,10 @@ int main (int argc, const char * argv[]) {
                 [pool release];
                 return EXIT_SUCCESS;
             case 'm':
-                modeOption = [NSString stringWithCString:optarg];
+                modeOption = [NSString stringWithCString:optarg encoding:NSASCIIStringEncoding];
                 break;
             case 'f':
-                filepath = [NSString stringWithCString:optarg];
+                filepath = [NSString stringWithCString:optarg encoding:NSASCIIStringEncoding];
                 break;
             case 'r':
                 restoreOption = YES;
@@ -249,7 +248,7 @@ void help() {
     "prefix the number with “=”, for instance “c:100,=-200”.)\n\n"
     "LIST OF COMMANDS\n\n";
     
-    printf([help UTF8String]);
+    printf("%s", [help UTF8String]);
     
     for (i = 0; i < count; i++) {
         NSString *className = [actionClasses objectAtIndex:i];
@@ -261,5 +260,5 @@ void help() {
                         "Website: www.bluem.net/jump/cliclick/\n\n",
                         VERSION,
                         buildDateInMDYFormat()];    
-    printf([author UTF8String]);    
+    printf("%s", [author UTF8String]);
 }
