@@ -41,6 +41,17 @@
          shortcut, shortcut, shortcut];
     }
     
+    /*
+     * NOTE: If you would like to add more keys, you can of course add key codes here, but
+     * please be aware that the codes of most keys depend on the keyboard layout and thus
+     * will not necessarily work as intended for other users. So feel free to add key codes
+     * for your personal needs, but I will not merge pull requests that extend this
+     * list of codes with keys that are not "safe" (such as the ones currently in the list).
+     * Cf. https://github.com/BlueM/cliclick/pull/2
+     */
+    
+    // For layout-independent key codes, see:
+    // /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/Headers/Events.h
     NSDictionary *keycodes = [NSDictionary dictionaryWithObjectsAndKeys:@"59", @"ctrl", @"55", @"cmd", @"58", @"alt", @"36", @"return", @"53", @"esc", nil];
     NSArray *keys = [data componentsSeparatedByString:@","];
     NSUInteger i, count = [keys count];
