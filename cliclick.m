@@ -51,7 +51,7 @@ int main (int argc, const char * argv[]) {
     CGPoint initialMousePosition;
     BOOL restoreOption = NO;
     unsigned mode;
-    unsigned waitTime;
+    unsigned waitTime = 0;
     int optchar;
     
     while ((optchar = getopt(argc, (char * const *)argv, "hVm:rf:w:d")) != -1) {        
