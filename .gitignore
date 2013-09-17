@@ -5,3 +5,6 @@
 *.perspectivev3
 *.pbxuser
 *.xcworkspace
+*.xcuserdatad
+/DerivedData
+/build
