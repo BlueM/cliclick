@@ -1,8 +1,9 @@
-#start textedit using shortcuts
+#start textedit using shortcuts (apple space toggles my quicksilver)
 cliclick  "kd:cmd,space" 
 sleep 1
 cliclick -m verbose "kd:t,e,x,t,down,return"
 sleep 2
+
 #start typing in textedit magically!
 for (( c=1; c<=5; c++ ))
 do

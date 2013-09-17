@@ -1,5 +1,7 @@
 cliclick Overview
 =========================
+Just bumped version to 10.7 sdk so it works on a recent xcode version (otherwise you need to download the 10.5.sdk).
+xcodebuild now also works from command line with xcode 4.6.3 and puts the binary somewhere in build/Release directory.
 
 cliclick (short for “Command Line Interface Click”) is a tool for executing mouse- and keyboard-related actions from the shell/Terminal. It is written in Objective-C and runs on Mac OS X 10.5 or later, including OS X 10.8.
 
