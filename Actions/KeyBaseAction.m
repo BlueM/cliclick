@@ -48,6 +48,13 @@
      * for your personal needs, but I will not merge pull requests that extend this
      * list of codes with keys that are not "safe" (such as the ones currently in the list).
      * Cf. https://github.com/BlueM/cliclick/pull/2
+     *
+     * TODO: Currently, the code treats modifier keys (such as cmd or shift) and non-modifier
+     *       keys (such as return) identically -- which does not make much sense. Modifier keys
+     *       should be available only for "key down" and "key up" actions, while non-modifier
+     *       keys should only be available for the "key press" action. (And the list of supported
+     *       keys displayed when called with -h switch should be appropriate for either type
+     *       of keys.)
      */
     
     // For layout-independent key codes, see:
