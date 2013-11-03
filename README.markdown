@@ -76,13 +76,15 @@ To get a quick first impression, this is what you will get when you invoke `clic
               you may also use “.”, which means: the current position.
     
       kd:keys Will trigger a KEY DOWN event for a comma-separated list of
-              modifier keys (“cmd”, “alt” or “ctrl”).
+              modifier keys. Possible keys are:
+              “alt”, “cmd”, “ctrl”, “fn”, “shift”
               Example: “kd:cmd,alt” will press the command key and the
               option key (and will keep them down until you release them
               with another command)
     
       ku:keys Will trigger a KEY UP event for a comma-separated list of
-              modifier keys (“cmd”, “alt” or “ctrl”).
+              modifier keys. Possible keys are:
+              “alt”, “cmd”, “ctrl”, “fn”, “shift”
               Example: “ku:cmd,ctrl” will release the command key and the
               control key (which will only have an effect if you performed
               a “key down” before)
@@ -96,8 +98,11 @@ To get a quick first impression, this is what you will get when you invoke `clic
       w:ms    Will WAIT/PAUSE for the given number of milliseconds.
               Example: “w:500” will pause command execution for half a second
     
-      kp:key  Will emulate PRESSING A KEY (key down + key up). For the moment,
-              only “return” or “esc” can be used as key.
+      kp:key  Will emulate PRESSING A KEY (key down + key up). Possible keys are:
+              “arrow-down”, “arrow-left”, “arrow-right”, “arrow-up”, “delete”, “end”,
+              “esc”, “f1”, “f2”, “f3”, “f4”, “f5”, “f6”, “f7”, “f8”, “f9”, “f10”, “f11”,
+              “f12”, “f13”, “f14”, “f15”, “f16”, “fwd-delete”, “help”, “home”, “mute”,
+              “page-down”, “page-up”, “return”, “space”, “tab”, “volume-down”, “volume-up”
               Example: “kp:return” will hit the return key.
 
 
