@@ -28,9 +28,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ActionProtocol.h"
-#import "KeyBaseAction.h"
+#import "KeyDownUpBaseAction.h"
 
-@interface KeyDownAction : KeyBaseAction <ActionProtocol> {
+@interface KeyDownAction : KeyDownUpBaseAction <ActionProtocol> {
 
 }
 

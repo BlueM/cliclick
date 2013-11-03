@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,7 @@
 		226A924F16AC9D7B0079165A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226A924E16AC9D7B0079165A /* Cocoa.framework */; };
 		22B4D99C15D6CB0A002C8478 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B4D99B15D6CB0A002C8478 /* Carbon.framework */; };
 		22C0ECEE16BAFD9800E3A46C /* KeyBaseAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C0ECED16BAFD9800E3A46C /* KeyBaseAction.m */; };
+		22C68A501825A8960083A722 /* KeyDownUpBaseAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C68A4F1825A8960083A722 /* KeyDownUpBaseAction.m */; };
 		22E5626B16BA589200CD5D86 /* ClickAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E5625716BA589200CD5D86 /* ClickAction.m */; };
 		22E5626C16BA589200CD5D86 /* DoubleclickAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E5625916BA589200CD5D86 /* DoubleclickAction.m */; };
 		22E5626D16BA589200CD5D86 /* KeyDownAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E5625B16BA589200CD5D86 /* KeyDownAction.m */; };
@@ -48,6 +49,8 @@
 		22B4D99B15D6CB0A002C8478 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		22C0ECEC16BAFD9800E3A46C /* KeyBaseAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyBaseAction.h; path = Actions/KeyBaseAction.h; sourceTree = "<group>"; };
 		22C0ECED16BAFD9800E3A46C /* KeyBaseAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyBaseAction.m; path = Actions/KeyBaseAction.m; sourceTree = "<group>"; };
+		22C68A4E1825A8960083A722 /* KeyDownUpBaseAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyDownUpBaseAction.h; path = Actions/KeyDownUpBaseAction.h; sourceTree = "<group>"; };
+		22C68A4F1825A8960083A722 /* KeyDownUpBaseAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyDownUpBaseAction.m; path = Actions/KeyDownUpBaseAction.m; sourceTree = "<group>"; };
 		22E5625516BA589200CD5D86 /* ActionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionProtocol.h; path = Actions/ActionProtocol.h; sourceTree = "<group>"; };
 		22E5625616BA589200CD5D86 /* ClickAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClickAction.h; path = Actions/ClickAction.h; sourceTree = "<group>"; };
 		22E5625716BA589200CD5D86 /* ClickAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClickAction.m; path = Actions/ClickAction.m; sourceTree = "<group>"; };
@@ -140,6 +143,8 @@
 				22E5625916BA589200CD5D86 /* DoubleclickAction.m */,
 				22C0ECEC16BAFD9800E3A46C /* KeyBaseAction.h */,
 				22C0ECED16BAFD9800E3A46C /* KeyBaseAction.m */,
+				22C68A4E1825A8960083A722 /* KeyDownUpBaseAction.h */,
+				22C68A4F1825A8960083A722 /* KeyDownUpBaseAction.m */,
 				22E5625A16BA589200CD5D86 /* KeyDownAction.h */,
 				22E5625B16BA589200CD5D86 /* KeyDownAction.m */,
 				22E5625C16BA589200CD5D86 /* KeyPressAction.h */,
@@ -203,6 +208,7 @@
 				Japanese,
 				French,
 				German,
+				en,
 			);
 			mainGroup = 08FB7794FE84155DC02AAC07 /* cliclick */;
 			projectDirPath = "";
@@ -241,6 +247,7 @@
 				22E5626D16BA589200CD5D86 /* KeyDownAction.m in Sources */,
 				22E5626E16BA589200CD5D86 /* KeyPressAction.m in Sources */,
 				22E5626F16BA589200CD5D86 /* KeyUpAction.m in Sources */,
+				22C68A501825A8960083A722 /* KeyDownUpBaseAction.m in Sources */,
 				22E5627016BA589200CD5D86 /* MouseBaseAction.m in Sources */,
 				22E5627116BA589200CD5D86 /* MoveAction.m in Sources */,
 				22E5627216BA589200CD5D86 /* PrintAction.m in Sources */,

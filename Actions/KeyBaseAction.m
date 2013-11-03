@@ -30,6 +30,11 @@
 
 @implementation KeyBaseAction
 
++(NSDictionary *)getSupportedKeycodes {
+    [NSException raise:@"InvalidCommandException"
+                format:@"To be implemented by subclasses"];
+}
+
 -(void)performActionWithData:(NSString *)data
                       inMode:(unsigned)mode {
     
@@ -40,29 +45,11 @@
                     format:@"Missing argument to command “%@”: Expected one or more keys (separated by a comma). Examples: “%@:ctrl” or “%@:cmd,alt”",
          shortcut, shortcut, shortcut];
     }
-    
-    /*
-     * NOTE: If you would like to add more keys, you can of course add key codes here, but
-     * please be aware that the codes of most keys depend on the keyboard layout and thus
-     * will not necessarily work as intended for other users. So feel free to add key codes
-     * for your personal needs, but I will not merge pull requests that extend this
-     * list of codes with keys that are not "safe" (such as the ones currently in the list).
-     * Cf. https://github.com/BlueM/cliclick/pull/2
-     *
-     * TODO: Currently, the code treats modifier keys (such as cmd or shift) and non-modifier
-     *       keys (such as return) identically -- which does not make much sense. Modifier keys
-     *       should be available only for "key down" and "key up" actions, while non-modifier
-     *       keys should only be available for the "key press" action. (And the list of supported
-     *       keys displayed when called with -h switch should be appropriate for either type
-     *       of keys.)
-     */
-    
-    // For layout-independent key codes, see:
-    // /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/Headers/Events.h
-    NSDictionary *keycodes = [NSDictionary dictionaryWithObjectsAndKeys:@"59", @"ctrl", @"55", @"cmd", @"58", @"alt", @"36", @"return", @"53", @"esc", nil];
-    NSArray *keys = [data componentsSeparatedByString:@","];
-    NSUInteger i, count = [keys count];
-    
+
+    NSDictionary *keycodes = [[self class] getSupportedKeycodes];
+    NSArray *keys          = [data componentsSeparatedByString:@","];
+    NSUInteger i, count    = [keys count];
+
     // First, validate the key names
     for (i = 0; i < count; i++) {
         NSObject *keyname = [keys objectAtIndex:i];

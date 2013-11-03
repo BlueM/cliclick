@@ -33,6 +33,8 @@
 
 }
 
++(NSDictionary *)getSupportedKeycodes;
+
 -(void)performActionWithData:(NSString *)data
                       inMode:(unsigned)mode;
 
