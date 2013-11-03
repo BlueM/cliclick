@@ -36,9 +36,9 @@
 void error();
 void help();
 NSArray* parseCommandsFile(NSString *filepath);
-NSString* buildDateInMDYFormat();
 
 #define VERSION @"2.2"
+#define RELEASEDATE @"11/03/2013"
 
 int main (int argc, const char * argv[]) {
 
@@ -159,15 +159,6 @@ int main (int argc, const char * argv[]) {
     return EXIT_SUCCESS;
 }
 
-NSString* buildDateInMDYFormat() {
-    char *date = __DATE__;
-    NSString *dateString = [NSString stringWithCString:date encoding:NSUTF8StringEncoding];
-    NSDate *dateobj = [NSDate dateWithNaturalLanguageString:dateString];
-    return [dateobj descriptionWithCalendarFormat:@"%m/%d/%Y"
-                                         timeZone:nil
-                                           locale:nil];
-}
-
 NSArray* parseCommandsFile(NSString *filepath) {
     NSMutableArray *commands = [[NSMutableArray alloc] initWithCapacity:32];
     NSString *fileContents = [NSString stringWithContentsOfFile:filepath
@@ -252,6 +243,6 @@ void help() {
                         "Author: Carsten Blüm, <carsten@bluem.net>\n"
                         "Website: www.bluem.net/jump/cliclick/\n\n",
                         VERSION,
-                        buildDateInMDYFormat()];
+                        RELEASEDATE];
     printf("%s", [author UTF8String]);
 }
