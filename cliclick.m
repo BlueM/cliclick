@@ -35,7 +35,6 @@
 
 void error();
 void help();
-void printMouseLocation();
 NSArray* parseCommandsFile(NSString *filepath);
 NSString* buildDateInMDYFormat();
 
@@ -53,8 +52,8 @@ int main (int argc, const char * argv[]) {
     unsigned mode;
     unsigned waitTime = 0;
     int optchar;
-    
-    while ((optchar = getopt(argc, (char * const *)argv, "hVm:rf:w:d")) != -1) {        
+
+    while ((optchar = getopt(argc, (char * const *)argv, "hVm:rf:w:d")) != -1) {
         switch(optchar) {
             case 'h':
                 help();
@@ -85,11 +84,11 @@ int main (int argc, const char * argv[]) {
                 return EXIT_FAILURE;
         }
     }
-    
+
     if ([modeOption isEqualToString:@"verbose"]) {
         mode = MODE_VERBOSE;
     } else if ([modeOption isEqualToString:@"test"]) {
-        mode = MODE_TEST;        
+        mode = MODE_TEST;
     } else if (!modeOption) {
         mode = MODE_REGULAR;
     } else {
@@ -97,7 +96,7 @@ int main (int argc, const char * argv[]) {
         [pool release];
         return EXIT_FAILURE;
     }
-    
+
     if (restoreOption) {
         CGEventRef ourEvent = CGEventCreate(NULL);
         initialMousePosition = CGEventGetLocation(ourEvent);
@@ -130,7 +129,7 @@ int main (int argc, const char * argv[]) {
         NSArray *arguments = [[NSProcessInfo processInfo] arguments];
         actions = [arguments subarrayWithRange:NSMakeRange(optind, argc - optind)];
     }
-    
+
     @try {
         [ActionExecutor executeActions:actions
                                 inMode:mode
@@ -155,15 +154,15 @@ int main (int argc, const char * argv[]) {
             printf("Restoring mouse position to %s\n", [positionString UTF8String]);
         }
     }
-    
+
     [pool release];
     return EXIT_SUCCESS;
 }
 
-NSString* buildDateInMDYFormat() {    
+NSString* buildDateInMDYFormat() {
     char *date = __DATE__;
     NSString *dateString = [NSString stringWithCString:date encoding:NSUTF8StringEncoding];
-    NSDate *dateobj = [NSDate dateWithNaturalLanguageString:dateString];    
+    NSDate *dateobj = [NSDate dateWithNaturalLanguageString:dateString];
     return [dateobj descriptionWithCalendarFormat:@"%m/%d/%Y"
                                          timeZone:nil
                                            locale:nil];
@@ -187,7 +186,7 @@ NSArray* parseCommandsFile(NSString *filepath) {
         }
         [commands addObject:command];
     }
-                                       
+
     return [commands autorelease];
 }
 
@@ -196,17 +195,11 @@ void error() {
     printf("Call cliclick with option -h to see usage instructions.\n");
 }
 
-void printMouseLocation() {
-    CGEventRef ourEvent = CGEventCreate(NULL);
-    CGPoint ourLoc = CGEventGetLocation(ourEvent);
-    printf("%d,%d\n", (int)ourLoc.x, (int)ourLoc.y);
-}
-
 void help() {
-    
+
     NSArray *actionClasses = [ActionExecutor actionClasses];
     NSUInteger i, count = [actionClasses count];
-    
+
     NSString *help = @"\ncliclick (short for “Command Line Interface Click”) is a tool for "
     "executing mouse- and keyboard-related actions from the shell/Terminal\n"
     "\n"
@@ -247,18 +240,18 @@ void help() {
     "values in case you have a setup with a second display arranged to the left of your main display, "
     "prefix the number with “=”, for instance “c:100,=-200”.)\n\n"
     "LIST OF COMMANDS\n\n";
-    
+
     printf("%s", [help UTF8String]);
-    
+
     for (i = 0; i < count; i++) {
         NSString *className = [actionClasses objectAtIndex:i];
         printf("%s\n\n", [[NSClassFromString(className) commandDescription] UTF8String]);
     }
-    
+
     NSString *author = [NSString stringWithFormat:@"Version %@, released %@\n"
                         "Author: Carsten Blüm, <carsten@bluem.net>\n"
                         "Website: www.bluem.net/jump/cliclick/\n\n",
                         VERSION,
-                        buildDateInMDYFormat()];    
+                        buildDateInMDYFormat()];
     printf("%s", [author UTF8String]);
 }
