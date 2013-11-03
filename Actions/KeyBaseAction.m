@@ -90,7 +90,7 @@
         if (![keycodes objectForKey:keyname]) {
             [NSException raise:@"InvalidCommandException"
                         format:@"Invalid key “%@” given as argument to command “%@”.\nThe key name may only be one of:\n%@",
-                               keyname, shortcut, [[self class] getSupportedKeysAsStringBreakingAt:60 indentWith:@""]];
+                               keyname, shortcut, [[self class] getSupportedKeysAsStringBreakingAt:60 indentWith:@"  "]];
         }
     }
     
