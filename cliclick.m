@@ -60,7 +60,7 @@ int main (int argc, const char * argv[]) {
                 [pool release];
                 return EXIT_SUCCESS;
             case 'V':
-                printf("%s\n", [[NSString stringWithFormat:@"cliclick version %@ - %@", VERSION, buildDateInMDYFormat()] UTF8String]);
+                printf("%s\n", [[NSString stringWithFormat:@"cliclick %@, %@", VERSION, RELEASEDATE] UTF8String]);
                 [pool release];
                 return EXIT_SUCCESS;
             case 'd':
@@ -216,6 +216,7 @@ void help() {
     "            is not affected by -w. This means that invoking\n"
     "            “cliclick -w 200 wait:500” will wait for 700 milliseconds.\n"
     "            The default (and minimum) value for -w is 20.\n"
+    "  -V        Show cliclick version number and release date\n"
     "  -d        Send a donation\n"
     "\n"
     "COMMANDS\n"
