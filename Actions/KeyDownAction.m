@@ -35,11 +35,13 @@
 }
 
 +(NSString *)commandDescription {
-    return @"  kd:keys Will trigger a KEY DOWN event for a comma-separated list of\n"
-    "          modifier keys (“cmd”, “alt” or “ctrl”).\n"
+    NSString *keyList = [[self class] getSupportedKeysAsStringBreakingAt:65 indentWith:@"          "];
+    NSString *format = @"  kd:keys Will trigger a KEY DOWN event for a comma-separated list of\n"
+    "          modifier keys. Possible keys are:\n%@\n"
     "          Example: “kd:cmd,alt” will press the command key and the\n"
     "          option key (and will keep them down until you release them\n"
     "          with another command)";
+    return [NSString stringWithFormat:format, keyList];
 }
 
 -(void)performActionWithKeycode:(CGKeyCode)code {

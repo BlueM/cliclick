@@ -35,9 +35,10 @@
 }
 
 +(NSString *)commandDescription {
-    return @"  kp:key  Will emulate PRESSING A KEY (key down + key up). For the moment,\n"
-    "          only “return” or “esc” can be used as key.\n"
-    "          Example: “kp:return” will hit the return key.";
+    NSString *keyList = [[self class] getSupportedKeysAsStringBreakingAt:65 indentWith:@"          "];
+    NSString *format = @"  kp:key  Will emulate PRESSING A KEY (key down + key up). Possible keys are:\n%@\n"
+                       "          Example: “kp:return” will hit the return key.";
+    return [NSString stringWithFormat:format, keyList];
 }
 
 -(void)performActionWithKeycode:(CGKeyCode)code {    

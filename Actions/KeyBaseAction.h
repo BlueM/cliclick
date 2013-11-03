@@ -35,6 +35,8 @@
 
 +(NSDictionary *)getSupportedKeycodes;
 
++(NSString *)getSupportedKeysAsStringBreakingAt:(unsigned)width indentWith:(NSString *)indent;
+
 -(void)performActionWithData:(NSString *)data
                       inMode:(unsigned)mode;
 

@@ -33,13 +33,47 @@
 +(NSDictionary *)getSupportedKeycodes {
     [NSException raise:@"InvalidCommandException"
                 format:@"To be implemented by subclasses"];
+    return [NSDictionary dictionary]; // Will never be reached, but will suppress Xcode warning
+}
+
++(NSString *)getSupportedKeysAsStringBreakingAt:(unsigned)width indentWith:(NSString *)indent {
+
+    NSMutableArray *lines = [[NSMutableArray alloc] initWithCapacity:8];
+    NSRange range;
+    unsigned lastRangeStart = 0;
+    unsigned effectiveWidth = width + [indent length];
+    
+    NSArray *sortedkeyNames = [[[[self class] getSupportedKeycodes] allKeys] sortedArrayUsingComparator:^(id obj1, id obj2) {
+        return [obj1 compare:obj2 options:NSNumericSearch];
+    }];
+    
+    NSString *keys = [NSString stringWithFormat:@"“%@”", [sortedkeyNames componentsJoinedByString:@"”, “"]];
+    
+    if ([keys length] <= effectiveWidth) {
+        effectiveWidth = [keys length];
+    }
+    
+    do {
+        range = [keys rangeOfString:@" " options:NSBackwardsSearch range:NSMakeRange(lastRangeStart, effectiveWidth)];
+        if (range.location == NSNotFound ||
+            ([keys length] - range.location <= effectiveWidth)
+        ) {
+            // No rest or rest of the string fits in last part
+            [lines addObject:[indent stringByAppendingString:[keys substringFromIndex:lastRangeStart]]];
+            break;
+        }
+        [lines addObject:[indent stringByAppendingString:[keys substringWithRange:NSMakeRange(lastRangeStart, range.location - lastRangeStart)]]];
+        lastRangeStart = range.location + 1;
+    } while (1);
+    
+    return [lines componentsJoinedByString:@"\n"];
 }
 
 -(void)performActionWithData:(NSString *)data
                       inMode:(unsigned)mode {
-    
+
     NSString *shortcut = [[self class] commandListShortcut];
-    
+
     if ([data isEqualToString:@""]) {
         [NSException raise:@"InvalidCommandException"
                     format:@"Missing argument to command “%@”: Expected one or more keys (separated by a comma). Examples: “%@:ctrl” or “%@:cmd,alt”",
@@ -55,8 +89,8 @@
         NSObject *keyname = [keys objectAtIndex:i];
         if (![keycodes objectForKey:keyname]) {
             [NSException raise:@"InvalidCommandException"
-                        format:@"Invalid argument key name “%@” to command “%@”.\nThe key name may only be one of: %@",
-                               keyname, shortcut, [[keycodes allKeys] componentsJoinedByString:@" "]];
+                        format:@"Invalid key “%@” given as argument to command “%@”.\nThe key name may only be one of:\n%@",
+                               keyname, shortcut, [[self class] getSupportedKeysAsStringBreakingAt:60 indentWith:@""]];
         }
     }
     
@@ -68,11 +102,11 @@
             NSString *description = [self actionDescriptionString:[keys objectAtIndex:i]];
             printf("%s\n", [description UTF8String]);
         }
-        
+
         if (MODE_TEST != mode) {
             [self performActionWithKeycode:(CGKeyCode)code];
-        }        
-    }    
+        }
+    }
 }
 
 -(NSString *)actionDescriptionString:(NSString *)keyName {    

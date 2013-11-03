@@ -35,11 +35,13 @@
 }
 
 +(NSString *)commandDescription {
-    return @"  ku:keys Will trigger a KEY UP event for a comma-separated list of\n"
-    "          modifier keys (“cmd”, “alt” or “ctrl”).\n"
-    "          Example: “ku:cmd,ctrl” will release the command key and the\n"
-    "          control key (which will only have an effect if you performed\n"
-    "          a “key down” before)";
+    NSString *keyList = [[self class] getSupportedKeysAsStringBreakingAt:65 indentWith:@"          "];
+    NSString *format = @"  ku:keys Will trigger a KEY UP event for a comma-separated list of\n"
+                       "          modifier keys. Possible keys are:\n%@\n"
+                       "          Example: “ku:cmd,ctrl” will release the command key and the\n"
+                       "          control key (which will only have an effect if you performed\n"
+                       "          a “key down” before)";
+    return [NSString stringWithFormat:format, keyList];
 }
 
 -(void)performActionWithKeycode:(CGKeyCode)code {
