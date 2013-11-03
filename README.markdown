@@ -101,6 +101,11 @@ To get a quick first impression, this is what you will get when you invoke `clic
               Example: “kp:return” will hit the return key.
 
 
+Limitations
+-----------
+It is not possible to use cliclick before a user logs in, i.e.: to control the login window.
+
+
 Building cliclick
 -----------------
 Either build in Xcode, as usual, or build from the shell by `cd`ing into the project directory and then invoking `xcodebuild`.
