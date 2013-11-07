@@ -74,6 +74,10 @@
 
     NSString *shortcut = [[self class] commandListShortcut];
 
+    struct timespec waitingtime;
+    waitingtime.tv_sec = 0;
+    waitingtime.tv_nsec = 5 * 1000000; // Milliseconds
+
     if ([data isEqualToString:@""]) {
         [NSException raise:@"InvalidCommandException"
                     format:@"Missing argument to command “%@”: Expected one or more keys (separated by a comma). Examples: “%@:ctrl” or “%@:cmd,alt”",
@@ -94,7 +98,7 @@
         }
     }
     
-    // Then, "press" the key down
+    // Then, perform whatever action is requested
     for (i = 0; i < count; i++) {
         unsigned code = [[keycodes objectForKey:[keys objectAtIndex:i]] intValue];
 
@@ -104,6 +108,7 @@
         }
 
         if (MODE_TEST != mode) {
+            nanosleep(&waitingtime, NULL);
             [self performActionWithKeycode:(CGKeyCode)code];
         }
     }
