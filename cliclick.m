@@ -37,8 +37,8 @@ void error();
 void help();
 NSArray* parseCommandsFile(NSString *filepath);
 
-#define VERSION     @"2.3"
-#define RELEASEDATE @"11/03/2013"
+#define VERSION     @"2.3.1"
+#define RELEASEDATE @"11/07/2013"
 
 int main (int argc, const char * argv[]) {
 
