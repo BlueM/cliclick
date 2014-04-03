@@ -212,7 +212,7 @@ void help() {
     "            and trailing whitespace is ignored, too.\n"
     "  -w <num>  Wait the given number of milliseconds after each event.\n"
     "            If you find that you use the “wait” command too often,\n"
-    "            using -w could make things easer. Please note that “wait”\n"
+    "            using -w could make things easier. Please note that “wait”\n"
     "            is not affected by -w. This means that invoking\n"
     "            “cliclick -w 200 wait:500” will wait for 700 milliseconds.\n"
     "            The default (and minimum) value for -w is 20.\n"
