@@ -61,7 +61,7 @@ To get a quick first impression, this is what you will get when you invoke `clic
               also use “.”, which means: the current position. Using “.” is
               equivalent to using relative zero values “c:+0,+0”.
     
-      m:x,y   MOVE the mouse to the point with the given coordinates.
+      m:x,y   Will MOVE the mouse to the point with the given coordinates.
               Example: “m:12,34” will move the mouse to the point with
               x coordinate 12 and y coordinate 34.
     
