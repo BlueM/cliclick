@@ -145,6 +145,10 @@
 				22E5625516BA589200CD5D86 /* ActionProtocol.h */,
 				22E5625616BA589200CD5D86 /* ClickAction.h */,
 				22E5625716BA589200CD5D86 /* ClickAction.m */,
+				F0A674F618EE2D0C0062FD29 /* DragDownAction.h */,
+				F0A674F718EE2D0C0062FD29 /* DragDownAction.m */,
+				F0A674F918EE3F220062FD29 /* DragUpAction.h */,
+				F0A674FA18EE3F220062FD29 /* DragUpAction.m */,
 				22E5625816BA589200CD5D86 /* DoubleclickAction.h */,
 				22E5625916BA589200CD5D86 /* DoubleclickAction.m */,
 				22C0ECEC16BAFD9800E3A46C /* KeyBaseAction.h */,
@@ -167,10 +171,6 @@
 				22E5626816BA589200CD5D86 /* TripleclickAction.m */,
 				22E5626916BA589200CD5D86 /* WaitAction.h */,
 				22E5626A16BA589200CD5D86 /* WaitAction.m */,
-				F0A674F618EE2D0C0062FD29 /* DragDownAction.h */,
-				F0A674F718EE2D0C0062FD29 /* DragDownAction.m */,
-				F0A674F918EE3F220062FD29 /* DragUpAction.h */,
-				F0A674FA18EE3F220062FD29 /* DragUpAction.m */,
 			);
 			name = Actions;
 			sourceTree = "<group>";
