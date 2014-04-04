@@ -35,7 +35,7 @@
 }
 
 +(NSString *)commandDescription {
-    return @"  m:x,y   MOVE the mouse to the point with the given coordinates.\n"
+    return @"  m:x,y   Will MOVE the mouse to the point with the given coordinates.\n"
     "          Example: “m:12,34” will move the mouse to the point with\n"
     "          x coordinate 12 and y coordinate 34.";
 }
