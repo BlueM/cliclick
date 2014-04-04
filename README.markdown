@@ -104,6 +104,15 @@ To get a quick first impression, this is what you will get when you invoke `clic
               “f12”, “f13”, “f14”, “f15”, “f16”, “fwd-delete”, “help”, “home”, “mute”,
               “page-down”, “page-up”, “return”, “space”, “tab”, “volume-down”, “volume-up”
               Example: “kp:return” will hit the return key.
+    
+      dd:x,y  Will press down to START A DRAG at the given coordinates.
+              Example: “dd:12,34” will press down at the point with x
+              coordinate 12 and y coordinate 34. Instead of x and y values,
+              you may also use “.”, which means: the current position.
+    
+      du:x,y  Will release to END A DRAG at the given coordinates.
+              Example: “du:112,134” will release at the point with x
+              coordinate 112 and y coordinate 134.
 
 
 Limitations

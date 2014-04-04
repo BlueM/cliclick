@@ -87,7 +87,7 @@
 +(NSArray *)actionClasses {
     NSArray *actionClasses = [NSArray arrayWithObjects:@"ClickAction", @"MoveAction", @"DoubleclickAction", @"TripleclickAction",
                                                        @"KeyDownAction", @"KeyUpAction",  @"PrintAction", @"WaitAction",
-                                                       @"KeyPressAction", nil];
+                                                       @"KeyPressAction", @"DragDownAction", @"DragUpAction", nil];
     return actionClasses;
 }
 
