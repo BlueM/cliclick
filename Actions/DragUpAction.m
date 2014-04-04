@@ -27,6 +27,7 @@
  */
 
 #import "DragUpAction.h"
+#include <unistd.h>
 
 @implementation DragUpAction
 
@@ -48,6 +49,8 @@
     // Left button dragged
     CGEventRef leftDragged = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDragged, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
     CGEventPost(kCGHIDEventTap, leftDragged);
+
+    usleep(20000); // Improves reliability for some actions, e.g. dragging a file
     
     // Left button up
     CGEventRef leftUp = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseUp, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
