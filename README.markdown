@@ -29,7 +29,7 @@ To get a quick first impression, this is what you will get when you invoke `clic
                 and trailing whitespace is ignored, too.
       -w <num>  Wait the given number of milliseconds after each event.
                 If you find that you use the “wait” command too often,
-                using -w could make things easer. Please note that “wait”
+                using -w could make things easier. Please note that “wait”
                 is not affected by -w. This means that invoking
                 “cliclick -w 200 wait:500” will wait for 700 milliseconds.
                 The default (and minimum) value for -w is 20.
