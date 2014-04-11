@@ -124,4 +124,4 @@ Building cliclick
 -----------------
 Either build in Xcode, as usual, or build from the shell by `cd`ing into the project directory and then invoking either `xcodebuild` or `make` (whatever you prefer).
 
-Please note that while the code will run on 10.5 (Intel or PPC) and later, Base SDK and architectures selected in the Xcode project are set to the 10.7 SDK and Intel32/64. Therefore, if you want to build for an older system, be sure to change these settings accordingly.
+Please note that while the code will run on 10.6 (Intel or PPC) and later, Base SDK and architectures selected in the Xcode project are set to the 10.7 SDK and Intel32/64. Therefore, if you want to build for an older system, be sure to change these settings accordingly.
