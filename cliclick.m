@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007-2013, Carsten Blüm <carsten@bluem.net>
+ * Copyright (c) 2007-2014, Carsten Blüm <carsten@bluem.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,8 +37,8 @@ void error();
 void help();
 NSArray* parseCommandsFile(NSString *filepath);
 
-#define VERSION     @"2.3.1"
-#define RELEASEDATE @"11/07/2013"
+#define VERSION     @"2.4"
+#define RELEASEDATE @"04/11/2014"
 
 int main (int argc, const char * argv[]) {
 
@@ -242,6 +242,7 @@ void help() {
 
     NSString *author = [NSString stringWithFormat:@"Version %@, released %@\n"
                         "Author: Carsten Blüm, <carsten@bluem.net>\n"
+                        "List of contributors: https://github.com/BlueM/cliclick/graphs/contributors\n"
                         "Website: www.bluem.net/jump/cliclick/\n\n",
                         VERSION,
                         RELEASEDATE];
