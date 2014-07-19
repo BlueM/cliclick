@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*-
 
 # Tests command line parsing and output
-# Expects to find an executable “cliclick” in <projectdir>/build/Debug
+# Expects to find an executable “cliclick” in <projectdir>/Build/Products/Debug/
 
 import sys
 import os.path
 
 def runWithArguments(args = ""):
     projdir = os.path.dirname(__file__)
-    executable = projdir  + "/build/Debug/cliclick"
+    executable = projdir  + "/Build/Products/Debug/cliclick"
     cmd = "%s -m test %s" % (executable, args)
     result = ''.join(os.popen(cmd, 'r').readlines())
     return result
@@ -104,3 +104,8 @@ expectStringForArguments("Missing argument to command “du”: Expected", "du:"
 expectStringForArguments("Invalid argument “1” to command “du”: Expected two coordinates", "du:1")
 expectStringForArguments("Invalid argument “1,” to command “du”: Expected two coordinates", "du:1,")
 expectStringForArguments("Drag release at 1129,64", "du:1129,64")
+
+# “t” (type)
+expectStringForArguments("Missing argument to command “t”: Expected", "t")
+expectStringForArguments("Missing argument to command “t”: Expected", "t:")
+expectStringForArguments("Type: “Hello world, how are you today?”", "t:'Hello world, how are you today?'")
