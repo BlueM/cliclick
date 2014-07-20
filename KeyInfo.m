@@ -71,7 +71,7 @@
 
 - (id) keyCodeForString:(NSString *)string
 {
-    return [map objectForKey:string];
+    return [map objectForKey:[string decomposedStringWithCanonicalMapping]];
 }
 
 - (NSString *) stringForKeyCode:(CGKeyCode)keyCode andModifiers:(UInt32)modifiers
