@@ -41,7 +41,7 @@
             "          Example: “type:'Viele Grüße'” will type “Viele Grüße” into the frontmost application";
 }
 
--(void)performActionWithKeycode:(CGKeyCode)code {    
+-(void)performActionWithKeycode:(CGKeyCode)code {
     CGEventRef e1 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, true);
     CGEventPost(kCGSessionEventTap, e1);
 
@@ -53,16 +53,16 @@
 
     struct timespec waitingtime;
     waitingtime.tv_sec = 0;
-    waitingtime.tv_nsec = 5 * 1000000; // Milliseconds
+    waitingtime.tv_nsec = 2 * 1000000; // Milliseconds
 
     NSString *shortcut = [[self class] commandListShortcut];
-    
+
     if ([data isEqualToString:@""]) {
         [NSException raise:@"InvalidCommandException"
                     format:@"Missing argument to command “%@”: Expected s string. Examples: “%@:Hello” or “%@:'Hello world'”",
          shortcut, shortcut, shortcut];
     }
-  
+
     if (MODE_TEST == mode) {
         printf("Type: “%s”\n", [data UTF8String]);
         return;
@@ -71,16 +71,11 @@
     // Generate the key code mapping
     KeyInfo *ki = [[KeyInfo alloc] init];
 
-    data = [ki prepareString:data];
-    
-    for (unsigned i = 0, ii = [data length]; i < ii; i ++) {
+    NSArray *keyCodeInfos = [ki keyCodesForString:data];
 
-        NSRange range = [data rangeOfComposedCharacterSequenceAtIndex:i];
-        if (range.length > 1) {
-            i += range.length - 1;
-        }
-        
-        NSArray *keyCodeInfo = [ki keyCodeForString:[data substringWithRange:range]];
+    for (unsigned j = 0, jj = [keyCodeInfos count]; j < jj; ++j) {
+
+        NSArray *keyCodeInfo = [keyCodeInfos objectAtIndex:j];
 
         CGKeyCode keyCode = [[keyCodeInfo objectAtIndex:0] intValue];
 
@@ -118,6 +113,7 @@
         nanosleep(&waitingtime, NULL);
     }
 
+    [ki release];
 }
 
 @end
