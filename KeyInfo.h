@@ -29,7 +29,7 @@
 
 #import <Foundation/Foundation.h>
 #include <CoreFoundation/CoreFoundation.h>
-#include <Carbon/Carbon.h> /* For kVK_ constants, and TIS functions. */
+#include <Carbon/Carbon.h>
 
 @interface KeyInfo : NSObject {
     NSMutableDictionary *map;
@@ -37,6 +37,7 @@
 
 - (id) keyCodeForString:(NSString *)string;
 - (NSDictionary *)getSupportedKeycodes;
-- (NSString *) stringForKeyCode:(CGKeyCode)keyCode andModifiers:(UInt32)modifiers;
+- (NSString *)stringForKeyCode:(CGKeyCode)keyCode andModifiers:(UInt32)modifiers;
+- (NSString *)prepareString:(NSString *)string;
 
 @end

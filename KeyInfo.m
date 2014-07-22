@@ -52,9 +52,9 @@
 
             NSString *string4 = [self stringForKeyCode:(CGKeyCode)[keyCode intValue] andModifiers:MODIFIER_SHIFT_ALT];
             [map setObject:@[keyCode, NSNUMBER_MODIFIER_SHIFT_ALT] forKey:[string4 decomposedStringWithCanonicalMapping]];
-        }                
+        }
     }
-
+    
     return self;
 }
 
@@ -72,6 +72,54 @@
 - (id) keyCodeForString:(NSString *)string
 {
     return [map objectForKey:[string decomposedStringWithCanonicalMapping]];
+}
+
+- (NSString *)prepareString:(NSString *)string
+{
+    // Incomplete list of characters which (dependent on the keyboard layout) cannot
+    // be typed by a combination of keys, but may require consecutive key presses or
+    // key combinations. Many characters are missing, as I did not yet find a way to
+    // auto-generate the map.
+    NSDictionary *replacementMap = @{
+        @"Ä": @"¨A",
+        @"Ö": @"¨O",
+        @"Ü": @"¨U",
+        @"ä": @"¨a",
+        @"ö": @"¨o",
+        @"ü": @"¨u",
+        @"ü": @"¨u",
+        @"ë": @"¨e",
+        @"Á": @"´A",
+        @"É": @"´E",
+        @"á": @"´a",
+        @"é": @"´e",
+        @"À": @"`A",
+        @"È": @"`E",
+        @"à": @"`a",
+        @"è": @"`e",
+        @"Ñ": @"~n",
+        @"Â": @"^A",
+        @"Ê": @"^E",
+        @"Î": @"^I",
+        @"Ô": @"^O",
+        @"Û": @"^U",
+        @"â": @"^a",
+        @"ê": @"^e",
+        @"î": @"^i",
+        @"ô": @"^o",
+        @"û": @"^u"
+    };
+
+    NSMutableString *tmp     = [NSMutableString stringWithString:string];
+    NSEnumerator *enumerator = [replacementMap keyEnumerator];
+    NSString *key;
+    
+    while ((key = [enumerator nextObject])) {
+        // @todo-internal Could somehow get rid of executing [tmp length] each time?
+        [tmp replaceOccurrencesOfString:key withString:[replacementMap objectForKey:key] options:NSLiteralSearch range:NSMakeRange(0, [tmp length])];
+    }
+    
+    return tmp;
 }
 
 - (NSString *) stringForKeyCode:(CGKeyCode)keyCode andModifiers:(UInt32)modifiers

@@ -70,7 +70,9 @@
 
     // Generate the key code mapping
     KeyInfo *ki = [[KeyInfo alloc] init];
-     
+
+    data = [ki prepareString:data];
+    
     for (unsigned i = 0, ii = [data length]; i < ii; i ++) {
 
         NSRange range = [data rangeOfComposedCharacterSequenceAtIndex:i];
