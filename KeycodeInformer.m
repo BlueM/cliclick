@@ -100,11 +100,6 @@ static KeycodeInformer *sharedInstance = nil;
     [super dealloc];
 }
 
-- (NSDictionary *)getSupportedKeycodes
-{
-    return [NSDictionary dictionaryWithDictionary:map];
-}
-
 - (NSArray *)keyCodesForString:(NSString *)string
 {
     NSMutableArray *keyCodes = [[NSMutableArray alloc] initWithCapacity:[string length]];
