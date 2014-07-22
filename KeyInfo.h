@@ -35,7 +35,7 @@
     NSMutableDictionary *map;
 }
 
-- (id) keyCodeForString:(NSString *)string;
+- (NSArray *)keyCodesForString:(NSString *)string;
 - (NSDictionary *)getSupportedKeycodes;
 - (NSString *)stringForKeyCode:(CGKeyCode)keyCode andModifiers:(UInt32)modifiers;
 - (NSString *)prepareString:(NSString *)string;
