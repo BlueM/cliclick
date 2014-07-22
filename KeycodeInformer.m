@@ -26,41 +26,77 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "KeyInfo.h"
+#import "KeycodeInformer.h"
 
-@implementation KeyInfo
+@implementation KeycodeInformer
+
+static KeycodeInformer *sharedInstance = nil;
+
++ (id)sharedInstance
+{
+    @synchronized(self) {
+        if(sharedInstance == nil)
+            sharedInstance = [[super allocWithZone:NULL] init];
+    }
+    return sharedInstance;
+}
+
++ (id)allocWithZone:(NSZone *)zone {
+    return [[self sharedInstance] retain];
+}
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
         map = [[NSMutableDictionary alloc] initWithCapacity:256];
-
+        
         NSArray *keyCodes = @[ @0,  @1,  @2,  @3,  @4,  @5,  @6,  @7,  @8,  @9, @10, @11, @12, @13, @14, @15,
-                              @16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @27, @28, @29, @30, @31,
-                              @32, @33, @34, @35, @37, @38, @39, @40, @41, @42, @43, @44, @45, @46, @47, @49];
-
+                               @16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @27, @28, @29, @30, @31,
+                               @32, @33, @34, @35, @37, @38, @39, @40, @41, @42, @43, @44, @45, @46, @47, @49];
+        
         for (NSNumber *keyCode in keyCodes) {
             NSString *string1 = [self stringForKeyCode:(CGKeyCode)[keyCode intValue] andModifiers:0];
             [map setObject:@[keyCode, @0] forKey:[string1 decomposedStringWithCanonicalMapping]];
-
+            
             NSString *string2 = [self stringForKeyCode:(CGKeyCode)[keyCode intValue] andModifiers:MODIFIER_SHIFT];
             [map setObject:@[keyCode, NSNUMBER_MODIFIER_SHIFT] forKey:[string2 decomposedStringWithCanonicalMapping]];
-
+            
             NSString *string3 = [self stringForKeyCode:(CGKeyCode)[keyCode intValue] andModifiers:MODIFIER_ALT];
             [map setObject:@[keyCode, NSNUMBER_MODIFIER_ALT] forKey:[string3 decomposedStringWithCanonicalMapping]];
-
+            
             NSString *string4 = [self stringForKeyCode:(CGKeyCode)[keyCode intValue] andModifiers:MODIFIER_SHIFT_ALT];
             [map setObject:@[keyCode, NSNUMBER_MODIFIER_SHIFT_ALT] forKey:[string4 decomposedStringWithCanonicalMapping]];
         }
     }
+    
+    return self;
+}
 
+- (id)copyWithZone:(NSZone *)zone {
+    return self;
+}
+
+- (id)retain {
+    return self;
+}
+
+- (NSUInteger)retainCount {
+    return UINT_MAX;
+}
+
+- (oneway void)release
+{
+    
+}
+
+- (id)autorelease {
     return self;
 }
 
 - (void)dealloc
 {
-    [map dealloc];
+    [map release];
     [super dealloc];
 }
 
@@ -170,7 +206,7 @@
                    &realLength,
                    chars);
     CFRelease(keyboard);
-
+    
     return [NSString stringWithCharacters:chars length:1];
 }
 

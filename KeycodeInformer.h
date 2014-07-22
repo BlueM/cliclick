@@ -31,10 +31,11 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <Carbon/Carbon.h>
 
-@interface KeyInfo : NSObject {
+@interface KeycodeInformer : NSObject {
     NSMutableDictionary *map;
 }
 
++ (id)sharedInstance;
 - (NSArray *)keyCodesForString:(NSString *)string;
 - (NSDictionary *)getSupportedKeycodes;
 - (NSString *)stringForKeyCode:(CGKeyCode)keyCode andModifiers:(UInt32)modifiers;

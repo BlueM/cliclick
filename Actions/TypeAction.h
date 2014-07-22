@@ -28,7 +28,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ActionProtocol.h"
-#import "KeyInfo.h"
+#import "KeycodeInformer.h"
 
 @interface TypeAction : NSObject <ActionProtocol> {
 

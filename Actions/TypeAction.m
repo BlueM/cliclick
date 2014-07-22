@@ -69,7 +69,7 @@
     }
 
     // Generate the key code mapping
-    KeyInfo *ki = [[KeyInfo alloc] init];
+    KeycodeInformer *ki = [KeycodeInformer sharedInstance];
 
     NSArray *keyCodeInfos = [ki keyCodesForString:data];
 
