@@ -151,6 +151,16 @@
 			isa = PBXGroup;
 			children = (
 				22E5625516BA589200CD5D86 /* ActionProtocol.h */,
+				22704CCC19816C62000270EE /* KeyboardActions */,
+				22704CCB19816C4C000270EE /* MouseActions */,
+				22704CCD19816C74000270EE /* OtherActions */,
+			);
+			name = Actions;
+			sourceTree = "<group>";
+		};
+		22704CCB19816C4C000270EE /* MouseActions */ = {
+			isa = PBXGroup;
+			children = (
 				22E5625616BA589200CD5D86 /* ClickAction.h */,
 				22E5625716BA589200CD5D86 /* ClickAction.m */,
 				F0A674F618EE2D0C0062FD29 /* DragDownAction.h */,
@@ -159,6 +169,19 @@
 				F0A674FA18EE3F220062FD29 /* DragUpAction.m */,
 				22E5625816BA589200CD5D86 /* DoubleclickAction.h */,
 				22E5625916BA589200CD5D86 /* DoubleclickAction.m */,
+				22E5626116BA589200CD5D86 /* MouseBaseAction.h */,
+				22E5626216BA589200CD5D86 /* MouseBaseAction.m */,
+				22E5626316BA589200CD5D86 /* MoveAction.h */,
+				22E5626416BA589200CD5D86 /* MoveAction.m */,
+				22E5626716BA589200CD5D86 /* TripleclickAction.h */,
+				22E5626816BA589200CD5D86 /* TripleclickAction.m */,
+			);
+			name = MouseActions;
+			sourceTree = "<group>";
+		};
+		22704CCC19816C62000270EE /* KeyboardActions */ = {
+			isa = PBXGroup;
+			children = (
 				22C0ECEC16BAFD9800E3A46C /* KeyBaseAction.h */,
 				22C0ECED16BAFD9800E3A46C /* KeyBaseAction.m */,
 				22C68A4E1825A8960083A722 /* KeyDownUpBaseAction.h */,
@@ -169,20 +192,21 @@
 				22E5625D16BA589200CD5D86 /* KeyPressAction.m */,
 				22E5625E16BA589200CD5D86 /* KeyUpAction.h */,
 				22E5625F16BA589200CD5D86 /* KeyUpAction.m */,
-				22E5626116BA589200CD5D86 /* MouseBaseAction.h */,
-				22E5626216BA589200CD5D86 /* MouseBaseAction.m */,
-				22E5626316BA589200CD5D86 /* MoveAction.h */,
-				22E5626416BA589200CD5D86 /* MoveAction.m */,
-				22E5626516BA589200CD5D86 /* PrintAction.h */,
-				22E5626616BA589200CD5D86 /* PrintAction.m */,
-				22E5626716BA589200CD5D86 /* TripleclickAction.h */,
-				22E5626816BA589200CD5D86 /* TripleclickAction.m */,
 				22998C7B197A85A300A4C691 /* TypeAction.h */,
 				22998C7C197A85A300A4C691 /* TypeAction.m */,
+			);
+			name = KeyboardActions;
+			sourceTree = "<group>";
+		};
+		22704CCD19816C74000270EE /* OtherActions */ = {
+			isa = PBXGroup;
+			children = (
+				22E5626516BA589200CD5D86 /* PrintAction.h */,
+				22E5626616BA589200CD5D86 /* PrintAction.m */,
 				22E5626916BA589200CD5D86 /* WaitAction.h */,
 				22E5626A16BA589200CD5D86 /* WaitAction.m */,
 			);
-			name = Actions;
+			name = OtherActions;
 			sourceTree = "<group>";
 		};
 		C6859EA2029092E104C91782 /* Documentation */ = {
