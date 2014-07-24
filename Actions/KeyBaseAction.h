@@ -33,6 +33,11 @@
 
 }
 
+/**
+ Returns the keys that are supported by the command.
+
+ @returns An NSDictionary which has keyboard key name as dictionary keys and keyboard key codes (strings) as dictionary values.
+ */
 +(NSDictionary *)getSupportedKeycodes;
 
 +(NSString *)getSupportedKeysAsStringBreakingAt:(unsigned)width indentWith:(NSString *)indent;

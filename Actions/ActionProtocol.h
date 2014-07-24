@@ -30,8 +30,21 @@
 
 @protocol ActionProtocol
 
+/**
+ Returns the command's shortcut.
+
+ The command shortcut is the string which has to be used as command-line argument (typically followed by “:” plus some arguments) to invoke the command.
+ @note The command shortcut is unique for each command.
+ @returns Command shortcut
+ */
 +(NSString *)commandListShortcut;
 
+/**
+ Returns the command description
+ 
+ The description is to be included in the help output and is formatted (i.e.: indented). It should include a description as well as at least one usage example.
+ @returns Command shortcut
+ */
 +(NSString *)commandDescription;
 
 -(void)performActionWithData:(NSString *)data

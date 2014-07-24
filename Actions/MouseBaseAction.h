@@ -44,6 +44,12 @@ typedef enum {
 -(void)performActionWithData:(NSString *)data
                       inMode:(unsigned)mode;
 
+/**
+ Returns a human-readable description of the action
+
+ This should be a one-line string which will be used in “verbose” and in “test” mode.
+ @param locationDescription A textual representation of the coordinates at which the action is performed.
+ */
 -(NSString *)actionDescriptionString:(NSString *)locationDescription;
 
 -(void)performActionAtPoint:(CGPoint)p;
