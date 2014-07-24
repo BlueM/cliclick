@@ -30,7 +30,7 @@
 
 @implementation KeyPressAction
 
-+(NSString *)commandListShortcut {
++(NSString *)commandShortcut {
     return @"kp";
 }
 

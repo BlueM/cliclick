@@ -30,7 +30,7 @@
 
 @implementation MoveAction
 
-+(NSString *)commandListShortcut {
++(NSString *)commandShortcut {
     return @"m";
 }
 

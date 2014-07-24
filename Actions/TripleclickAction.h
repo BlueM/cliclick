@@ -34,7 +34,7 @@
 
 }
 
-+(NSString *)commandListShortcut;
++(NSString *)commandShortcut;
 
 -(NSString *)actionDescriptionString:(NSString *)locationDescription;
 

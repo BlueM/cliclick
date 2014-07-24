@@ -30,7 +30,7 @@
 
 @implementation TripleclickAction
 
-+(NSString *)commandListShortcut {
++(NSString *)commandShortcut {
     return @"tc";
 }
 

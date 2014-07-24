@@ -99,7 +99,7 @@
     
     for (i = 0, ii = [actionClasses count]; i < ii; i++) {
         NSString *classname = [actionClasses objectAtIndex:i];
-        NSString *shortcut = [NSClassFromString(classname) commandListShortcut];
+        NSString *shortcut = [NSClassFromString(classname) commandShortcut];
         if (nil != [shortcuts objectForKey:shortcut]) {
             [NSException raise:@"ShortcutConflictException"
                         format:@"Shortcut “%@” is used by more than one action class", shortcut];

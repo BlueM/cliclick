@@ -37,7 +37,7 @@
  @note The command shortcut is unique for each command.
  @returns Command shortcut
  */
-+(NSString *)commandListShortcut;
++(NSString *)commandShortcut;
 
 /**
  Returns the command description

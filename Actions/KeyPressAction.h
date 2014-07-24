@@ -34,6 +34,6 @@
 
 }
 
-+(NSString *)commandListShortcut;
++(NSString *)commandShortcut;
 
 @end

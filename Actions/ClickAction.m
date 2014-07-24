@@ -30,7 +30,7 @@
 
 @implementation ClickAction
 
-+(NSString *)commandListShortcut {
++(NSString *)commandShortcut {
     return @"c";
 }
 

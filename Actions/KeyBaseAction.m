@@ -72,7 +72,7 @@
 -(void)performActionWithData:(NSString *)data
                       inMode:(unsigned)mode {
 
-    NSString *shortcut = [[self class] commandListShortcut];
+    NSString *shortcut = [[self class] commandShortcut];
 
     struct timespec waitingtime;
     waitingtime.tv_sec = 0;

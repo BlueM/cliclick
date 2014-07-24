@@ -30,7 +30,7 @@
 
 @implementation DragDownAction
 
-+(NSString *)commandListShortcut {
++(NSString *)commandShortcut {
     return @"dd";
 }
 

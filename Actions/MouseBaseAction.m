@@ -34,7 +34,7 @@
                       inMode:(unsigned)mode {
     
     CGPoint p;
-    NSString *shortcut = [[self class] commandListShortcut];
+    NSString *shortcut = [[self class] commandShortcut];
     NSString *verboseLoc;
 
     if ([data isEqualToString:@""]) {

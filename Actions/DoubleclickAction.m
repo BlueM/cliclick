@@ -30,7 +30,7 @@
 
 @implementation DoubleclickAction
 
-+(NSString *)commandListShortcut {
++(NSString *)commandShortcut {
     return @"dc";
 }
 

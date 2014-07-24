@@ -33,7 +33,7 @@
 
 }
 
-+(NSString *)commandListShortcut;
++(NSString *)commandShortcut;
 
 -(void)performActionWithData:(NSString *)data
                       inMode:(unsigned)mode;

@@ -33,7 +33,7 @@
 
 }
 
-+(NSString *)commandListShortcut;
++(NSString *)commandShortcut;
 
 +(NSString *)commandDescription;
 

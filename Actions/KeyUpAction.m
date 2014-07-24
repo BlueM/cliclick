@@ -30,7 +30,7 @@
 
 @implementation KeyUpAction
 
-+(NSString *)commandListShortcut {
++(NSString *)commandShortcut {
     return @"ku";
 }
 

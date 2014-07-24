@@ -30,7 +30,7 @@
 
 @implementation TypeAction
 
-+(NSString *)commandListShortcut {
++(NSString *)commandShortcut {
     return @"t";
 }
 
@@ -55,7 +55,7 @@
     waitingtime.tv_sec = 0;
     waitingtime.tv_nsec = 2 * 1000000; // Milliseconds
 
-    NSString *shortcut = [[self class] commandListShortcut];
+    NSString *shortcut = [[self class] commandShortcut];
 
     if ([data isEqualToString:@""]) {
         [NSException raise:@"InvalidCommandException"

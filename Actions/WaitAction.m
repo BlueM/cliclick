@@ -30,7 +30,7 @@
 
 @implementation WaitAction
 
-+(NSString *)commandListShortcut {
++(NSString *)commandShortcut {
     return @"w";
 }
 
@@ -43,7 +43,7 @@
                       inMode:(unsigned)mode {
 
     unsigned milliseconds = abs([data intValue]);
-    NSString *shortcut = [[self class] commandListShortcut];
+    NSString *shortcut = [[self class] commandShortcut];
     
     if ([data isEqualToString:@""] ||
         !milliseconds) {

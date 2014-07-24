@@ -31,7 +31,7 @@
 
 @implementation DragUpAction
 
-+(NSString *)commandListShortcut {
++(NSString *)commandShortcut {
     return @"du";
 }
 

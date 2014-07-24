@@ -30,7 +30,7 @@
 
 @implementation KeyDownAction
 
-+(NSString *)commandListShortcut {
++(NSString *)commandShortcut {
     return @"kd";
 }
 

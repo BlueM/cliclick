@@ -30,7 +30,7 @@
 
 @implementation PrintAction
 
-+(NSString *)commandListShortcut {
++(NSString *)commandShortcut {
     return @"p";
 }
 

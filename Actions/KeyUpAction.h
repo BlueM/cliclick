@@ -34,7 +34,7 @@
     
 }
 
-+(NSString *)commandListShortcut;
++(NSString *)commandShortcut;
 
 -(void)performActionWithKeycode:(CGKeyCode)code;
 
