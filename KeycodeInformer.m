@@ -180,7 +180,7 @@ static KeycodeInformer *sharedInstance = nil;
     return tmp;
 }
 
-- (NSString *) stringForKeyCode:(CGKeyCode)keyCode andModifiers:(UInt32)modifiers
+- (NSString *)stringForKeyCode:(CGKeyCode)keyCode andModifiers:(UInt32)modifiers
 {
     TISInputSourceRef keyboard             = TISCopyCurrentKeyboardInputSource();
     CFDataRef keyLayoutData                = TISGetInputSourceProperty(keyboard, kTISPropertyUnicodeKeyLayoutData);
