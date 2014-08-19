@@ -161,6 +161,8 @@
 		22704CCB19816C4C000270EE /* MouseActions */ = {
 			isa = PBXGroup;
 			children = (
+				22E5626116BA589200CD5D86 /* MouseBaseAction.h */,
+				22E5626216BA589200CD5D86 /* MouseBaseAction.m */,
 				22E5625616BA589200CD5D86 /* ClickAction.h */,
 				22E5625716BA589200CD5D86 /* ClickAction.m */,
 				F0A674F618EE2D0C0062FD29 /* DragDownAction.h */,
@@ -169,8 +171,6 @@
 				F0A674FA18EE3F220062FD29 /* DragUpAction.m */,
 				22E5625816BA589200CD5D86 /* DoubleclickAction.h */,
 				22E5625916BA589200CD5D86 /* DoubleclickAction.m */,
-				22E5626116BA589200CD5D86 /* MouseBaseAction.h */,
-				22E5626216BA589200CD5D86 /* MouseBaseAction.m */,
 				22E5626316BA589200CD5D86 /* MoveAction.h */,
 				22E5626416BA589200CD5D86 /* MoveAction.m */,
 				22E5626716BA589200CD5D86 /* TripleclickAction.h */,
