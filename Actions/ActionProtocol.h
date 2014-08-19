@@ -35,18 +35,26 @@
 
  The command shortcut is the string which has to be used as command-line argument (typically followed by “:” plus some arguments) to invoke the command.
  @note The command shortcut is unique for each command.
- @returns Command shortcut
+ @return Command shortcut
  */
 +(NSString *)commandShortcut;
 
 /**
  Returns the command description
  
- The description is to be included in the help output and is formatted (i.e.: indented). It should include a description as well as at least one usage example.
- @returns Command shortcut
+ The command description is to be included in the help output and is formatted (i.e.: indented). It should include a description as well as at least one usage example.
+ @return Command shortcut
  */
 +(NSString *)commandDescription;
 
+/**
+ Performs the action
+
+ Depending on the `mode` argument, this can be the action, printing a description of the action to STDOUT or both.
+ 
+ @param data Part of the argument remaining after stripping the leading command identifier
+ @param mode One of: MODE_VERBOSE, MODE_TEST, MODE_REGULAR
+ */
 -(void)performActionWithData:(NSString *)data
                       inMode:(unsigned)mode;
 

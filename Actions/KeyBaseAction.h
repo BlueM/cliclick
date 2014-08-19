@@ -36,19 +36,55 @@
 /**
  Returns the keys that are supported by the command.
 
- @returns An NSDictionary which has keyboard key name as dictionary keys and keyboard key codes (strings) as dictionary values.
+ @return An NSDictionary which has keyboard key name as dictionary keys and keyboard key codes (strings) as dictionary values.
  */
 +(NSDictionary *)getSupportedKeycodes;
 
-+(NSString *)getSupportedKeysAsStringBreakingAt:(unsigned)width indentWith:(NSString *)indent;
 
--(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode;
+/**
+ Returns the keys supported by the command
+ 
+ @param width  Number of characters after which to insert a break (will be increased by the length or the the indentation string)
+ @param indent String to use as indentation string at the beginning of each line
 
--(NSString *)actionDescriptionString:(NSString *)locationDescription;
+ @return Comma-separated, multi-line, indented string
+ */
++(NSString *)getSupportedKeysAsStringBreakingAt:(unsigned)width
+                                     indentWith:(NSString *)indent;
 
+/**
+ Returns a string describing the action performed be the command
+ 
+ @param keyName Name of the key
+ 
+ @return Human-readable phrase such as @@"Press blahblah key"
+ 
+ @note This method must be overwritten by subclasses
+ */
 -(NSString *)actionDescriptionString:(NSString *)keyName;
 
+
+/**
+ Performs the command's action
+
+ @param code The key code
+ 
+ @note This method must be overwritten by subclasses
+ */
 -(void)performActionWithKeycode:(CGKeyCode)code;
+
+
+#pragma mark - ActionProtocol
+
+/**
+ Performs the action
+
+ Depending on the `mode` argument, this can be the action, printing a description of the action to STDOUT or both.
+
+ @param data Part of the argument remaining after stripping the leading command identifier
+ @param mode One of: MODE_VERBOSE, MODE_TEST, MODE_REGULAR
+ */
+-(void)performActionWithData:(NSString *)data
+                      inMode:(unsigned)mode;
 
 @end
