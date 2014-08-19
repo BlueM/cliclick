@@ -30,6 +30,8 @@
 
 @implementation KeyPressAction
 
+#pragma mark - ActionProtocol
+
 +(NSString *)commandShortcut {
     return @"kp";
 }
@@ -41,17 +43,7 @@
     return [NSString stringWithFormat:format, keyList];
 }
 
--(void)performActionWithKeycode:(CGKeyCode)code {    
-    CGEventRef e1 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, true);
-    CGEventPost(kCGSessionEventTap, e1);
-
-    CGEventRef e2 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, false);
-    CGEventPost(kCGSessionEventTap, e2);
-}
-
--(NSString *)actionDescriptionString:(NSString *)keyName {
-    return [NSString stringWithFormat:@"Press + release %@ key", keyName];
-}
+#pragma mark - KeyBaseAction
 
 +(NSDictionary *)getSupportedKeycodes {
     return [NSDictionary dictionaryWithObjectsAndKeys:
@@ -90,6 +82,18 @@
             @"73",  @"volume-down",
             @"114", @"help",
             nil];
+}
+
+-(void)performActionWithKeycode:(CGKeyCode)code {    
+    CGEventRef e1 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, true);
+    CGEventPost(kCGSessionEventTap, e1);
+
+    CGEventRef e2 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, false);
+    CGEventPost(kCGSessionEventTap, e2);
+}
+
+-(NSString *)actionDescriptionString:(NSString *)keyName {
+    return [NSString stringWithFormat:@"Press + release %@ key", keyName];
 }
 
 @end

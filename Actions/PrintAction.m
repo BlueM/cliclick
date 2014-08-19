@@ -30,6 +30,8 @@
 
 @implementation PrintAction
 
+#pragma mark - ActionProtocol
+
 +(NSString *)commandShortcut {
     return @"p";
 }

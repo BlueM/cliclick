@@ -30,6 +30,8 @@
 
 @implementation ClickAction
 
+#pragma mark - ActionProtocol
+
 +(NSString *)commandShortcut {
     return @"c";
 }
@@ -41,6 +43,8 @@
     "          also use “.”, which means: the current position. Using “.” is\n"
     "          equivalent to using relative zero values “c:+0,+0”.";
 }
+
+#pragma mark - MouseBaseAction
 
 -(NSString *)actionDescriptionString:(NSString *)locationDescription {
     return [NSString stringWithFormat:@"Click at %@", locationDescription];

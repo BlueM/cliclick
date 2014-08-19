@@ -31,6 +31,8 @@
 
 @implementation DragUpAction
 
+#pragma mark - ActionProtocol
+
 +(NSString *)commandShortcut {
     return @"du";
 }
@@ -40,6 +42,8 @@
     "          Example: “du:112,134” will release at the point with x\n"
     "          coordinate 112 and y coordinate 134.";
 }
+
+#pragma mark - MouseBaseAction
 
 -(NSString *)actionDescriptionString:(NSString *)locationDescription {
     return [NSString stringWithFormat:@"Drag release at %@", locationDescription];

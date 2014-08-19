@@ -30,6 +30,8 @@
 
 @implementation DragDownAction
 
+#pragma mark - ActionProtocol
+
 +(NSString *)commandShortcut {
     return @"dd";
 }
@@ -40,6 +42,9 @@
     "          coordinate 12 and y coordinate 34. Instead of x and y values,\n"
     "          you may also use “.”, which means: the current position.";
 }
+
+
+#pragma mark - MouseBaseAction
 
 -(NSString *)actionDescriptionString:(NSString *)locationDescription {
     return [NSString stringWithFormat:@"Drag press down at %@", locationDescription];

@@ -30,6 +30,41 @@
 
 @implementation MouseBaseAction
 
++(int)getCoordinate:(NSString *)unparsedValue
+            forAxis:(CLICLICKAXIS)axis {
+
+    if ([[unparsedValue substringToIndex:1] isEqualToString:@"+"] ||
+        [[unparsedValue substringToIndex:1] isEqualToString:@"-"]) {
+        // Relative value
+        CGPoint ourLoc      = CGEventGetLocation(CGEventCreate(NULL));
+        int positionDiff    = [unparsedValue intValue];
+        int currentPosition = axis == XAXIS ? (int)ourLoc.x : (int)ourLoc.y;
+
+        return (int) currentPosition + positionDiff;
+    }
+
+    if ([[unparsedValue substringToIndex:1] isEqualToString:@"="]) {
+        // Forced absolute value
+        return [[unparsedValue substringFromIndex:1] intValue];
+    }
+
+    // Else. Absolute value
+    return [unparsedValue intValue];
+}
+
+-(NSString *)actionDescriptionString:(NSString *)locationDescription {
+    [NSException raise:@"InvalidCommandException"
+                format:@"To be implemented by subclasses"];
+    return @"Will never be reached, but makes Xcode happy ;-)";
+}
+
+-(void)performActionAtPoint:(CGPoint)p {
+    [NSException raise:@"InvalidCommandException"
+                format:@"To be implemented by subclasses"];
+}
+
+#pragma mark - ActionProtocol
+
 -(void)performActionWithData:(NSString *)data
                       inMode:(unsigned)mode {
     
@@ -78,41 +113,6 @@
     CGEventPost(kCGHIDEventTap, move);
     
     [self performActionAtPoint:p];
-}
-
-+(int)getCoordinate:(NSString *)unparsedValue
-            forAxis:(CLICLICKAXIS)axis {
-    
-    if ([[unparsedValue substringToIndex:1] isEqualToString:@"+"] ||
-        [[unparsedValue substringToIndex:1] isEqualToString:@"-"]) {
-        // Relative value
-        CGEventRef ourEvent = CGEventCreate(NULL);
-        CGPoint ourLoc      = CGEventGetLocation(ourEvent);
-
-        int positionDiff = [unparsedValue intValue];
-        int currentPosition = axis == XAXIS ? (int)ourLoc.x : (int)ourLoc.y;
-        
-        return (int) currentPosition + positionDiff;
-    }
-
-    if ([[unparsedValue substringToIndex:1] isEqualToString:@"="]) {
-        // Forced absolute value
-        return [[unparsedValue substringFromIndex:1] intValue];
-    }
-
-    // Else. Absolute value
-    return [unparsedValue intValue];
-}
-
--(NSString *)actionDescriptionString:(NSString *)locationDescription {
-    [NSException raise:@"InvalidCommandException"
-                format:@"To be implemented by subclasses"];
-    return @"Will never be reached, but makes Xcode happy ;-)";
-}
-
--(void)performActionAtPoint:(CGPoint)p {
-    [NSException raise:@"InvalidCommandException"
-                format:@"To be implemented by subclasses"];
 }
 
 @end

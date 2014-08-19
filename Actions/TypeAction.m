@@ -30,6 +30,8 @@
 
 @implementation TypeAction
 
+#pragma mark - ActionProtocol
+
 +(NSString *)commandShortcut {
     return @"t";
 }
@@ -40,6 +42,9 @@
             "          Example: “type:Test” will type “Test” into the frontmost application\n"
             "          Example: “type:'Viele Grüße'” will type “Viele Grüße” into the frontmost application";
 }
+
+
+#pragma mark - KeyBaseAction
 
 -(void)performActionWithKeycode:(CGKeyCode)code {
     CGEventRef e1 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, true);

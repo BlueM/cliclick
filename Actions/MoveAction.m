@@ -30,6 +30,8 @@
 
 @implementation MoveAction
 
+#pragma mark - ActionProtocol
+
 +(NSString *)commandShortcut {
     return @"m";
 }
@@ -39,6 +41,8 @@
     "          Example: “m:12,34” will move the mouse to the point with\n"
     "          x coordinate 12 and y coordinate 34.";
 }
+
+#pragma mark - MouseBaseAction
 
 -(NSString *)actionDescriptionString:(NSString *)locationDescription {
     return [NSString stringWithFormat:@"Move to %@", locationDescription];

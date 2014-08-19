@@ -33,7 +33,7 @@
 +(NSDictionary *)getSupportedKeycodes {
     [NSException raise:@"InvalidCommandException"
                 format:@"To be implemented by subclasses"];
-    return [NSDictionary dictionary]; // Will never be reached, but will suppress Xcode warning
+    return @{@"Will never be reached, but makes Xcode happy": @"Foo"};
 }
 
 +(NSString *)getSupportedKeysAsStringBreakingAt:(unsigned)width indentWith:(NSString *)indent {
@@ -55,9 +55,7 @@
     
     do {
         range = [keys rangeOfString:@" " options:NSBackwardsSearch range:NSMakeRange(lastRangeStart, effectiveWidth)];
-        if (range.location == NSNotFound ||
-            ([keys length] - range.location <= effectiveWidth)
-        ) {
+        if (range.location == NSNotFound || ([keys length] - range.location <= effectiveWidth)) {
             // No rest or rest of the string fits in last part
             [lines addObject:[indent stringByAppendingString:[keys substringFromIndex:lastRangeStart]]];
             break;
@@ -68,6 +66,19 @@
     
     return [lines componentsJoinedByString:@"\n"];
 }
+
+-(NSString *)actionDescriptionString:(NSString *)keyName {
+    [NSException raise:@"InvalidCommandException"
+                format:@"To be implemented by subclasses"];
+    return @"Will never be reached, but makes Xcode happy";
+}
+
+-(void)performActionWithKeycode:(CGKeyCode)code {
+    [NSException raise:@"InvalidCommandException"
+                format:@"To be implemented by subclasses"];
+}
+
+#pragma mark - ActionProtocol
 
 -(void)performActionWithData:(NSString *)data
                       inMode:(unsigned)mode {
@@ -112,17 +123,6 @@
             [self performActionWithKeycode:(CGKeyCode)code];
         }
     }
-}
-
--(NSString *)actionDescriptionString:(NSString *)keyName {    
-    [NSException raise:@"InvalidCommandException"
-                format:@"To be implemented by subclasses"];
-    return @"Will never be reached, but makes Xcode happy ;-)";
-}
-
--(void)performActionWithKeycode:(CGKeyCode)code {
-    [NSException raise:@"InvalidCommandException"
-                format:@"To be implemented by subclasses"];
 }
 
 @end

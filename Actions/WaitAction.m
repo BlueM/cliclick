@@ -30,6 +30,8 @@
 
 @implementation WaitAction
 
+#pragma mark - ActionProtocol
+
 +(NSString *)commandShortcut {
     return @"w";
 }

@@ -30,6 +30,8 @@
 
 @implementation KeyUpAction
 
+#pragma mark - ActionProtocol
+
 +(NSString *)commandShortcut {
     return @"ku";
 }
@@ -37,12 +39,14 @@
 +(NSString *)commandDescription {
     NSString *keyList = [[self class] getSupportedKeysAsStringBreakingAt:65 indentWith:@"          "];
     NSString *format = @"  ku:keys Will trigger a KEY UP event for a comma-separated list of\n"
-                       "          modifier keys. Possible keys are:\n%@\n"
-                       "          Example: “ku:cmd,ctrl” will release the command key and the\n"
-                       "          control key (which will only have an effect if you performed\n"
-                       "          a “key down” before)";
+                        "          modifier keys. Possible keys are:\n%@\n"
+                        "          Example: “ku:cmd,ctrl” will release the command key and the\n"
+                        "          control key (which will only have an effect if you performed\n"
+                        "          a “key down” before)";
     return [NSString stringWithFormat:format, keyList];
 }
+
+#pragma mark - KeyBaseAction
 
 -(void)performActionWithKeycode:(CGKeyCode)code {
     CGEventRef e = CGEventCreateKeyboardEvent(NULL, code, false);

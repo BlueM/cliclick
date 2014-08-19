@@ -30,6 +30,8 @@
 
 @implementation KeyDownUpBaseAction
 
+#pragma mark - KeyBaseAction
+
 +(NSDictionary *)getSupportedKeycodes {
     return [NSDictionary dictionaryWithObjectsAndKeys:
             @"59", @"ctrl",

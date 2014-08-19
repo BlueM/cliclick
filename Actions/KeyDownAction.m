@@ -30,6 +30,8 @@
 
 @implementation KeyDownAction
 
+#pragma mark - ActionProtocol
+
 +(NSString *)commandShortcut {
     return @"kd";
 }
@@ -43,6 +45,8 @@
     "          with another command)";
     return [NSString stringWithFormat:format, keyList];
 }
+
+#pragma mark - KeyBaseAction
 
 -(void)performActionWithKeycode:(CGKeyCode)code {
     CGEventRef e = CGEventCreateKeyboardEvent(NULL, code, true);
