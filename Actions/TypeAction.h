@@ -28,17 +28,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ActionProtocol.h"
+#import "KeyDownUpBaseAction.h"
 #import "KeycodeInformer.h"
 
 @interface TypeAction : NSObject <ActionProtocol> {
 
 }
-
-+(NSString *)commandShortcut;
-
-+(NSString *)commandDescription;
-
--(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode;
 
 @end
