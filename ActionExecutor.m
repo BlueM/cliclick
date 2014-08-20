@@ -27,6 +27,7 @@
  */
 
 #import "ActionExecutor.h"
+#include "ActionClassesMacro.h"
 
 @implementation ActionExecutor
 
@@ -85,9 +86,7 @@
 }
 
 +(NSArray *)actionClasses {
-    NSArray *actionClasses = [NSArray arrayWithObjects:@"ClickAction", @"MoveAction", @"DoubleclickAction", @"TripleclickAction",
-                                                       @"KeyDownAction", @"KeyUpAction",  @"PrintAction", @"WaitAction",
-                                                       @"KeyPressAction", @"DragDownAction", @"DragUpAction", @"TypeAction", nil];
+    NSArray *actionClasses = [NSArray arrayWithObjects:ACTION_CLASSES];
     return actionClasses;
 }
 
