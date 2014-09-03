@@ -68,7 +68,7 @@
          shortcut, shortcut, shortcut];
     }
 
-    if (MODE_TEST == mode) {
+    if (MODE_REGULAR != mode) {
         printf("Type: “%s”\n", [data UTF8String]);
         return;
     }
