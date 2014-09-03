@@ -54,7 +54,7 @@
 }
 
 -(NSString *)actionDescriptionString:(NSString *)keyName {
-    return [NSString stringWithFormat:@"Press %@ key", keyName];
+    return [NSString stringWithFormat:@"Hold %@ key down", keyName];
 }
 
 @end
