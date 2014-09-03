@@ -62,7 +62,6 @@ typedef enum {
  This method is called as last step of method performActionWithData:inMode: It should only perform the action, not print a description when in MODE_VERBOSE mode, as this is done by performActionWithData:inMode:
  
  @note This method will only be invoked when in MODE_REGULAR or MODE_VERBOSE mode.
-
  */
 -(void)performActionAtPoint:(CGPoint)p;
 
