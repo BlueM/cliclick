@@ -33,6 +33,9 @@
 
 @interface KeycodeInformer : NSObject {
     NSMutableDictionary *map;
+    TISInputSourceRef keyboard;
+    CFDataRef keyLayoutData;
+    const UCKeyboardLayout *keyboardLayout;
 }
 
 + (id)sharedInstance;

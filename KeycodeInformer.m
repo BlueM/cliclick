@@ -49,6 +49,10 @@ static KeycodeInformer *sharedInstance = nil;
 {
     self = [super init];
     if (self) {
+        keyboard       = TISCopyCurrentKeyboardInputSource();
+        keyLayoutData  = TISGetInputSourceProperty(keyboard, kTISPropertyUnicodeKeyLayoutData);
+        keyboardLayout = (const UCKeyboardLayout *)CFDataGetBytePtr(keyLayoutData);
+
         map = [[NSMutableDictionary alloc] initWithCapacity:256];
         
         NSArray *keyCodes = @[ @0,  @1,  @2,  @3,  @4,  @5,  @6,  @7,  @8,  @9, @10, @11, @12, @13, @14, @15,
@@ -87,7 +91,8 @@ static KeycodeInformer *sharedInstance = nil;
 
 - (oneway void)release
 {
-    
+    CFRelease(keyLayoutData);
+    CFRelease(keyboard);
 }
 
 - (id)autorelease {
@@ -182,10 +187,6 @@ static KeycodeInformer *sharedInstance = nil;
 
 - (NSString *)stringForKeyCode:(CGKeyCode)keyCode andModifiers:(UInt32)modifiers
 {
-    TISInputSourceRef keyboard             = TISCopyCurrentKeyboardInputSource();
-    CFDataRef keyLayoutData                = TISGetInputSourceProperty(keyboard, kTISPropertyUnicodeKeyLayoutData);
-    const UCKeyboardLayout *keyboardLayout = (const UCKeyboardLayout *)CFDataGetBytePtr(keyLayoutData);
-
     UInt32 keysDown = 0;
     UniChar chars[4];
     UniCharCount realLength;
@@ -200,8 +201,6 @@ static KeycodeInformer *sharedInstance = nil;
                    sizeof(chars) / sizeof(chars[0]),
                    &realLength,
                    chars);
-    CFRelease(keyboard);
-    
     return [NSString stringWithCharacters:chars length:1];
 }
 
