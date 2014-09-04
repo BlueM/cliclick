@@ -54,26 +54,26 @@ static KeycodeInformer *sharedInstance = nil;
         keyboardLayout = (const UCKeyboardLayout *)CFDataGetBytePtr(keyLayoutData);
 
         map = [[NSMutableDictionary alloc] initWithCapacity:256];
-        
+
         NSArray *keyCodes = @[ @0,  @1,  @2,  @3,  @4,  @5,  @6,  @7,  @8,  @9, @10, @11, @12, @13, @14, @15,
-                               @16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @27, @28, @29, @30, @31,
-                               @32, @33, @34, @35, @37, @38, @39, @40, @41, @42, @43, @44, @45, @46, @47, @49];
-        
+                              @16, @17, @18, @19, @20, @21, @22, @23, @24, @25, @26, @27, @28, @29, @30, @31,
+                              @32, @33, @34, @35, @37, @38, @39, @40, @41, @42, @43, @44, @45, @46, @47, @49, @50];
+
         for (NSNumber *keyCode in keyCodes) {
             NSString *string1 = [self stringForKeyCode:(CGKeyCode)[keyCode intValue] andModifiers:0];
             [map setObject:@[keyCode, @0] forKey:[string1 decomposedStringWithCanonicalMapping]];
-            
+
             NSString *string2 = [self stringForKeyCode:(CGKeyCode)[keyCode intValue] andModifiers:MODIFIER_SHIFT];
             [map setObject:@[keyCode, NSNUMBER_MODIFIER_SHIFT] forKey:[string2 decomposedStringWithCanonicalMapping]];
-            
+
             NSString *string3 = [self stringForKeyCode:(CGKeyCode)[keyCode intValue] andModifiers:MODIFIER_ALT];
             [map setObject:@[keyCode, NSNUMBER_MODIFIER_ALT] forKey:[string3 decomposedStringWithCanonicalMapping]];
-            
+
             NSString *string4 = [self stringForKeyCode:(CGKeyCode)[keyCode intValue] andModifiers:MODIFIER_SHIFT_ALT];
             [map setObject:@[keyCode, NSNUMBER_MODIFIER_SHIFT_ALT] forKey:[string4 decomposedStringWithCanonicalMapping]];
         }
     }
-    
+
     return self;
 }
 
@@ -118,14 +118,13 @@ static KeycodeInformer *sharedInstance = nil;
             i += range.length - 1;
         }
 
-        // [ki keyCodesForString:[data substringWithRange:range]];
         id keyCodeInfo = [map objectForKey:[string substringWithRange:range]];
         if (keyCodeInfo) {
             [keyCodes addObject:keyCodeInfo];
         } else {
             // @todo-api Save unresolvable strings and make them retrievable via a method
             NSFileHandle *fh = [NSFileHandle fileHandleWithStandardError];
-            NSString *msg = [NSString stringWithFormat:@"Unable to get key code for: %@\n", [string substringWithRange:range]];
+            NSString *msg    = [NSString stringWithFormat:@"Unable to get key code for: %@\n", [string substringWithRange:range]];
             [fh writeData:[msg dataUsingEncoding:NSUTF8StringEncoding]];
         }
 
@@ -136,50 +135,19 @@ static KeycodeInformer *sharedInstance = nil;
 
 - (NSString *)prepareString:(NSString *)string
 {
-    // Incomplete list of characters which (dependent on the keyboard layout) cannot
-    // be typed by a combination of keys, but may require consecutive key presses or
-    // key combinations. Many characters are missing, as I did not yet find a way to
-    // auto-generate the map.
-    NSDictionary *replacementMap = @{
-        @"Ä": @"¨A",
-        @"Ö": @"¨O",
-        @"Ü": @"¨U",
-        @"ä": @"¨a",
-        @"ö": @"¨o",
-        @"ü": @"¨u",
-        @"ü": @"¨u",
-        @"ë": @"¨e",
-        @"Á": @"´A",
-        @"É": @"´E",
-        @"á": @"´a",
-        @"é": @"´e",
-        @"À": @"`A",
-        @"È": @"`E",
-        @"à": @"`a",
-        @"è": @"`e",
-        @"Ã": @"~A",
-        @"ã": @"~a",
-        @"Ñ": @"~N",
-        @"ñ": @"~n",
-        @"Â": @"^A",
-        @"Ê": @"^E",
-        @"Î": @"^I",
-        @"Ô": @"^O",
-        @"Û": @"^U",
-        @"â": @"^a",
-        @"ê": @"^e",
-        @"î": @"^i",
-        @"ô": @"^o",
-        @"û": @"^u"
-    };
-
-    NSMutableString *tmp     = [NSMutableString stringWithString:string];
-    NSEnumerator *enumerator = [replacementMap keyEnumerator];
+    NSString *layoutName         = TISGetInputSourceProperty(keyboard, kTISPropertyLocalizedName);
+    NSDictionary *replacementMap = [self getReplacementMapForKeyboardLayoutNamed:layoutName];
+    NSMutableString *tmp         = [NSMutableString stringWithString:string];
+    NSEnumerator *enumerator     = [replacementMap keyEnumerator];
     NSString *key;
 
-    while ((key = [enumerator nextObject])) {
-        // @todo-internal Could somehow get rid of executing [tmp length] each time?
-        [tmp replaceOccurrencesOfString:key withString:[replacementMap objectForKey:key] options:NSLiteralSearch range:NSMakeRange(0, [tmp length])];
+    NSLog(@"Current keyboard layout: %@", layoutName);
+
+    if (nil != replacementMap) {
+        while ((key = [enumerator nextObject])) {
+            // @todo-internal Could somehow get rid of executing [tmp length] each time?
+            [tmp replaceOccurrencesOfString:key withString:[replacementMap objectForKey:key] options:NSLiteralSearch range:NSMakeRange(0, [tmp length])];
+        }
     }
 
     return tmp;
@@ -201,7 +169,295 @@ static KeycodeInformer *sharedInstance = nil;
                    sizeof(chars) / sizeof(chars[0]),
                    &realLength,
                    chars);
+
     return [NSString stringWithCharacters:chars length:1];
+}
+
+- (NSDictionary *)getReplacementMapForKeyboardLayoutNamed:(NSString *)layoutName
+{
+    // Incomplete lists of characters which (dependent on the keyboard layout) cannot
+    // be typed by a combination of keys, but may require consecutive key presses or
+    // key combinations. Many characters are missing, as I did not yet find a way to
+    // auto-generate the map.
+    if ([@"German" isEqualToString:layoutName]) {
+        #pragma mark - German replacement map
+        return @{
+            // Umlauts
+            @"Ë": @"¨E",
+            @"ë": @"¨e",
+
+            // Acute
+            @"Á": @"´A",
+            @"É": @"´E",
+            @"á": @"´a",
+            @"é": @"´e",
+
+            // Agrave
+            @"À": @"`A",
+            @"È": @"`E",
+            @"à": @"`a",
+            @"è": @"`e",
+
+            // Tilde
+            @"Ã": @"~A",
+            @"ã": @"~a",
+            @"Ñ": @"~N",
+            @"ñ": @"~n",
+
+            // Circumflex
+            @"Â": @"^A",
+            @"Ê": @"^E",
+            @"Î": @"^I",
+            @"Ô": @"^O",
+            @"Û": @"^U",
+            @"â": @"^a",
+            @"ê": @"^e",
+            @"î": @"^i",
+            @"ô": @"^o",
+            @"û": @"^u",
+        };
+    }
+
+    if ([@"U.S. Extended" isEqualToString:layoutName]) {
+        #pragma mark - U.S. Extended replacement map
+        // See http://symbolcodes.tlt.psu.edu/accents/codemacext.html
+        return @{
+            // Umlauts
+            @"Ä": @"¨A",
+            @"Ö": @"¨O",
+            @"Ü": @"¨U",
+            @"Ë": @"¨E",
+            @"ä": @"¨a",
+            @"ö": @"¨o",
+            @"ü": @"¨u",
+            @"ë": @"¨e",
+
+            // Acute
+            @"Á": @"´A",
+            @"É": @"´E",
+            @"Ú": @"´U",
+            @"á": @"´a",
+            @"é": @"´e",
+            @"ú": @"´u",
+            @"Ń": @"´N",
+            @"ń": @"´n",
+
+            // Tilde
+            @"Ñ": @"~N",
+            @"ñ": @"~n",
+
+            // Agrave
+            @"À": @"`A",
+            @"È": @"`E",
+            @"à": @"`a",
+            @"è": @"`e",
+            @"Ǹ": @"`N",
+            @"ǹ": @"`n",
+
+            // Caron
+            @"Ň": @"ˇN",
+            @"ň": @"ˇn",
+            @"Š": @"ˇS",
+            @"š": @"ˇs",
+        };
+    }
+
+    if ([@"French" isEqualToString:layoutName]) {
+        #pragma mark - French replacement map
+        return @{
+             // Umlauts
+             @"Ä": @"¨A",
+             @"Ö": @"¨O",
+             @"Ü": @"¨U",
+             @"Ë": @"¨E",
+             @"ä": @"¨a",
+             @"ö": @"¨o",
+             @"ü": @"¨u",
+             @"ë": @"¨e",
+
+             // Acute
+             @"É": @"´E",
+             @"á": @"´a",
+             @"ú": @"´u",
+             @"Ń": @"´N",
+             @"ń": @"´n",
+
+             // Agrave
+             @"À": @"`A",
+         };
+    }
+
+    if ([@"Canadian French - CSA" isEqualToString:layoutName]) {
+        #pragma mark - Canadian French replacement map
+        return @{
+             // Umlauts
+             @"Ä": @"¨A",
+             @"Ö": @"¨O",
+             @"Ü": @"¨U",
+             @"Ë": @"¨E",
+             @"ä": @"¨a",
+             @"ö": @"¨o",
+             @"ü": @"¨u",
+             @"ë": @"¨e",
+
+             // Acute
+             @"É": @"´E",
+             @"á": @"´a",
+             @"ú": @"´u",
+
+             // Agrave
+             @"À": @"`A",
+         };
+    }
+
+    if ([@"Spanish" isEqualToString:layoutName]) {
+        #pragma mark - Spanish replacement map
+        return @{
+             // Umlauts
+             @"Ä": @"¨A",
+             @"Ö": @"¨O",
+             @"Ü": @"¨U",
+             @"Ë": @"¨E",
+             @"ä": @"¨a",
+             @"ö": @"¨o",
+             @"ü": @"¨u",
+             @"ë": @"¨e",
+
+             // Acute
+              @"É": @"´E",
+              @"á": @"´a",
+              @"é": @"´e",
+
+              // Agrave
+              @"À": @"`A",
+              @"à": @"`a",
+              @"è": @"`e",
+
+             // Circumflex
+              @"â": @"^a",
+              @"ê": @"^e",
+         };
+    }
+
+    if ([@"Portuguese" isEqualToString:layoutName]) {
+        #pragma mark - Portuguese replacement map
+        return @{
+             // Umlauts
+             @"Ä": @"¨A",
+             @"Ö": @"¨O",
+             @"Ü": @"¨U",
+             @"Ë": @"¨E",
+             @"ä": @"¨a",
+             @"ö": @"¨o",
+             @"ü": @"¨u",
+             @"ë": @"¨e",
+
+             // Acute
+             @"Á": @"´A",
+             @"É": @"´E",
+             @"á": @"´a",
+             @"é": @"´e",
+
+             // Agrave
+             @"À": @"`A",
+             @"È": @"`E",
+             @"à": @"`a",
+             @"è": @"`e",
+
+             // Circumflex
+             @"Â": @"^A",
+             @"Ê": @"^E",
+             @"â": @"^a",
+             @"ê": @"^e",
+
+             // Tilde
+             @"Ã": @"˜A",
+             @"Ñ": @"˜n",
+             @"ã": @"˜a",
+             @"ñ": @"˜n",
+         };
+    }
+
+    if ([@"Canadian English" isEqualToString:layoutName]) {
+        #pragma mark - Canadian English replacement map
+
+        // Note: When physically typing on a keyboard with this layout, all the
+        // replacements below work. But for some reason, when typing programmatically,
+        // they require a pretty long delay between keystrokes (50+ ms). And, more
+        // important, in a sequence of those characters (e.g. "Äñé"), only the first one
+        // is correct, while the others will result in the two characters (the right side
+        // of the map), not in the character that should be typed (the left side of the map).
+        //
+        // Any hints why this is the case and how that could be fixed are welcome.
+
+        return @{
+            // Umlauts
+//             @"Ä": @"¨A",
+//             @"Ö": @"¨O",
+//             @"Ü": @"¨U",
+//             @"Ë": @"¨E",
+//             @"ä": @"¨a",
+//             @"ö": @"¨o",
+//             @"ü": @"¨u",
+//             @"ë": @"¨e",
+
+            // Acute
+//             @"Á": @"´A",
+//             @"É": @"´E",
+//             @"á": @"´a",
+//             @"é": @"´e",
+
+            // Tilde
+//             @"Ñ": @"~N",
+//             @"ñ": @"~n",
+
+            // Agrave
+//             @"À": @"`A",
+//             @"È": @"`E",
+//             @"à": @"`a",
+//             @"è": @"`e",
+        };
+    }
+
+    if ([@"Brazilian" isEqualToString:layoutName]) {
+        #pragma mark - Brazilian replacement map
+
+        // Note: When physically typing on a keyboard with this layout, all the
+        // replacements below work. But for some reason, when typing programmatically,
+        // they require a pretty long delay between keystrokes (50+ ms). And, more
+        // important, in a sequence of those characters (e.g. "Äñé"), only the first one
+        // is correct, while the others will result in the two characters (the right side
+        // of the map), not in the character that should be typed (the left side of the map).
+        //
+        // Any hints why this is the case and how that could be fixed are welcome.
+
+        return @{
+            // Umlauts
+//             @"Ä": @"¨A",
+//             @"Ö": @"¨O",
+//             @"Ü": @"¨U",
+//             @"ä": @"¨a",
+//             @"ö": @"¨o",
+//             @"ü": @"¨u",
+
+            // Circumflex
+//             @"ê": @"ˆe",
+// 
+            // Tilde
+//             @"Ã": @"˜A",
+//             @"Ñ": @"˜N",
+//             @"ã": @"˜a",
+//             @"ñ": @"˜n",
+
+            // Acute
+//             @"é": @"´e",
+
+            // Agrave
+//             @"è": @"`e",
+        };
+    }
+
+    return nil;
 }
 
 @end
