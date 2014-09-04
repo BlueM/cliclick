@@ -58,7 +58,7 @@
 
     struct timespec waitingtime;
     waitingtime.tv_sec = 0;
-    waitingtime.tv_nsec = 2 * 1000000; // Milliseconds
+    waitingtime.tv_nsec = 10 * 1000000; // Milliseconds
 
     NSString *shortcut = [[self class] commandShortcut];
 
