@@ -122,7 +122,6 @@ static KeycodeInformer *sharedInstance = nil;
         if (keyCodeInfo) {
             [keyCodes addObject:keyCodeInfo];
         } else {
-            // @todo-api Save unresolvable strings and make them retrievable via a method
             NSFileHandle *fh = [NSFileHandle fileHandleWithStandardError];
             NSString *msg    = [NSString stringWithFormat:@"Unable to get key code for: %@\n", [string substringWithRange:range]];
             [fh writeData:[msg dataUsingEncoding:NSUTF8StringEncoding]];
@@ -141,11 +140,11 @@ static KeycodeInformer *sharedInstance = nil;
     NSEnumerator *enumerator     = [replacementMap keyEnumerator];
     NSString *key;
 
-    NSLog(@"Current keyboard layout: %@", layoutName);
+    DLog(@"Current keyboard layout: %@", layoutName);
 
     if (nil != replacementMap) {
         while ((key = [enumerator nextObject])) {
-            // @todo-internal Could somehow get rid of executing [tmp length] each time?
+            // TODO: Could somehow get rid of executing [tmp length] each time?
             [tmp replaceOccurrencesOfString:key withString:[replacementMap objectForKey:key] options:NSLiteralSearch range:NSMakeRange(0, [tmp length])];
         }
     }
@@ -176,33 +175,44 @@ static KeycodeInformer *sharedInstance = nil;
 - (NSDictionary *)getReplacementMapForKeyboardLayoutNamed:(NSString *)layoutName
 {
     // Incomplete lists of characters which (dependent on the keyboard layout) cannot
-    // be typed by a combination of keys, but may require consecutive key presses or
-    // key combinations. Many characters are missing, as I did not yet find a way to
-    // auto-generate the map.
+    // be typed by a combination of keys, but require consecutive key presses. Many
+    // characters are missing, as I did not yet find a way to auto-generate the map.
+
     if ([@"German" isEqualToString:layoutName]) {
         #pragma mark - German replacement map
+        // #SUPPORTED German: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÃÕÑãõñ
+        // #KNOWN_UNSUPPORTED German: ŃńǸǹŇňŘřŠš
         return @{
             // Umlauts
             @"Ë": @"¨E",
+            @"Ÿ": @"¨Y",
             @"ë": @"¨e",
+            @"ï": @"¨i",
+            @"ÿ": @"¨y",
 
             // Acute
             @"Á": @"´A",
             @"É": @"´E",
+            @"Í": @"´I",
+            @"Ó": @"´O",
+            @"Ú": @"´U",
             @"á": @"´a",
             @"é": @"´e",
+            @"í": @"´i",
+            @"ó": @"´o",
+            @"ú": @"´u",
 
             // Agrave
             @"À": @"`A",
             @"È": @"`E",
+            @"Ì": @"`I",
+            @"Ò": @"`O",
+            @"Ù": @"`U",
             @"à": @"`a",
             @"è": @"`e",
-
-            // Tilde
-            @"Ã": @"~A",
-            @"ã": @"~a",
-            @"Ñ": @"~N",
-            @"ñ": @"~n",
+            @"ì": @"`i",
+            @"ò": @"`o",
+            @"ù": @"`u",
 
             // Circumflex
             @"Â": @"^A",
@@ -215,245 +225,404 @@ static KeycodeInformer *sharedInstance = nil;
             @"î": @"^i",
             @"ô": @"^o",
             @"û": @"^u",
+
+            // Tilde
+            @"Ã": @"~A",
+            @"Ñ": @"~N",
+            @"Õ": @"~O",
+            @"ã": @"~a",
+            @"ñ": @"~n",
+            @"õ": @"~o",
         };
     }
 
     if ([@"U.S. Extended" isEqualToString:layoutName]) {
         #pragma mark - U.S. Extended replacement map
+        // #SUPPORTED U.S. Extended: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÃÕÑãõñŃńǸǹŇňŘřŠš
+        // #KNOWN_UNSUPPORTED U.S. Extended:
         // See http://symbolcodes.tlt.psu.edu/accents/codemacext.html
+        return @{
+            // Umlauts
+            @"Ä": @"¨A",
+            @"Ë": @"¨E",
+            @"Ï": @"¨I",
+            @"Ö": @"¨O",
+            @"Ü": @"¨U",
+            @"Ÿ": @"¨Y",
+            @"ä": @"¨a",
+            @"ë": @"¨e",
+            @"ï": @"¨i",
+            @"ö": @"¨o",
+            @"ü": @"¨u",
+            @"ÿ": @"¨y",
+
+            // Acute
+            @"Á": @"´A",
+            @"É": @"´E",
+            @"Í": @"´I",
+            @"Ń": @"´N",
+            @"Ó": @"´O",
+            @"Ú": @"´U",
+            @"á": @"´a",
+            @"é": @"´e",
+            @"í": @"´i",
+            @"ń": @"´n",
+            @"ó": @"´o",
+            @"ú": @"´u",
+
+            // Agrave
+            @"À": @"`A",
+            @"È": @"`E",
+            @"Ì": @"`I",
+            @"Ǹ": @"`N",
+            @"Ò": @"`O",
+            @"Ù": @"`U",
+            @"à": @"`a",
+            @"è": @"`e",
+            @"ì": @"`i",
+            @"ò": @"`o",
+            @"ù": @"`u",
+            @"ǹ": @"`n",
+
+            // Circumflex
+            @"Â": @"ˆA",
+            @"Ê": @"ˆE",
+            @"Î": @"ˆI",
+            @"Ô": @"ˆO",
+            @"Û": @"ˆU",
+            @"â": @"ˆa",
+            @"ê": @"ˆe",
+            @"î": @"ˆi",
+            @"ô": @"ˆo",
+            @"û": @"ˆu",
+
+            // Tilde
+            @"Ã": @"˜A",
+            @"Ñ": @"˜N",
+            @"Õ": @"˜O",
+            @"ã": @"˜a",
+            @"ñ": @"˜n",
+            @"õ": @"˜o",
+
+            // Caron
+            @"Ň": @"ˇN",
+            @"Ř": @"ˇR",
+            @"Š": @"ˇS",
+            @"ň": @"ˇn",
+            @"ř": @"ˇr",
+            @"š": @"ˇs",
+        };
+    }
+
+    if ([@"Polish" isEqualToString:layoutName]) {
+        #pragma mark - Polish replacement map
+        // #SUPPORTED Polish: ÄÖÜäöüÁÉÍÓÚáéíóúŃńŇňŘřŠš
+        // #KNOWN_UNSUPPORTED Polish: ËÏŸëïÿÀÈÌÒÙàèìòùǸǹÂÊÎÔÛâêîôûÃÕÑãõñ
         return @{
             // Umlauts
             @"Ä": @"¨A",
             @"Ö": @"¨O",
             @"Ü": @"¨U",
-            @"Ë": @"¨E",
             @"ä": @"¨a",
             @"ö": @"¨o",
             @"ü": @"¨u",
-            @"ë": @"¨e",
 
             // Acute
             @"Á": @"´A",
             @"É": @"´E",
+            @"Í": @"´I",
             @"Ú": @"´U",
             @"á": @"´a",
             @"é": @"´e",
+            @"í": @"´i",
             @"ú": @"´u",
-            @"Ń": @"´N",
-            @"ń": @"´n",
 
-            // Tilde
-            @"Ñ": @"~N",
-            @"ñ": @"~n",
-
-            // Agrave
-            @"À": @"`A",
-            @"È": @"`E",
-            @"à": @"`a",
-            @"è": @"`e",
-            @"Ǹ": @"`N",
-            @"ǹ": @"`n",
-
-            // Caron
+            // Caron			
             @"Ň": @"ˇN",
-            @"ň": @"ˇn",
+            @"Ř": @"ˇR",
             @"Š": @"ˇS",
+            @"ň": @"ˇn",
+            @"ř": @"ˇr",
             @"š": @"ˇs",
         };
     }
 
     if ([@"French" isEqualToString:layoutName]) {
         #pragma mark - French replacement map
+        // #SUPPORTED French: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôû
+        // #KNOWN_UNSUPPORTED French: ÃÑÕãñõŃńǸǹŇňŘřŠš
         return @{
-             // Umlauts
-             @"Ä": @"¨A",
-             @"Ö": @"¨O",
-             @"Ü": @"¨U",
-             @"Ë": @"¨E",
-             @"ä": @"¨a",
-             @"ö": @"¨o",
-             @"ü": @"¨u",
-             @"ë": @"¨e",
+            // Umlauts
+            @"Ä": @"¨A",
+            @"Ë": @"¨E",
+            @"Ö": @"¨O",
+            @"Ü": @"¨U",
+            @"ä": @"¨a",
+            @"ë": @"¨e",
+            @"ö": @"¨o",
+            @"ü": @"¨u",
+            @"ÿ": @"¨y",
 
-             // Acute
-             @"É": @"´E",
-             @"á": @"´a",
-             @"ú": @"´u",
-             @"Ń": @"´N",
-             @"ń": @"´n",
+            // Acute
+            @"É": @"´E",
+            @"á": @"´a",
+            @"í": @"´i",
+            @"ó": @"´o",
+            @"ú": @"´u",
 
-             // Agrave
-             @"À": @"`A",
+            // Agrave
+            @"À": @"`A",
+            @"ì": @"`i",
+            @"ò": @"`o",
+
+            // Circumflex
+            @"â": @"^A",
+            @"û": @"^U",
+            @"Ǹ": @"`N",
+            @"ǹ": @"`n",             
          };
     }
 
     if ([@"Canadian French - CSA" isEqualToString:layoutName]) {
         #pragma mark - Canadian French replacement map
+        // #SUPPORTED Canadian French - CSA: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÃÑÕãñõ
+        // #KNOWN_UNSUPPORTED Canadian French - CSA: ŇŘŠňřšǸǹŃń
         return @{
-             // Umlauts
-             @"Ä": @"¨A",
-             @"Ö": @"¨O",
-             @"Ü": @"¨U",
-             @"Ë": @"¨E",
-             @"ä": @"¨a",
-             @"ö": @"¨o",
-             @"ü": @"¨u",
-             @"ë": @"¨e",
+            // Umlauts
+            @"Ä": @"¨A",
+            @"Ë": @"¨E",
+            @"Ï": @"¨I",
+            @"Ö": @"¨O",
+            @"Ü": @"¨U",
+            @"Ÿ": @"¨Y",
+            @"ä": @"¨a",
+            @"ë": @"¨e",
+            @"ï": @"¨i",
+            @"ö": @"¨o",
+            @"ü": @"¨u",
+            @"ÿ": @"¨y",
 
-             // Acute
-             @"É": @"´E",
-             @"á": @"´a",
-             @"ú": @"´u",
+            // Acute
+            @"Á": @"´A",
+            @"É": @"´E",
+            @"Í": @"´I",
+            @"Ó": @"´O",
+            @"Ú": @"´U",
+            @"á": @"´a",
+            @"í": @"´i",
+            @"ó": @"´o",
+            @"ú": @"´u",
 
-             // Agrave
-             @"À": @"`A",
-         };
+            // Agrave
+            @"Ì": @"`I",
+            @"Ò": @"`O",
+            @"ì": @"`i",
+            @"ò": @"`o",
+
+            // Circumflex
+            @"Â": @"^A",
+            @"Ê": @"^E",
+            @"Î": @"^I",
+            @"Ô": @"^O",
+            @"Û": @"^U",
+            @"â": @"^a",
+            @"ê": @"^e",
+            @"î": @"^i",
+            @"ô": @"^o",
+            @"û": @"^u",
+
+            // Tilde
+            @"Ã": @"~A",
+            @"Ñ": @"~N",
+            @"Õ": @"~O",
+            @"ã": @"~a",
+            @"ñ": @"~n",
+            @"õ": @"~o",
+        };
     }
 
     if ([@"Spanish" isEqualToString:layoutName]) {
         #pragma mark - Spanish replacement map
+        // #SUPPORTED Spanish: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÑñ
+        // #KNOWN_UNSUPPORTED Spanish: ÃÕãõŇŘŠňřšǸǹŃń
         return @{
-             // Umlauts
-             @"Ä": @"¨A",
-             @"Ö": @"¨O",
-             @"Ü": @"¨U",
-             @"Ë": @"¨E",
-             @"ä": @"¨a",
-             @"ö": @"¨o",
-             @"ü": @"¨u",
-             @"ë": @"¨e",
+            // Umlauts
+            @"Ä": @"¨A",
+            @"Ë": @"¨E",
+            @"Ö": @"¨O",
+            @"Ü": @"¨U",
+            @"ä": @"¨a",
+            @"ë": @"¨e",
+            @"ï": @"¨i",
+            @"ö": @"¨o",
+            @"ü": @"¨u",
+            @"ÿ": @"¨y",
 
-             // Acute
-              @"É": @"´E",
-              @"á": @"´a",
-              @"é": @"´e",
+            // Acute
+            @"É": @"´E",
+            @"í": @"´i",
+            @"á": @"´a",
+            @"é": @"´e",
+            @"ó": @"´o",
+            @"ú": @"´u",
 
-              // Agrave
-              @"À": @"`A",
-              @"à": @"`a",
-              @"è": @"`e",
+            // Agrave
+            @"À": @"`A",
+            @"à": @"`a",
+            @"è": @"`e",
+            @"ì": @"`i",
+            @"ò": @"`o",
+            @"ù": @"`u",
 
-             // Circumflex
-              @"â": @"^a",
-              @"ê": @"^e",
+            // Circumflex
+            @"â": @"^a",
+            @"ê": @"^e",
+            @"î": @"^i",
+            @"ô": @"^o",
+            @"û": @"^u",
          };
     }
 
     if ([@"Portuguese" isEqualToString:layoutName]) {
         #pragma mark - Portuguese replacement map
+        // #SUPPORTED Portuguese: ÄËÏÖÜäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÑñÃÕãõ
+        // #KNOWN_UNSUPPORTED Portuguese: ŸŇŘŠňřšǸǹŃń
         return @{
-             // Umlauts
-             @"Ä": @"¨A",
-             @"Ö": @"¨O",
-             @"Ü": @"¨U",
-             @"Ë": @"¨E",
-             @"ä": @"¨a",
-             @"ö": @"¨o",
-             @"ü": @"¨u",
-             @"ë": @"¨e",
+			// Umlauts
+			@"Ä": @"¨A",
+			@"Ë": @"¨E",
+			@"Ï": @"¨I",
+			@"Ö": @"¨O",
+			@"Ü": @"¨U",
+			@"ä": @"¨a",
+			@"ë": @"¨e",
+			@"ï": @"¨i",
+			@"ö": @"¨o",
+			@"ü": @"¨u",
+			@"ÿ": @"¨y",
 
-             // Acute
-             @"Á": @"´A",
-             @"É": @"´E",
-             @"á": @"´a",
-             @"é": @"´e",
+			// Acute
+			@"Á": @"´A",
+			@"É": @"´E",
+			@"Í": @"´I",
+			@"Ó": @"´O",
+			@"Ú": @"´U",
+			@"á": @"´a",
+			@"é": @"´e",
+			@"í": @"´i",
+			@"ó": @"´o",
+			@"ú": @"´u",
 
-             // Agrave
-             @"À": @"`A",
-             @"È": @"`E",
-             @"à": @"`a",
-             @"è": @"`e",
+			// Agrave
+			@"À": @"`A",
+			@"È": @"`E",
+			@"Ì": @"`I",
+			@"Ò": @"`O",
+			@"Ù": @"`U",
+			@"à": @"`a",
+			@"è": @"`e",
+			@"ì": @"`i",
+			@"ò": @"`o",
+			@"ù": @"`u",
 
-             // Circumflex
-             @"Â": @"^A",
-             @"Ê": @"^E",
-             @"â": @"^a",
-             @"ê": @"^e",
+			// Circumflex
+			@"Â": @"^A",
+			@"Ê": @"^E",
+			@"Î": @"^I",
+			@"Ô": @"^O",
+			@"Û": @"^U",
+			@"â": @"^a",
+			@"ê": @"^e",
+			@"î": @"^i",
+			@"ô": @"^o",
+			@"û": @"^u",
 
-             // Tilde
-             @"Ã": @"˜A",
-             @"Ñ": @"˜n",
-             @"ã": @"˜a",
-             @"ñ": @"˜n",
+			// Tilde
+			@"Ã": @"˜A",
+			@"Õ": @"˜O",
+			@"Ñ": @"˜N",
+			@"ã": @"˜a",
+			@"õ": @"˜o",
+			@"ñ": @"˜n",
+         };
+    }
+
+    if ([@"Italian" isEqualToString:layoutName]) {
+        #pragma mark - Italian replacement map
+        // #SUPPORTED Italian: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÑñÃÕãõ
+        // #KNOWN_UNSUPPORTED Italian: ŸŇŘŠňřšǸǹŃń
+        return @{
+			// Umlauts
+			@"Ä": @"¨A",
+			@"Ë": @"¨E",
+			@"Ï": @"¨I",
+			@"Ö": @"¨O",
+			@"Ü": @"¨U",
+			@"Ÿ": @"¨Y",
+			@"ä": @"¨a",
+			@"ë": @"¨e",
+			@"ï": @"¨i",
+			@"ö": @"¨o",
+			@"ü": @"¨u",
+			@"ÿ": @"¨y",
+
+			// Acute
+			@"á": @"´a",
+			@"í": @"´i",
+			@"ó": @"´o",
+			@"ú": @"´u",
+
+			// Circumflex
+			@"Â": @"ˆA",
+			@"Ê": @"ˆE",
+			@"Î": @"ˆI",
+			@"Ô": @"ˆO",
+			@"Û": @"ˆU",
+			@"â": @"ˆa",
+			@"ê": @"ˆe",
+			@"î": @"ˆi",
+			@"ô": @"ˆo",
+			@"û": @"ˆu",
+			
+			// Tilde
+			@"Ã": @"˜A",
+			@"Ñ": @"˜N",
+			@"Õ": @"˜O",
+			@"ã": @"˜a",
+			@"ñ": @"˜n",
+			@"õ": @"˜o",
          };
     }
 
     if ([@"Canadian English" isEqualToString:layoutName]) {
         #pragma mark - Canadian English replacement map
 
-        // Note: When physically typing on a keyboard with this layout, all the
-        // replacements below work. But for some reason, when typing programmatically,
-        // they require a pretty long delay between keystrokes (50+ ms). And, more
-        // important, in a sequence of those characters (e.g. "Äñé"), only the first one
-        // is correct, while the others will result in the two characters (the right side
-        // of the map), not in the character that should be typed (the left side of the map).
+        // Note: When physically typing on a keyboard with this layout, typing with combining
+        // characters (e.g. ¨ plus u) words. But for some reason, when typing programmatically,
+        // they require a pretty long delay between keystrokes (50+ ms). And, more important,
+        // in a sequence of those characters (e.g. "Äñé"), only the first one is correct,
+        // while the others will result in the two characters (the right side of the map),
+        // not in the character that should be typed (the left side of the map).
         //
         // Any hints why this is the case and how that could be fixed are welcome.
 
         return @{
-            // Umlauts
-//             @"Ä": @"¨A",
-//             @"Ö": @"¨O",
-//             @"Ü": @"¨U",
-//             @"Ë": @"¨E",
-//             @"ä": @"¨a",
-//             @"ö": @"¨o",
-//             @"ü": @"¨u",
-//             @"ë": @"¨e",
-
-            // Acute
-//             @"Á": @"´A",
-//             @"É": @"´E",
-//             @"á": @"´a",
-//             @"é": @"´e",
-
-            // Tilde
-//             @"Ñ": @"~N",
-//             @"ñ": @"~n",
-
-            // Agrave
-//             @"À": @"`A",
-//             @"È": @"`E",
-//             @"à": @"`a",
-//             @"è": @"`e",
         };
     }
 
     if ([@"Brazilian" isEqualToString:layoutName]) {
         #pragma mark - Brazilian replacement map
 
-        // Note: When physically typing on a keyboard with this layout, all the
-        // replacements below work. But for some reason, when typing programmatically,
-        // they require a pretty long delay between keystrokes (50+ ms). And, more
-        // important, in a sequence of those characters (e.g. "Äñé"), only the first one
-        // is correct, while the others will result in the two characters (the right side
-        // of the map), not in the character that should be typed (the left side of the map).
+        // Note: When physically typing on a keyboard with this layout, typing with combining
+        // characters (e.g. ¨ plus u) words. But for some reason, when typing programmatically,
+        // they require a pretty long delay between keystrokes (50+ ms). And, more important,
+        // in a sequence of those characters (e.g. "Äñé"), only the first one is correct,
+        // while the others will result in the two characters (the right side of the map),
+        // not in the character that should be typed (the left side of the map).
         //
         // Any hints why this is the case and how that could be fixed are welcome.
 
         return @{
-            // Umlauts
-//             @"Ä": @"¨A",
-//             @"Ö": @"¨O",
-//             @"Ü": @"¨U",
-//             @"ä": @"¨a",
-//             @"ö": @"¨o",
-//             @"ü": @"¨u",
-
-            // Circumflex
-//             @"ê": @"ˆe",
-// 
-            // Tilde
-//             @"Ã": @"˜A",
-//             @"Ñ": @"˜N",
-//             @"ã": @"˜a",
-//             @"ñ": @"˜n",
-
-            // Acute
-//             @"é": @"´e",
-
-            // Agrave
-//             @"è": @"`e",
         };
     }
 
