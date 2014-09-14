@@ -20,3 +20,9 @@
 
 #define KEYCODE_SHIFT 56
 #define KEYCODE_ALT   58
+
+#ifdef DEBUG
+    #define DLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#else
+    #define DLog(...) do { } while (0)
+#endif
