@@ -37,9 +37,6 @@ void error();
 void help();
 NSArray* parseCommandsFile(NSString *filepath);
 
-#define VERSION     @"3.0-dev"
-#define RELEASEDATE @"07/19/2014"
-
 int main (int argc, const char * argv[]) {
 
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];

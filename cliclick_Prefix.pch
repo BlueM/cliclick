@@ -7,6 +7,10 @@
     #import <Cocoa/Cocoa.h>
 #endif
 
+// Version or branch
+#define VERSION     @"type-action"
+#define RELEASEDATE @""
+
 #define MODE_REGULAR 0
 #define MODE_VERBOSE 1
 #define MODE_TEST 2
@@ -20,6 +24,8 @@
 
 #define KEYCODE_SHIFT 56
 #define KEYCODE_ALT   58
+
+#define CHARINFO_URL_TEMPLATE @"https://github.com/BlueM/cliclick/blob/%@/README-Characters.md"
 
 #ifdef DEBUG
     #define DLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
