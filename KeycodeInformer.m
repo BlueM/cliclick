@@ -123,7 +123,8 @@ static KeycodeInformer *sharedInstance = nil;
             [keyCodes addObject:keyCodeInfo];
         } else {
             NSFileHandle *fh = [NSFileHandle fileHandleWithStandardError];
-            NSString *msg    = [NSString stringWithFormat:@"Unable to get key code for: %@\n", [string substringWithRange:range]];
+            NSString    *url = [NSString stringWithFormat:CHARINFO_URL_TEMPLATE, VERSION];
+            NSString   *msg  = [NSString stringWithFormat:@"Unable to get key code for %@ (see %@)\n", [string substringWithRange:range], url];
             [fh writeData:[msg dataUsingEncoding:NSUTF8StringEncoding]];
         }
 
