@@ -230,6 +230,7 @@
 				8DD76F990486AA7600D96B5E /* Sources */,
 				8DD76F9B0486AA7600D96B5E /* Frameworks */,
 				8DD76F9E0486AA7600D96B5E /* CopyFiles */,
+				22240FB419C5F44D00C2AF24 /* ShellScript */,
 				22F0E20215D9AAC600158334 /* ShellScript */,
 			);
 			buildRules = (
@@ -271,6 +272,19 @@
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		22240FB419C5F44D00C2AF24 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -e \"$PROJECT_DIR/generate-characterinfo.php\" ]\nthen\n    # Make the script executable. It may not be, if it was just freshly checked out from VCS\n    chmod +x \"$PROJECT_DIR/generate-characterinfo.php\"\n    \"$PROJECT_DIR/generate-characterinfo.php\" > \"$PROJECT_DIR/README-Characters.md\"\nfi";
+		};
 		223CF13319ABCD6800689351 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
