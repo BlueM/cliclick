@@ -1,5 +1,5 @@
 CC = cc 
-CFLAGS = -include cliclick_Prefix.pch -I Actions
+CFLAGS = -include cliclick_Prefix.pch -I Actions -I .
 
 cliclick: Actions/ClickAction.o \
           Actions/DoubleclickAction.o \
@@ -14,10 +14,12 @@ cliclick: Actions/ClickAction.o \
           Actions/MoveAction.o \
           Actions/PrintAction.o \
           Actions/TripleclickAction.o \
+          Actions/TypeAction.o \
           Actions/WaitAction.o \
           ActionExecutor.o \
+          KeycodeInformer.o \
           cliclick.o
-	gcc -o cliclick $^ -framework Cocoa
+	gcc -o cliclick $^ -framework Cocoa -framework Carbon
 
 install: cliclick
 	cp cliclick /usr/local/bin/
