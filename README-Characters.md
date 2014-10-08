@@ -7,33 +7,33 @@ Having said that, here is the list of keyboard layouts with the supported and (s
 
 Canadian French - CSA
   * Supported: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÃÑÕãñõ
-  * Unsupported: ŇŘŠňřšǸǹŃń (incomplete list)
+  * Unsupported: ŇŘŠňřšǸǹŃńÅåŮů (incomplete list)
 
 French
   * Supported: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôû
-  * Unsupported: ÃÑÕãñõŃńǸǹŇňŘřŠš (incomplete list)
+  * Unsupported: ÃÑÕãñõŃńǸǹŇňŘřŠšŮů (incomplete list)
 
 German
   * Supported: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÃÕÑãõñ
-  * Unsupported: ŃńǸǹŇňŘřŠš (incomplete list)
+  * Unsupported: ŃńǸǹŇňŘřŠšŮů (incomplete list)
 
 Italian
   * Supported: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÑñÃÕãõ
-  * Unsupported: ŸŇŘŠňřšǸǹŃń (incomplete list)
+  * Unsupported: ŸŇŘŠňřšǸǹŃńŮů (incomplete list)
 
 Polish
   * Supported: ÄÖÜäöüÁÉÍÓÚáéíóúŃńŇňŘřŠš
-  * Unsupported: ËÏŸëïÿÀÈÌÒÙàèìòùǸǹÂÊÎÔÛâêîôûÃÕÑãõñ (incomplete list)
+  * Unsupported: ËÏŸëïÿÀÈÌÒÙàèìòùǸǹÂÊÎÔÛâêîôûÃÕÑãõñŒœÅåØøÆæ (incomplete list)
 
 Portuguese
   * Supported: ÄËÏÖÜäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÑñÃÕãõ
-  * Unsupported: ŸŇŘŠňřšǸǹŃń (incomplete list)
+  * Unsupported: ŸŇŘŠňřšǸǹŃńŮů (incomplete list)
 
 Spanish
   * Supported: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÑñ
-  * Unsupported: ÃÕãõŇŘŠňřšǸǹŃń (incomplete list)
+  * Unsupported: ÃÕãõŇŘŠňřšǸǹŃńŮů (incomplete list)
 
 U.S. Extended
-  * Supported: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÃÕÑãõñŃńǸǹŇňŘřŠš
+  * Supported: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÃÕÑãõñŃńǸǹŇňŘřŠšÅåŮů
   * Unsupported: [nothing]
 

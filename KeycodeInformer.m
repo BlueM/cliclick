@@ -182,7 +182,7 @@ static KeycodeInformer *sharedInstance = nil;
     if ([@"German" isEqualToString:layoutName]) {
         #pragma mark - German replacement map
         // #SUPPORTED German: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÃÕÑãõñ
-        // #KNOWN_UNSUPPORTED German: ŃńǸǹŇňŘřŠš
+        // #KNOWN_UNSUPPORTED German: ŃńǸǹŇňŘřŠšŮů
         return @{
             // Umlauts
             @"Ë": @"¨E",
@@ -239,7 +239,7 @@ static KeycodeInformer *sharedInstance = nil;
 
     if ([@"U.S. Extended" isEqualToString:layoutName]) {
         #pragma mark - U.S. Extended replacement map
-        // #SUPPORTED U.S. Extended: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÃÕÑãõñŃńǸǹŇňŘřŠš
+        // #SUPPORTED U.S. Extended: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÃÕÑãõñŃńǸǹŇňŘřŠšÅåŮů
         // #KNOWN_UNSUPPORTED U.S. Extended:
         // See http://symbolcodes.tlt.psu.edu/accents/codemacext.html
         return @{
@@ -312,13 +312,19 @@ static KeycodeInformer *sharedInstance = nil;
             @"ň": @"ˇn",
             @"ř": @"ˇr",
             @"š": @"ˇs",
+
+            // A ring
+            @"Å": @"˚A",
+            @"å": @"˚a",
+            @"Ů": @"˚U",
+            @"ů": @"˚u",
         };
     }
 
     if ([@"Polish" isEqualToString:layoutName]) {
         #pragma mark - Polish replacement map
         // #SUPPORTED Polish: ÄÖÜäöüÁÉÍÓÚáéíóúŃńŇňŘřŠš
-        // #KNOWN_UNSUPPORTED Polish: ËÏŸëïÿÀÈÌÒÙàèìòùǸǹÂÊÎÔÛâêîôûÃÕÑãõñ
+        // #KNOWN_UNSUPPORTED Polish: ËÏŸëïÿÀÈÌÒÙàèìòùǸǹÂÊÎÔÛâêîôûÃÕÑãõñŒœÅåØøÆæ
         return @{
             // Umlauts
             @"Ä": @"¨A",
@@ -351,7 +357,7 @@ static KeycodeInformer *sharedInstance = nil;
     if ([@"French" isEqualToString:layoutName]) {
         #pragma mark - French replacement map
         // #SUPPORTED French: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôû
-        // #KNOWN_UNSUPPORTED French: ÃÑÕãñõŃńǸǹŇňŘřŠš
+        // #KNOWN_UNSUPPORTED French: ÃÑÕãñõŃńǸǹŇňŘřŠšŮů
         return @{
             // Umlauts
             @"Ä": @"¨A",
@@ -387,7 +393,7 @@ static KeycodeInformer *sharedInstance = nil;
     if ([@"Canadian French - CSA" isEqualToString:layoutName]) {
         #pragma mark - Canadian French replacement map
         // #SUPPORTED Canadian French - CSA: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÃÑÕãñõ
-        // #KNOWN_UNSUPPORTED Canadian French - CSA: ŇŘŠňřšǸǹŃń
+        // #KNOWN_UNSUPPORTED Canadian French - CSA: ŇŘŠňřšǸǹŃńÅåŮů
         return @{
             // Umlauts
             @"Ä": @"¨A",
@@ -445,7 +451,7 @@ static KeycodeInformer *sharedInstance = nil;
     if ([@"Spanish" isEqualToString:layoutName]) {
         #pragma mark - Spanish replacement map
         // #SUPPORTED Spanish: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÑñ
-        // #KNOWN_UNSUPPORTED Spanish: ÃÕãõŇŘŠňřšǸǹŃń
+        // #KNOWN_UNSUPPORTED Spanish: ÃÕãõŇŘŠňřšǸǹŃńŮů
         return @{
             // Umlauts
             @"Ä": @"¨A",
@@ -487,7 +493,7 @@ static KeycodeInformer *sharedInstance = nil;
     if ([@"Portuguese" isEqualToString:layoutName]) {
         #pragma mark - Portuguese replacement map
         // #SUPPORTED Portuguese: ÄËÏÖÜäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÑñÃÕãõ
-        // #KNOWN_UNSUPPORTED Portuguese: ŸŇŘŠňřšǸǹŃń
+        // #KNOWN_UNSUPPORTED Portuguese: ŸŇŘŠňřšǸǹŃńŮů
         return @{
             // Umlauts
             @"Ä": @"¨A",
@@ -551,7 +557,7 @@ static KeycodeInformer *sharedInstance = nil;
     if ([@"Italian" isEqualToString:layoutName]) {
         #pragma mark - Italian replacement map
         // #SUPPORTED Italian: ÄËÏÖÜŸäëïöüÿÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÂÊÎÔÛâêîôûÑñÃÕãõ
-        // #KNOWN_UNSUPPORTED Italian: ŸŇŘŠňřšǸǹŃń
+        // #KNOWN_UNSUPPORTED Italian: ŸŇŘŠňřšǸǹŃńŮů
         return @{
             // Umlauts
             @"Ä": @"¨A",
