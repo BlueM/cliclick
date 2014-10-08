@@ -8,10 +8,10 @@
 #endif
 
 // Version or branch
-#define VERSION     @"3.0"
+#define VERSION     @"3.0.2"
 
 // Date as m/d/Y
-#define RELEASEDATE @"09/15/2014"
+#define RELEASEDATE @"10/08/2014"
 
 #define MODE_REGULAR 0
 #define MODE_VERBOSE 1
