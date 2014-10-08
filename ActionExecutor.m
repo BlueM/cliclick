@@ -74,7 +74,7 @@
         }
         
         if ([action count] > 1) {
-            [actionClassInstance performActionWithData:[action objectAtIndex:1] inMode:mode];
+            [actionClassInstance performActionWithData:[[action subarrayWithRange:NSMakeRange(1, [action count] - 1)] componentsJoinedByString:@":"] inMode:mode];
         } else {
             [actionClassInstance performActionWithData:@"" inMode:mode];
         }
