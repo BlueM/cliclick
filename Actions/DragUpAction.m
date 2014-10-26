@@ -54,11 +54,13 @@
     CGEventRef leftDragged = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDragged, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
     CGEventPost(kCGHIDEventTap, leftDragged);
 
-    usleep(20000); // Improves reliability for some actions, e.g. dragging a file
+    usleep(10000);
     
     // Left button up
     CGEventRef leftUp = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseUp, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
     CGEventPost(kCGHIDEventTap, leftUp);
+
+    usleep(800000); // This delay should usually prevent that a subsequent "wait" command is necessary
 }
 
 @end
