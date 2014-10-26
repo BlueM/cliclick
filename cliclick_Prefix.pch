@@ -7,6 +7,10 @@
     #import <Cocoa/Cocoa.h>
 #endif
 
+// Compatibiliy macros for 10.6, which knows neiter @123 nor @{@"Foo": @"Bar"}
+#define N(x) [NSNumber numberWithInt: x]
+#define D(...) [NSDictionary dictionaryWithObjectsAndKeys:__VA_ARGS__, nil]
+
 // Version or branch
 #define VERSION     @"3.0.2"
 
@@ -20,9 +24,9 @@
 #define MODIFIER_SHIFT              32
 #define MODIFIER_ALT                64
 #define MODIFIER_SHIFT_ALT          (MODIFIER_SHIFT | MODIFIER_ALT)
-#define NSNUMBER_MODIFIER_SHIFT     @MODIFIER_SHIFT
-#define NSNUMBER_MODIFIER_ALT       @MODIFIER_ALT
-#define NSNUMBER_MODIFIER_SHIFT_ALT @(MODIFIER_SHIFT | MODIFIER_ALT)
+#define NSNUMBER_MODIFIER_SHIFT     [NSNumber numberWithInt:MODIFIER_SHIFT]
+#define NSNUMBER_MODIFIER_ALT       [NSNumber numberWithInt:MODIFIER_ALT]
+#define NSNUMBER_MODIFIER_SHIFT_ALT [NSNumber numberWithInt:MODIFIER_SHIFT_ALT]
 
 #define KEYCODE_SHIFT 56
 #define KEYCODE_ALT   58

@@ -78,7 +78,9 @@
 
     NSArray *keyCodeInfos = [ki keyCodesForString:data];
 
-    for (unsigned j = 0, jj = [keyCodeInfos count]; j < jj; ++j) {
+    unsigned j, jj;
+    
+    for (j = 0, jj = [keyCodeInfos count]; j < jj; ++j) {
 
         NSArray *keyCodeInfo = [keyCodeInfos objectAtIndex:j];
 
