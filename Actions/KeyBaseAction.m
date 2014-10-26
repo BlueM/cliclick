@@ -33,7 +33,7 @@
 +(NSDictionary *)getSupportedKeycodes {
     [NSException raise:@"InvalidCommandException"
                 format:@"To be implemented by subclasses"];
-    return @{@"Will never be reached, but makes Xcode happy": @"Foo"};
+    return [NSDictionary dictionaryWithObject:@"Will never be reached, but makes Xcode happy" forKey:@"Foo"];
 }
 
 +(NSString *)getSupportedKeysAsStringBreakingAt:(unsigned)width indentWith:(NSString *)indent {
