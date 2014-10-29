@@ -7,15 +7,15 @@
     #import <Cocoa/Cocoa.h>
 #endif
 
-// Compatibiliy macros for 10.6, which knows neiter @123 nor @{@"Foo": @"Bar"}
+// Compatibiliy macros for 10.6, which knows neither @123 nor @{@"Foo": @"Bar"}
 #define N(x) [NSNumber numberWithInt: x]
 #define D(...) [NSDictionary dictionaryWithObjectsAndKeys:__VA_ARGS__, nil]
 
 // Version or branch
-#define VERSION     @"3.0.2"
+#define VERSION     @"3.0.3"
 
 // Date as m/d/Y
-#define RELEASEDATE @"10/08/2014"
+#define RELEASEDATE @"10/29/2014"
 
 #define MODE_REGULAR 0
 #define MODE_VERBOSE 1
