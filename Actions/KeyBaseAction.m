@@ -63,8 +63,10 @@
         [lines addObject:[indent stringByAppendingString:[keys substringWithRange:NSMakeRange(lastRangeStart, range.location - lastRangeStart)]]];
         lastRangeStart = range.location + 1;
     } while (1);
-    
-    return [lines componentsJoinedByString:@"\n"];
+
+    NSString *keyList = [lines componentsJoinedByString:@"\n"];
+    [lines release];
+    return keyList;
 }
 
 -(NSString *)actionDescriptionString:(NSString *)keyName {

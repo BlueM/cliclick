@@ -54,10 +54,12 @@
     // Left button down
     CGEventRef leftDown = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDown, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
     CGEventPost(kCGHIDEventTap, leftDown);
-    
+    CFRelease(leftDown);
+
     // Left button up
     CGEventRef leftUp = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseUp, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
-    CGEventPost(kCGHIDEventTap, leftUp);    
+    CGEventPost(kCGHIDEventTap, leftUp);
+    CFRelease(leftUp);
 }
 
 @end

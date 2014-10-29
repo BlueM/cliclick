@@ -36,9 +36,11 @@
     if ([[unparsedValue substringToIndex:1] isEqualToString:@"+"] ||
         [[unparsedValue substringToIndex:1] isEqualToString:@"-"]) {
         // Relative value
-        CGPoint ourLoc      = CGEventGetLocation(CGEventCreate(NULL));
-        int positionDiff    = [unparsedValue intValue];
-        int currentPosition = axis == XAXIS ? (int)ourLoc.x : (int)ourLoc.y;
+        CGEventRef dummyEvent = CGEventCreate(NULL);
+        CGPoint ourLoc        = CGEventGetLocation(dummyEvent);
+        int positionDiff      = [unparsedValue intValue];
+        int currentPosition   = axis == XAXIS ? (int)ourLoc.x : (int)ourLoc.y;
+        CFRelease(dummyEvent);
 
         return (int) currentPosition + positionDiff;
     }
@@ -79,7 +81,8 @@
     } else if ([data isEqualToString:@"."]) {
         // Click at current location
         CGEventRef ourEvent = CGEventCreate(NULL);
-        CGPoint ourLoc = CGEventGetLocation(ourEvent);
+        CGPoint    ourLoc   = CGEventGetLocation(ourEvent);
+        CFRelease(ourEvent);
         p.x = (int)ourLoc.x;
         p.y = (int)ourLoc.y;
         verboseLoc = @"current location";
@@ -111,6 +114,7 @@
     // Move
     CGEventRef move = CGEventCreateMouseEvent(NULL, kCGEventMouseMoved, CGPointMake(p.x, p.y), kCGMouseButtonLeft); // kCGMouseButtonLeft is ignored
     CGEventPost(kCGHIDEventTap, move);
+    CFRelease(move);
     
     [self performActionAtPoint:p];
 }

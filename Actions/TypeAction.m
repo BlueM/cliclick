@@ -49,9 +49,11 @@
 -(void)performActionWithKeycode:(CGKeyCode)code {
     CGEventRef e1 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, true);
     CGEventPost(kCGSessionEventTap, e1);
+    CFRelease(e1);
 
     CGEventRef e2 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, false);
     CGEventPost(kCGSessionEventTap, e2);
+    CFRelease(e2);
 }
 
 -(void)performActionWithData:(NSString *)data inMode:(unsigned)mode {
@@ -89,6 +91,7 @@
         if ([[keyCodeInfo objectAtIndex:1] intValue] & MODIFIER_SHIFT) {
             CGEventRef e = CGEventCreateKeyboardEvent(NULL, KEYCODE_SHIFT, true);
             CGEventPost(kCGSessionEventTap, e);
+            CFRelease(e);
         }
 
         nanosleep(&waitingtime, NULL); // Note: the delay is not needed for all keys. Strange, but true.
@@ -96,18 +99,25 @@
         if ([[keyCodeInfo objectAtIndex:1] intValue] & MODIFIER_ALT) {
             CGEventRef e = CGEventCreateKeyboardEvent(NULL, KEYCODE_ALT, true);
             CGEventPost(kCGSessionEventTap, e);
+            CFRelease(e);
         }
 
         nanosleep(&waitingtime, NULL);
 
-        CGEventPost(kCGSessionEventTap, CGEventCreateKeyboardEvent(NULL, (CGKeyCode)keyCode, true));
-        CGEventPost(kCGSessionEventTap, CGEventCreateKeyboardEvent(NULL, (CGKeyCode)keyCode, false));
+        CGEventRef keyDownEvent = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)keyCode, true);
+        CGEventPost(kCGSessionEventTap, keyDownEvent);
+        CFRelease(keyDownEvent);
+
+        CGEventRef keyUpEvent = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)keyCode, false);
+        CGEventPost(kCGSessionEventTap, keyUpEvent);
+        CFRelease(keyUpEvent);
 
         nanosleep(&waitingtime, NULL);
 
         if ([[keyCodeInfo objectAtIndex:1] intValue] & MODIFIER_ALT) {
             CGEventRef e = CGEventCreateKeyboardEvent(NULL, KEYCODE_ALT, false);
             CGEventPost(kCGSessionEventTap, e);
+            CFRelease(e);
         }
 
         nanosleep(&waitingtime, NULL);
@@ -115,12 +125,13 @@
         if ([[keyCodeInfo objectAtIndex:1] intValue] & MODIFIER_SHIFT) {
             CGEventRef e = CGEventCreateKeyboardEvent(NULL, KEYCODE_SHIFT, false);
             CGEventPost(kCGSessionEventTap, e);
+            CFRelease(e);
         }
 
         nanosleep(&waitingtime, NULL);
     }
 
-    [ki release];
+//    [ki release];
 }
 
 @end

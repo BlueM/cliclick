@@ -53,9 +53,10 @@
             printf("Print the current mouse position");
         } else {
             CGEventRef ourEvent = CGEventCreate(NULL);
-            CGPoint ourLoc = CGEventGetLocation(ourEvent);
-            NSPoint point = NSPointFromCGPoint(ourLoc);
+            CGPoint    ourLoc   = CGEventGetLocation(ourEvent);
+            NSPoint    point    = NSPointFromCGPoint(ourLoc);
             printf("Current mouse position: %.0f,%.0f\n", point.x, point.y);
+            CFRelease(ourEvent);
         }
         return;
     }

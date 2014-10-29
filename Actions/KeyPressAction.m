@@ -87,9 +87,11 @@
 -(void)performActionWithKeycode:(CGKeyCode)code {    
     CGEventRef e1 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, true);
     CGEventPost(kCGSessionEventTap, e1);
+    CFRelease(e1);
 
     CGEventRef e2 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, false);
     CGEventPost(kCGSessionEventTap, e2);
+    CFRelease(e2);
 }
 
 -(NSString *)actionDescriptionString:(NSString *)keyName {
