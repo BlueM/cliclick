@@ -54,7 +54,7 @@
     CGEventRef leftDragged = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDragged, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
     CGEventPost(kCGHIDEventTap, leftDragged);
 
-    usleep(10000);
+    usleep(200000); // Some target applications require this to recognize the drop
     
     // Left button up
     CGEventRef leftUp = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseUp, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
