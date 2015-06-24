@@ -72,7 +72,9 @@
 
     if (MODE_REGULAR != mode) {
         printf("Type: “%s”\n", [data UTF8String]);
-        return;
+        if (MODE_TEST == mode) {
+            return;
+        }
     }
 
     // Generate the key code mapping
@@ -130,8 +132,6 @@
 
         nanosleep(&waitingtime, NULL);
     }
-
-//    [ki release];
 }
 
 @end
