@@ -133,10 +133,9 @@ static KeycodeInformer *sharedInstance = nil;
         } else {
             NSFileHandle *fh = [NSFileHandle fileHandleWithStandardError];
             NSString    *url = [NSString stringWithFormat:CHARINFO_URL_TEMPLATE, VERSION];
-            NSString   *msg  = [NSString stringWithFormat:@"Unable to get key code for %@ (see %@)\n", [string substringWithRange:range], url];
+            NSString    *msg = [NSString stringWithFormat:@"Unable to get key code for %@ (see %@)\n", [string substringWithRange:range], url];
             [fh writeData:[msg dataUsingEncoding:NSUTF8StringEncoding]];
         }
-
     }
 
     return [keyCodes autorelease];
@@ -154,7 +153,6 @@ static KeycodeInformer *sharedInstance = nil;
 
     if (nil != replacementMap) {
         while ((key = [enumerator nextObject])) {
-            // TODO: Could somehow get rid of executing [tmp length] each time?
             [tmp replaceOccurrencesOfString:key withString:[replacementMap objectForKey:key] options:NSLiteralSearch range:NSMakeRange(0, [tmp length])];
         }
     }
