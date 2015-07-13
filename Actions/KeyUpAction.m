@@ -37,7 +37,7 @@
 }
 
 +(NSString *)commandDescription {
-    NSString *keyList = [[self class] getSupportedKeysAsStringBreakingAt:65 indentWith:@"          "];
+    NSString *keyList = [[self class] getSupportedKeysIndentedWith:@"            - "];
     NSString *format = @"  ku:keys Will trigger a KEY UP event for a comma-separated list of\n"
                         "          modifier keys. Possible keys are:\n%@\n"
                         "          Example: “ku:cmd,ctrl” will release the command key and the\n"

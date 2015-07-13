@@ -36,37 +36,13 @@
     return [NSDictionary dictionaryWithObject:@"Will never be reached, but makes Xcode happy" forKey:@"Foo"];
 }
 
-+(NSString *)getSupportedKeysAsStringBreakingAt:(unsigned)width indentWith:(NSString *)indent {
++(NSString *)getSupportedKeysIndentedWith:(NSString *)indent {
 
-    NSMutableArray *lines = [[NSMutableArray alloc] initWithCapacity:8];
-    NSRange range;
-    unsigned lastRangeStart = 0;
-    unsigned effectiveWidth = width + [indent length];
-    
     NSArray *sortedkeyNames = [[[[self class] getSupportedKeycodes] allKeys] sortedArrayUsingComparator:^(id obj1, id obj2) {
         return [obj1 compare:obj2 options:NSNumericSearch];
     }];
-    
-    NSString *keys = [NSString stringWithFormat:@"“%@”", [sortedkeyNames componentsJoinedByString:@"”, “"]];
-    
-    if ([keys length] <= effectiveWidth) {
-        effectiveWidth = [keys length];
-    }
-    
-    do {
-        range = [keys rangeOfString:@" " options:NSBackwardsSearch range:NSMakeRange(lastRangeStart, effectiveWidth)];
-        if (range.location == NSNotFound || ([keys length] - range.location <= effectiveWidth)) {
-            // No rest or rest of the string fits in last part
-            [lines addObject:[indent stringByAppendingString:[keys substringFromIndex:lastRangeStart]]];
-            break;
-        }
-        [lines addObject:[indent stringByAppendingString:[keys substringWithRange:NSMakeRange(lastRangeStart, range.location - lastRangeStart)]]];
-        lastRangeStart = range.location + 1;
-    } while (1);
 
-    NSString *keyList = [lines componentsJoinedByString:@"\n"];
-    [lines release];
-    return keyList;
+    return [NSString stringWithFormat:@"%@%@", indent, [sortedkeyNames componentsJoinedByString:[@"\n" stringByAppendingString:indent]]];
 }
 
 -(NSString *)actionDescriptionString:(NSString *)keyName {
@@ -107,7 +83,7 @@
         if (![keycodes objectForKey:keyname]) {
             [NSException raise:@"InvalidCommandException"
                         format:@"Invalid key “%@” given as argument to command “%@”.\nThe key name may only be one of:\n%@",
-                               keyname, shortcut, [[self class] getSupportedKeysAsStringBreakingAt:60 indentWith:@"  "]];
+                               keyname, shortcut, [[self class] getSupportedKeysIndentedWith:@"  - "]];
         }
     }
     

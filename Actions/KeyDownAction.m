@@ -37,7 +37,7 @@
 }
 
 +(NSString *)commandDescription {
-    NSString *keyList = [[self class] getSupportedKeysAsStringBreakingAt:65 indentWith:@"          "];
+    NSString *keyList = [[self class] getSupportedKeysIndentedWith:@"            - "];
     NSString *format = @"  kd:keys Will trigger a KEY DOWN event for a comma-separated list of\n"
     "          modifier keys. Possible keys are:\n%@\n"
     "          Example: “kd:cmd,alt” will press the command key and the\n"

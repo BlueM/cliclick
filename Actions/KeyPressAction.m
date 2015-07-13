@@ -37,7 +37,7 @@
 }
 
 +(NSString *)commandDescription {
-    NSString *keyList = [[self class] getSupportedKeysAsStringBreakingAt:65 indentWith:@"          "];
+    NSString *keyList = [[self class] getSupportedKeysIndentedWith:@"            - "];
     NSString *format = @"  kp:key  Will emulate PRESSING A KEY (key down + key up). Possible keys are:\n%@\n"
                        "          Example: “kp:return” will hit the return key.";
     return [NSString stringWithFormat:format, keyList];

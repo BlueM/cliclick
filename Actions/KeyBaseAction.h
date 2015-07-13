@@ -42,15 +42,14 @@
 
 
 /**
- Returns the keys supported by the command
+ Returns the list of keys supported by the command
  
- @param width  Number of characters after which to insert a break (will be increased by the length or the the indentation string)
  @param indent String to use as indentation string at the beginning of each line
 
- @return Comma-separated, multi-line, indented string
+ @return Newline-separated string
  */
-+(NSString *)getSupportedKeysAsStringBreakingAt:(unsigned)width
-                                     indentWith:(NSString *)indent;
++(NSString *)getSupportedKeysIndentedWith:(NSString *)indent;
+
 
 /**
  Returns a string describing the action performed be the command
