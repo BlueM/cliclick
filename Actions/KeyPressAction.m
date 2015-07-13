@@ -80,7 +80,6 @@
             @"74",  @"mute",
             @"72",  @"volume-up",
             @"73",  @"volume-down",
-            @"114", @"help",
             nil];
 }
 
