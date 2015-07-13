@@ -11,6 +11,7 @@
 		223F8ECB15BDF8290078A313 /* ActionExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 223F8ECA15BDF8290078A313 /* ActionExecutor.m */; };
 		2250A92A1966D39000150E07 /* KeycodeInformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2250A9291966D39000150E07 /* KeycodeInformer.m */; };
 		226A924F16AC9D7B0079165A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226A924E16AC9D7B0079165A /* Cocoa.framework */; };
+		228B7AA81B54179A003D6960 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228B7AA71B54179A003D6960 /* IOKit.framework */; };
 		22998C7D197A85A300A4C691 /* TypeAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 22998C7C197A85A300A4C691 /* TypeAction.m */; };
 		22B4D99C15D6CB0A002C8478 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B4D99B15D6CB0A002C8478 /* Carbon.framework */; };
 		22C0ECEE16BAFD9800E3A46C /* KeyBaseAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C0ECED16BAFD9800E3A46C /* KeyBaseAction.m */; };
@@ -52,6 +53,7 @@
 		2250A9281966D39000150E07 /* KeycodeInformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeycodeInformer.h; sourceTree = "<group>"; };
 		2250A9291966D39000150E07 /* KeycodeInformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeycodeInformer.m; sourceTree = "<group>"; };
 		226A924E16AC9D7B0079165A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		228B7AA71B54179A003D6960 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = ../../../../../../System/Library/Frameworks/IOKit.framework; sourceTree = "<group>"; };
 		22998C7B197A85A300A4C691 /* TypeAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TypeAction.h; path = Actions/TypeAction.h; sourceTree = "<group>"; };
 		22998C7C197A85A300A4C691 /* TypeAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TypeAction.m; path = Actions/TypeAction.m; sourceTree = "<group>"; };
 		22B4D99B15D6CB0A002C8478 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
@@ -97,6 +99,7 @@
 				8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */,
 				220F5BDB0C0717C2005EC17E /* ApplicationServices.framework in Frameworks */,
 				22B4D99C15D6CB0A002C8478 /* Carbon.framework in Frameworks */,
+				228B7AA81B54179A003D6960 /* IOKit.framework in Frameworks */,
 				226A924F16AC9D7B0079165A /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,6 +136,7 @@
 		08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				228B7AA71B54179A003D6960 /* IOKit.framework */,
 				220F5BDA0C0717C2005EC17E /* ApplicationServices.framework */,
 				08FB779EFE84155DC02AAC07 /* Foundation.framework */,
 				22B4D99B15D6CB0A002C8478 /* Carbon.framework */,

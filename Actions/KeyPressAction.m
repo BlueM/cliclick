@@ -77,20 +77,52 @@
             @"119", @"end",
             @"116", @"page-up",
             @"121", @"page-down",
-            @"74",  @"mute",
-            @"72",  @"volume-up",
-            @"73",  @"volume-down",
+            // "NSSystemDefined" events, see list in IOKit/hidsystem/ev_keymap.h
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_MUTE],  @"mute",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_SOUND_UP],  @"volume-up",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_SOUND_DOWN],  @"volume-down",
             nil];
 }
 
--(void)performActionWithKeycode:(CGKeyCode)code {    
-    CGEventRef e1 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, true);
-    CGEventPost(kCGSessionEventTap, e1);
-    CFRelease(e1);
+-(BOOL)keyCodeRequiresSystemDefinedEvent:(CGKeyCode)code {
+    return code == NX_KEYTYPE_SOUND_UP ||
+           code == NX_KEYTYPE_SOUND_DOWN ||
+           code == NX_KEYTYPE_MUTE;
+}
 
-    CGEventRef e2 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, false);
-    CGEventPost(kCGSessionEventTap, e2);
-    CFRelease(e2);
+-(void)performActionWithKeycode:(CGKeyCode)code {
+
+    if ([self keyCodeRequiresSystemDefinedEvent:code]) {
+        NSEvent *e1 = [NSEvent otherEventWithType:NSSystemDefined
+                                         location:NSPointFromCGPoint(CGPointZero)
+                                    modifierFlags:0xa00
+                                        timestamp:0
+                                     windowNumber:0
+                                          context:0
+                                          subtype:8
+                                            data1:((code << 16) | (0xa << 8))
+                                            data2:-1];
+        CGEventPost(0, [e1 CGEvent]);
+
+        NSEvent *e2 = [NSEvent otherEventWithType:NSSystemDefined
+                                         location:NSPointFromCGPoint(CGPointZero)
+                                    modifierFlags:0xb00
+                                        timestamp:0
+                                     windowNumber:0
+                                          context:0
+                                          subtype:8
+                                            data1:((code << 16) | (0xb << 8))
+                                            data2:-1];
+        
+        CGEventPost(0, [e2 CGEvent]);
+    } else {
+        CGEventRef e1 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, true);
+        CGEventRef e2 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, false);
+        CGEventPost(kCGSessionEventTap, e1);
+        CGEventPost(kCGSessionEventTap, e2);
+        CFRelease(e1);
+        CFRelease(e2);
+    }
 }
 
 -(NSString *)actionDescriptionString:(NSString *)keyName {

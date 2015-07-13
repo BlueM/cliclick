@@ -29,6 +29,7 @@
 #import <Cocoa/Cocoa.h>
 #import "ActionProtocol.h"
 #import "KeyBaseAction.h"
+#import <IOKit/hidsystem/ev_keymap.h>
 
 @interface KeyPressAction : KeyBaseAction <ActionProtocol> {
 
