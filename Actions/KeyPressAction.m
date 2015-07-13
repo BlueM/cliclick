@@ -81,13 +81,31 @@
             [NSString stringWithFormat:@"%i", NX_KEYTYPE_MUTE],  @"mute",
             [NSString stringWithFormat:@"%i", NX_KEYTYPE_SOUND_UP],  @"volume-up",
             [NSString stringWithFormat:@"%i", NX_KEYTYPE_SOUND_DOWN],  @"volume-down",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_BRIGHTNESS_UP],  @"brightness-up",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_BRIGHTNESS_DOWN],  @"brightness-down",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_PLAY],  @"play-pause",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_PREVIOUS],  @"play-previous",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_NEXT],  @"play-next",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_ILLUMINATION_TOGGLE],  @"keys-light-toggle",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_ILLUMINATION_UP],  @"keys-light-up",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_ILLUMINATION_DOWN],  @"keys-light-down",
             nil];
 }
 
 -(BOOL)keyCodeRequiresSystemDefinedEvent:(CGKeyCode)code {
     return code == NX_KEYTYPE_SOUND_UP ||
            code == NX_KEYTYPE_SOUND_DOWN ||
-           code == NX_KEYTYPE_MUTE;
+           code == NX_KEYTYPE_MUTE ||
+		   code == NX_KEYTYPE_PLAY ||
+		   code == NX_KEYTYPE_BRIGHTNESS_UP ||
+		   code == NX_KEYTYPE_BRIGHTNESS_DOWN ||
+		   code == NX_KEYTYPE_PLAY ||
+		   code == NX_KEYTYPE_PREVIOUS ||
+		   code == NX_KEYTYPE_NEXT ||
+		   code == NX_KEYTYPE_ILLUMINATION_UP ||
+		   code == NX_KEYTYPE_ILLUMINATION_DOWN ||
+		   code == NX_KEYTYPE_ILLUMINATION_TOGGLE
+		   ;
 }
 
 -(void)performActionWithKeycode:(CGKeyCode)code {
@@ -113,7 +131,7 @@
                                           subtype:8
                                             data1:((code << 16) | (0xb << 8))
                                             data2:-1];
-        
+
         CGEventPost(0, [e2 CGEvent]);
     } else {
         CGEventRef e1 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, true);
