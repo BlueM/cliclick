@@ -96,16 +96,16 @@
     return code == NX_KEYTYPE_SOUND_UP ||
            code == NX_KEYTYPE_SOUND_DOWN ||
            code == NX_KEYTYPE_MUTE ||
-		   code == NX_KEYTYPE_PLAY ||
-		   code == NX_KEYTYPE_BRIGHTNESS_UP ||
-		   code == NX_KEYTYPE_BRIGHTNESS_DOWN ||
-		   code == NX_KEYTYPE_PLAY ||
-		   code == NX_KEYTYPE_PREVIOUS ||
-		   code == NX_KEYTYPE_NEXT ||
-		   code == NX_KEYTYPE_ILLUMINATION_UP ||
-		   code == NX_KEYTYPE_ILLUMINATION_DOWN ||
-		   code == NX_KEYTYPE_ILLUMINATION_TOGGLE
-		   ;
+           code == NX_KEYTYPE_PLAY ||
+           code == NX_KEYTYPE_BRIGHTNESS_UP ||
+           code == NX_KEYTYPE_BRIGHTNESS_DOWN ||
+           code == NX_KEYTYPE_PLAY ||
+           code == NX_KEYTYPE_PREVIOUS ||
+           code == NX_KEYTYPE_NEXT ||
+           code == NX_KEYTYPE_ILLUMINATION_UP ||
+           code == NX_KEYTYPE_ILLUMINATION_DOWN ||
+           code == NX_KEYTYPE_ILLUMINATION_TOGGLE
+           ;
 }
 
 -(void)performActionWithKeycode:(CGKeyCode)code {
