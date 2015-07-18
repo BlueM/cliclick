@@ -78,7 +78,7 @@ expectStringForArguments("Invalid key “abc” given as argument to command “
 expectStringForArguments("Release ctrl key", "ku:ctrl")
 expectStringForArguments("Release ctrl key\nRelease cmd key\nRelease alt key", "ku:ctrl,cmd,alt")
 
-# “kp” (key up)
+# “kp” (key press)
 expectStringForArguments("Missing argument to command “kp”: Expected", "kp")
 expectStringForArguments("Missing argument to command “kp”: Expected", "kp:")
 expectStringForArguments("Invalid key “abc” given as argument to command “kp”", "kp:abc")
