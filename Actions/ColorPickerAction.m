@@ -38,15 +38,14 @@
 }
 
 +(NSString *)commandDescription {
-    return @"  cp[:str] Will PRINT the color at the given screen location.\n"
-    "          Example: “cp:123,456” might print “00FFCC88”";
+    return @"  cp:str Will PRINT the color value at the given screen location.\n"
+    "          The color value is printed as four 8-bit values in decimal, representing,\n"
+    "          in order, red, green, blue, and alpha.\n"
+    "          Example: “cp:123,456” might print “127 63 0 255”";
 }
 
 -(void)performActionWithData:(NSString *)data
                       inMode:(unsigned)mode {
-
-    CGPoint p;
-    NSColor *color;
 
     NSString *shortcut = [[self class] commandShortcut];
 
@@ -68,6 +67,7 @@
         if (MODE_TEST == mode) {
             printf("Print color value of given location\n");
         } else {
+            CGPoint p;
             p.x = [MouseBaseAction getCoordinate:[coords objectAtIndex:0] forAxis:XAXIS];
             p.y = [MouseBaseAction getCoordinate:[coords objectAtIndex:1] forAxis:YAXIS];
 
@@ -75,9 +75,9 @@
             CGImageRef imageRef = CGWindowListCreateImage(imageRect, kCGWindowListOptionOnScreenOnly, kCGNullWindowID, kCGWindowImageDefault);
             NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:imageRef];
             CGImageRelease(imageRef);
-            color = [bitmap colorAtX:0 y:0];
+            NSColor *color = [bitmap colorAtX:0 y:0];
 
-            printf("%02x %02x %02x %02x\n", (int)(color.redComponent*255), (int)(color.greenComponent*255), (int)(color.blueComponent*255), (int)(color.alphaComponent*255));
+            printf("%d %d %d %d\n", (int)(color.redComponent*255), (int)(color.greenComponent*255), (int)(color.blueComponent*255), (int)(color.alphaComponent*255));
         }
     }
 
