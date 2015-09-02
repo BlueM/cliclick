@@ -38,9 +38,9 @@
 }
 
 +(NSString *)commandDescription {
-    return @"  cp:str Will PRINT the color value at the given screen location.\n"
-    "          The color value is printed as four 8-bit values in decimal, representing,\n"
-    "          in order, red, green, blue, and alpha.\n"
+    return @"  cp:str  Will PRINT the color value at the given screen location.\n"
+    "          The color value is printed as four 8-bit values in decimal,\n"
+    "          representing, in order, red, green, blue, and alpha.\n"
     "          Example: “cp:123,456” might print “127 63 0 255”";
 }
 
