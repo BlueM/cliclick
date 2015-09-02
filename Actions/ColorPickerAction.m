@@ -77,7 +77,7 @@
             CGImageRelease(imageRef);
             color = [bitmap colorAtX:0 y:0];
 
-            printf("%f %f %f %f\n", color.redComponent, color.greenComponent, color.blueComponent, color.alphaComponent);
+            printf("%02x %02x %02x %02x\n", (int)(color.redComponent*255), (int)(color.greenComponent*255), (int)(color.blueComponent*255), (int)(color.alphaComponent*255));
         }
     }
 
