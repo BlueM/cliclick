@@ -109,3 +109,8 @@ expectStringForArguments("Drag release at 1129,64", "du:1129,64")
 expectStringForArguments("Missing argument to command “t”: Expected", "t")
 expectStringForArguments("Missing argument to command “t”: Expected", "t:")
 expectStringForArguments("Type: “Type this: How are you today?”", "t:'Type this: How are you today?'")
+
+# “cp” (color picker)
+expectStringForArguments("Missing argument to command “cp”: Expected", "cp")
+expectStringForArguments("Missing argument to command “cp”: Expected", "cp:")
+expectStringForArguments("Print color at location 123,456", "cp:123,456")
