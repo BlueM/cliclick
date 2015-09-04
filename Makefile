@@ -2,6 +2,7 @@ CC = cc
 CFLAGS = -include cliclick_Prefix.pch -I Actions -I .
 
 cliclick: Actions/ClickAction.o \
+          Actions/ColorPickerAction.o \
           Actions/DoubleclickAction.o \
           Actions/DragDownAction.o \
           Actions/DragUpAction.o \

@@ -2,6 +2,7 @@
 // This file is written automatically by a “Run Script” build phase
 #define ACTION_CLASSES \
         @"ClickAction", \
+        @"ColorPickerAction", \
         @"DoubleclickAction", \
         @"DragDownAction", \
         @"DragUpAction", \
