@@ -72,7 +72,11 @@
         }
 
         if (MODE_TEST == mode) {
-            printf("Print color value of given location\n");
+            if ([data isEqualToString:@"."]) {
+                printf("Print color at current mouse position\n");
+            } else {
+                printf("Print color at location %i,%i\n", [[coords objectAtIndex:0] intValue], [[coords objectAtIndex:1] intValue]);
+            }
         } else {
             CGPoint p;
             p.x = [MouseBaseAction getCoordinate:[coords objectAtIndex:0] forAxis:XAXIS];
