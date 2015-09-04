@@ -40,8 +40,8 @@
 +(NSString *)commandDescription {
     return @"  cp:str  Will PRINT the color value at the given screen location.\n"
     "          The color value is printed as four 8-bit values in decimal,\n"
-    "          representing, in order, red, green, blue, and alpha.\n"
-    "          Example: “cp:123,456” might print “127 63 0 255”";
+    "          representing, in order, red, green, and blue.\n"
+    "          Example: “cp:123,456” might print “127 63 0”";
 }
 
 -(void)performActionWithData:(NSString *)data
@@ -83,7 +83,7 @@
             CGImageRelease(imageRef);
             NSColor *color = [bitmap colorAtX:0 y:0];
 
-            printf("%d %d %d %d\n", (int)(color.redComponent*255), (int)(color.greenComponent*255), (int)(color.blueComponent*255), (int)(color.alphaComponent*255));
+            printf("%d %d %d\n", (int)(color.redComponent*255), (int)(color.greenComponent*255), (int)(color.blueComponent*255));
         }
     }
 
