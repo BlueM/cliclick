@@ -76,7 +76,7 @@
 
     if ([data isEqualToString:@""]) {
         [NSException raise:@"InvalidCommandException"
-                    format:@"Missing argument to command “%@”: Expected two coordinates (separated by a comma) or “.”. Examples: “%@:123,456” or “%@.”",
+                    format:@"Missing argument to command “%@”: Expected two coordinates (separated by a comma) or “.”. Examples: “%@:123,456” or “%@:.”",
                            shortcut, shortcut, shortcut];
     } else if ([data isEqualToString:@"."]) {
         // Click at current location
@@ -90,11 +90,12 @@
         NSArray *coords = [data componentsSeparatedByString:@","];
         
         if ([coords count] != 2 ||
+            [[coords objectAtIndex:0] isEqualToString:@""] ||
             [[coords objectAtIndex:1] isEqualToString:@""])
         {
             [NSException raise:@"InvalidCommandException"
-                        format:@"Invalid argument “%@” to command “%@”: Expected two coordinates, separated by a comma. Example: “%@:123,456”",
-                               data, shortcut, shortcut];
+                        format:@"Invalid argument “%@” to command “%@”: Expected two coordinates (separated by a comma) or “.”. Examples: “%@:123,456” or “%@:.”",
+                               data, shortcut, shortcut, shortcut];
         }
         
         p.x = [[self class] getCoordinate:[coords objectAtIndex:0] forAxis:XAXIS];        
