@@ -90,6 +90,7 @@
         NSArray *coords = [data componentsSeparatedByString:@","];
         
         if ([coords count] != 2 ||
+            [[coords objectAtIndex:0] isEqualToString:@""] ||
             [[coords objectAtIndex:1] isEqualToString:@""])
         {
             [NSException raise:@"InvalidCommandException"
