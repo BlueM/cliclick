@@ -51,8 +51,8 @@
 
     if ([data isEqualToString:@""]) {
         [NSException raise:@"InvalidCommandException"
-                    format:@"Missing argument to command “%@”: Expected two coordinates (separated by a comma). Example: “%@:123,456”",
-                           shortcut, shortcut];
+                    format:@"Missing argument to command “%@”: Expected two coordinates (separated by a comma) or “.”. Example: “%@:123,456” or “%@:.”",
+                           shortcut, shortcut, shortcut];
     } else {
         NSArray *coords;
 
@@ -65,8 +65,8 @@
                 [[coords objectAtIndex:1] isEqualToString:@""])
             {
                 [NSException raise:@"InvalidCommandException"
-                            format:@"Invalid argument “%@” to command “%@”: Expected two coordinates, separated by a comma. Example: “%@:123,456”",
-                                   data, shortcut, shortcut];
+                            format:@"Invalid argument “%@” to command “%@”: Expected two coordinates (separated by a comma) or “.”. Example: “%@:123,456” or “%@:.”",
+                                   data, shortcut, shortcut, shortcut];
             }
         }
 
