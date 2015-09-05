@@ -33,6 +33,8 @@
 +(int)getCoordinate:(NSString *)unparsedValue
             forAxis:(CLICLICKAXIS)axis {
 
+    [[self class] validateAxisValue:unparsedValue forAxis:axis];
+
     if ([[unparsedValue substringToIndex:1] isEqualToString:@"+"] ||
         [[unparsedValue substringToIndex:1] isEqualToString:@"-"]) {
         // Relative value
@@ -52,6 +54,16 @@
 
     // Else. Absolute value
     return [unparsedValue intValue];
+}
+
++(void)validateAxisValue:(NSString *)string
+                 forAxis:(CLICLICKAXIS)axis {
+    NSString *regex = @"^[+=-]?\\d+$";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    if ([predicate evaluateWithObject:string] != YES) {
+        [NSException raise:@"InvalidCommandException"
+                    format:@"Invalid %@ axis coordinate “%@” given", XAXIS == axis ? @"X" : @"Y", string];
+    }
 }
 
 -(NSString *)actionDescriptionString:(NSString *)locationDescription {

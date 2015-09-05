@@ -41,11 +41,20 @@ typedef enum {
 /**
  Takes an unparsed position string for a single axis and returns the corresponding position
  
- @param unparsedValue String in one of the supported formats, such as @@"934" or @@"+17" or @@"."
+ @param unparsedValue String in one of the supported formats, such as @@"934", @@"+17" or @@"=218"
  @param axis The axis
  */
 +(int)getCoordinate:(NSString *)unparsedValue
             forAxis:(CLICLICKAXIS)axis;
+
+/**
+ Checks if the given string is an acceptable X or Y coordinate value and throws an exception if not
+
+ @param string String to test. See +getCoordinate:forAxis: for supported syntaxes
+ @param axis The axis
+*/
++(void)validateAxisValue:(NSString *)string
+                 forAxis:(CLICLICKAXIS)axis;
 
 /**
  Returns a human-readable description of the action

@@ -25,6 +25,12 @@ expectStringForArguments("You did not pass any commands as argument", "")
 # Invalid action shortcut
 expectStringForArguments("Unrecognized action shortcut “z”", "z")
 
+# Invalid X value
+expectStringForArguments("Invalid X axis coordinate “foobar”", "m:foobar,-123")
+
+# Invalid Y value
+expectStringForArguments("Invalid Y axis coordinate “foobar”", "m:+123,foobar")
+
 # “m” (move)
 expectStringForArguments("Missing argument to command “m”: Expected", "m")
 expectStringForArguments("Missing argument to command “m”: Expected", "m:")
