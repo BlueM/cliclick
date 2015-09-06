@@ -26,23 +26,23 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "ScrollAction.h"
+#import "ScrollBaseAction.h"
 
-@implementation ScrollAction
+@implementation ScrollBaseAction
+
+-(NSString *)scrollUnitName {
+    [NSException raise:@"InvalidCommandException"
+                format:@"To be implemented by subclasses"];
+    return @"";
+}
+
+-(CGScrollEventUnit)scrollUnit {
+    [NSException raise:@"InvalidCommandException"
+                format:@"To be implemented by subclasses"];
+    return (CGScrollEventUnit)NULL;
+}
 
 #pragma mark - ActionProtocol
-
-+(NSString *)commandShortcut {
-    return @"sp";
-}
-
-+(NSString *)commandDescription {
-    return @"  sp:str  Will send a mouse scroll event in the specifed number of pixels.\n"
-    "          Pixel scrolling is generally interpreted as smooth scrolling.\n"
-    "          You can specify up to three values, corresponding to three scroll wheels,\n"
-    "          usually interpreted as vertical, horizontal, and depth.\n"
-    "          Example: sp:10,2,0\n";
-}
 
 -(void)performActionWithData:(NSString *)data
                       inMode:(unsigned)mode {
@@ -65,7 +65,7 @@
                 scrollVals[1] = 0;
                 scrollVals[2] = 0;
                 if (MODE_VERBOSE == mode || MODE_TEST == mode) {
-                    printf("Scroll up/down %d pixels\n", scrollVals[0]);
+                    printf("Scroll up/down %d %s\n", scrollVals[0], [[self scrollUnitName] UTF8String]);
                 }
                 break;
             case 2:
@@ -73,7 +73,7 @@
 		scrollVals[1] = [[scrollStrVals objectAtIndex:1] intValue];
                 scrollVals[2] = 0;
                 if (MODE_VERBOSE == mode || MODE_TEST == mode) {
-                    printf("Scroll up/down %d pixels, left/right %d pixels\n", scrollVals[0], scrollVals[1]);
+                    printf("Scroll up/down %d, left/right %d %s\n", scrollVals[0], scrollVals[1], [[self scrollUnitName] UTF8String]);
                 }
                 break;
             case 3:
@@ -81,7 +81,7 @@
 		scrollVals[1] = [[scrollStrVals objectAtIndex:1] intValue];
 		scrollVals[2] = [[scrollStrVals objectAtIndex:2] intValue];
                 if (MODE_VERBOSE == mode || MODE_TEST == mode) {
-                    printf("Scroll up/down %d pixels, left/right %d pixels, in/out %d pixels\n", scrollVals[0], scrollVals[1], scrollVals[2]);
+                    printf("Scroll up/down %d, left/right %d, in/out %d %s\n", scrollVals[0], scrollVals[1], scrollVals[2], [[self scrollUnitName] UTF8String]);
                 }
                 break;
             default:
@@ -93,7 +93,7 @@
 
         if (MODE_TEST != mode) {
             /*
-             * Rather than do a massive scroll all at once, split it into chunks of 10 pixels or fewer.
+             * Rather than do a massive scroll all at once, split it into chunks of 10 units or fewer.
              * This is according to Apple docs:
              *
              * Scrolling movement is generally represented by small signed integer values, typically in a
@@ -123,7 +123,7 @@
                     }
                     scrollPart[i] *= scrollDir[i];
                 }
-                scrollEvent = CGEventCreateScrollWheelEvent(NULL, kCGScrollEventUnitPixel, 3, scrollPart[0], scrollPart[1], scrollPart[2]);
+                scrollEvent = CGEventCreateScrollWheelEvent(NULL, [self scrollUnit], 3, scrollPart[0], scrollPart[1], scrollPart[2]);
                 CGEventPost(kCGHIDEventTap, scrollEvent);
                 CFRelease(scrollEvent);
             }

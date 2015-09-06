@@ -26,18 +26,33 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <Cocoa/Cocoa.h>
-#import "ActionProtocol.h"
+#import "ScrollPixelAction.h"
 
-@interface ScrollAction : NSObject <ActionProtocol> {
+@implementation ScrollPixelAction
 
+#pragma mark - ActionProtocol
+
++(NSString *)commandShortcut {
+    return @"sp";
 }
 
-+(NSString *)commandShortcut;
++(NSString *)commandDescription {
+    return @"  sp:str  Will send a mouse scroll event in the specifed number of pixels.\n"
+    "          Pixel scrolling is generally interpreted as smooth scrolling.\n"
+    "          You can specify up to three values, corresponding to three scroll wheels,\n"
+    "          usually interpreted as vertical, horizontal, and depth.\n"
+    "          Positive is up/left; negative is down/right.\n"
+    "          Example: “sp:10,2,0” will scroll up and to the left";
+}
 
-+(NSString *)commandDescription;
+#pragma mark - ScrollBaseAction
 
--(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode;
+-(CGScrollEventUnit)scrollUnit {
+    return kCGScrollEventUnitPixel;
+}
+
+-(NSString *)scrollUnitName {
+    return @"pixels";
+}
 
 @end
