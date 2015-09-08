@@ -61,7 +61,7 @@
 
         switch([scrollStrVals count]) {
             case 1:
-		scrollVals[0] = [[scrollStrVals objectAtIndex:0] intValue];
+		scrollVals[0] = [[scrollStrVals objectAtIndex:0] intValue] * -1;
                 scrollVals[1] = 0;
                 scrollVals[2] = 0;
                 if (MODE_VERBOSE == mode || MODE_TEST == mode) {
@@ -69,17 +69,17 @@
                 }
                 break;
             case 2:
-		scrollVals[0] = [[scrollStrVals objectAtIndex:0] intValue];
-		scrollVals[1] = [[scrollStrVals objectAtIndex:1] intValue];
+		scrollVals[0] = [[scrollStrVals objectAtIndex:0] intValue] * -1;
+		scrollVals[1] = [[scrollStrVals objectAtIndex:1] intValue] * -1;
                 scrollVals[2] = 0;
                 if (MODE_VERBOSE == mode || MODE_TEST == mode) {
                     printf("Scroll up/down %d, left/right %d %s\n", scrollVals[0], scrollVals[1], [[self scrollUnitName] UTF8String]);
                 }
                 break;
             case 3:
-		scrollVals[0] = [[scrollStrVals objectAtIndex:0] intValue];
-		scrollVals[1] = [[scrollStrVals objectAtIndex:1] intValue];
-		scrollVals[2] = [[scrollStrVals objectAtIndex:2] intValue];
+		scrollVals[0] = [[scrollStrVals objectAtIndex:0] intValue] * -1;
+		scrollVals[1] = [[scrollStrVals objectAtIndex:1] intValue] * -1;
+		scrollVals[2] = [[scrollStrVals objectAtIndex:2] intValue] * -1;
                 if (MODE_VERBOSE == mode || MODE_TEST == mode) {
                     printf("Scroll up/down %d, left/right %d, in/out %d %s\n", scrollVals[0], scrollVals[1], scrollVals[2], [[self scrollUnitName] UTF8String]);
                 }

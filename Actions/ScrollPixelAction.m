@@ -41,8 +41,8 @@
     "          Pixel scrolling is generally interpreted as smooth scrolling.\n"
     "          You can specify up to three values, corresponding to three scroll wheels,\n"
     "          usually interpreted as vertical, horizontal, and depth.\n"
-    "          Positive is up/left; negative is down/right.\n"
-    "          Example: “sp:10,2,0” will scroll up and to the left";
+    "          Positive is down/right; negative is up/left.\n"
+    "          Example: “sp:10,2,0” will scroll down and to the right";
 }
 
 #pragma mark - ScrollBaseAction
