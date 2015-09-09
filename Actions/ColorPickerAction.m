@@ -87,6 +87,7 @@
             NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:imageRef];
             CGImageRelease(imageRef);
             NSColor *color = [bitmap colorAtX:0 y:0];
+            [bitmap release];
 
             printf("%d %d %d\n", (int)(color.redComponent*255), (int)(color.greenComponent*255), (int)(color.blueComponent*255));
         }
