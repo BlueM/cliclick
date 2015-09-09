@@ -120,3 +120,13 @@ expectStringForArguments("Type: “Type this: How are you today?”", "t:'Type t
 expectStringForArguments("Missing argument to command “cp”: Expected", "cp")
 expectStringForArguments("Missing argument to command “cp”: Expected", "cp:")
 expectStringForArguments("Print color at location 123,456", "cp:123,456")
+
+# “sl” (scroll line)
+expectStringForArguments("Missing argument to command “sl”: Expected", "sl")
+expectStringForArguments("Missing argument to command “sl”: Expected", "sl:")
+expectStringForArguments("Scroll up/down -20, left/right 13 lines", "sl:+20,-13")
+
+# “sp” (scroll pixels)
+expectStringForArguments("Missing argument to command “sp”: Expected", "sp")
+expectStringForArguments("Missing argument to command “sp”: Expected", "sp:")
+expectStringForArguments("Scroll up/down 200, left/right -85 pixels", "sp:-200,85")
