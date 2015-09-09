@@ -1,3 +1,4 @@
+*.o
 *.mode1
 *.mode1v3
 *.mode2v3
@@ -8,3 +9,4 @@
 *.xcuserdatad
 /DerivedData
 /build
+cliclick
