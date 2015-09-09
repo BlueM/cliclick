@@ -55,13 +55,13 @@
                            shortcut, shortcut, shortcut];
     } else {
         NSArray *scrollStrVals = [data componentsSeparatedByString:@","];
-	int scrollVals[3];
+        int scrollVals[3];
 
         CGEventRef scrollEvent;
 
         switch([scrollStrVals count]) {
             case 1:
-		scrollVals[0] = [[scrollStrVals objectAtIndex:0] intValue] * -1;
+                scrollVals[0] = [[scrollStrVals objectAtIndex:0] intValue] * -1;
                 scrollVals[1] = 0;
                 scrollVals[2] = 0;
                 if (MODE_VERBOSE == mode || MODE_TEST == mode) {
@@ -69,17 +69,17 @@
                 }
                 break;
             case 2:
-		scrollVals[0] = [[scrollStrVals objectAtIndex:0] intValue] * -1;
-		scrollVals[1] = [[scrollStrVals objectAtIndex:1] intValue] * -1;
+                scrollVals[0] = [[scrollStrVals objectAtIndex:0] intValue] * -1;
+                scrollVals[1] = [[scrollStrVals objectAtIndex:1] intValue] * -1;
                 scrollVals[2] = 0;
                 if (MODE_VERBOSE == mode || MODE_TEST == mode) {
                     printf("Scroll up/down %d, left/right %d %s\n", scrollVals[0], scrollVals[1], [[self scrollUnitName] UTF8String]);
                 }
                 break;
             case 3:
-		scrollVals[0] = [[scrollStrVals objectAtIndex:0] intValue] * -1;
-		scrollVals[1] = [[scrollStrVals objectAtIndex:1] intValue] * -1;
-		scrollVals[2] = [[scrollStrVals objectAtIndex:2] intValue] * -1;
+                scrollVals[0] = [[scrollStrVals objectAtIndex:0] intValue] * -1;
+                scrollVals[1] = [[scrollStrVals objectAtIndex:1] intValue] * -1;
+                scrollVals[2] = [[scrollStrVals objectAtIndex:2] intValue] * -1;
                 if (MODE_VERBOSE == mode || MODE_TEST == mode) {
                     printf("Scroll up/down %d, left/right %d, in/out %d %s\n", scrollVals[0], scrollVals[1], scrollVals[2], [[self scrollUnitName] UTF8String]);
                 }
@@ -98,10 +98,10 @@
              *
              * Scrolling movement is generally represented by small signed integer values, typically in a
              * range from -10 to +10. Large values may have unexpected results, depending on the application
-             * that processes the event. 
+             * that processes the event.
              */
             int scrollDir[3];
-            for (int i=0; i<3; i++) {
+            for (int i = 0; i < 3; i ++) {
                 if (scrollVals[i] > 0) {
                     scrollDir[i] = 1;
                 } else {
@@ -113,7 +113,7 @@
                    scrollVals[1] > 0 ||
                    scrollVals[2] > 0) {
                 int scrollPart[3];
-                for (int i=0; i<3; i++) {
+                for (int i = 0; i < 3; i ++) {
                     scrollPart[i] = scrollVals[i];
                     if (scrollPart[i] > 10) {
                         scrollPart[i] = 10;
@@ -129,7 +129,6 @@
             }
         }
     }
-
 }
 
 @end
