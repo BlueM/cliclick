@@ -41,7 +41,7 @@
     "          You can specify up to three values, corresponding to three scroll wheels,\n"
     "          usually interpreted as vertical, horizontal, and depth.\n"
     "          Positive is down/right; negative is up/left.\n"
-    "          Example: “sp:10,2,0” will scroll down and to the right";
+    "          Example: “sl:10,2” will scroll down and to the right";
 }
 
 #pragma mark - ScrollBaseAction
