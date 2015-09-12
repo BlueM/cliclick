@@ -41,7 +41,9 @@
     return @"  tc:x,y  Will TRIPLE-CLICK at the point with the given coordinates.\n"
     "          Example: “tc:12,34” will triple-click at the point with x\n"
     "          coordinate 12 and y coordinate 34. Instead of x and y values,\n"
-    "          you may also use “.”, which means: the current position.";
+    "          you may also use “.”, which means: the current position.\n"
+    "          Note: If you find that this does not work in a target application,\n"
+    "          please try if double-clicking plus single-clicking does.";
 }
 
 #pragma mark - MouseBaseAction

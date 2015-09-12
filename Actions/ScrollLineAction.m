@@ -38,8 +38,8 @@
 
 +(NSString *)commandDescription {
     return @"  sl:str  Will send a mouse scroll event in the specifed number of lines.\n"
-    "          You can specify up to three values, corresponding to three scroll wheels,\n"
-    "          usually interpreted as vertical, horizontal, and depth.\n"
+    "          You can specify up to three values, corresponding to three scroll\n"
+    "          wheels, usually interpreted as vertical, horizontal, and depth.\n"
     "          Positive is down/right; negative is up/left.\n"
     "          Example: “sl:10,2” will scroll down and to the right";
 }
