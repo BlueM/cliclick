@@ -37,7 +37,7 @@
 }
 
 +(NSString *)commandDescription {
-    return @"  sp:str  Will send a mouse scroll event in the specifed number of pixels.\n"
+    return @"  sp:str  Will SCROLL the specifed number of PIXELS.\n"
     "          Pixel scrolling is generally interpreted as smooth scrolling.\n"
     "          You can specify up to three values, corresponding to three scroll\n"
     "          wheels, usually interpreted as vertical, horizontal, and depth.\n"

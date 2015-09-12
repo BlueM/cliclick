@@ -37,7 +37,7 @@
 }
 
 +(NSString *)commandDescription {
-    return @"  t:text  Will emulate typing the given text into the frontmost application.\n"
+    return @"  t:text  Will TYPE the given TEXT into the frontmost application.\n"
             "          If the text includes space(s), it must be enclosed in quotes.\n"
             "          Example: “type:Test” will type “Test” \n"
             "          Example: “type:'Viele Grüße'” will type “Viele Grüße”";
