@@ -27,6 +27,7 @@
  */
 
 #import "DoubleclickAction.h"
+#include <unistd.h>
 
 @implementation DoubleclickAction
 
@@ -59,6 +60,8 @@
     // Left button up
     CGEventSetType(mouseEvent, kCGEventLeftMouseUp);
     CGEventPost(kCGHIDEventTap, mouseEvent);
+
+    usleep(200000); // Improve reliability
 
     // 2nd click
     CGEventSetIntegerValueField(mouseEvent, kCGMouseEventClickState, 2);

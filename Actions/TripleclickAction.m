@@ -27,6 +27,7 @@
  */
 
 #import "TripleclickAction.h"
+#include <unistd.h>
 
 @implementation TripleclickAction
 
@@ -59,7 +60,9 @@
     CGEventSetType(mouseEvent, kCGEventLeftMouseUp);
     CGEventPost(kCGHIDEventTap, mouseEvent);
 
-    // 2nd click
+    usleep(200000); // Improve reliability
+
+    // 2nd/3rd click
     CGEventSetIntegerValueField(mouseEvent, kCGMouseEventClickState, 3);
     
     CGEventSetType(mouseEvent, kCGEventLeftMouseDown);  
