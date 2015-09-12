@@ -614,7 +614,7 @@ static KeycodeInformer *sharedInstance = nil;
         #pragma mark - Canadian English replacement map
 
         // Note: When physically typing on a keyboard with this layout, typing with combining
-        // characters (e.g. ¨ plus u) words. But for some reason, when typing programmatically,
+        // characters (e.g. ¨ plus u) works. But for some reason, when typing programmatically,
         // they require a pretty long delay between keystrokes (50+ ms). And, more important,
         // in a sequence of those characters (e.g. "Äñé"), only the first one is correct,
         // while the others will result in the two characters (the right side of the map),
@@ -629,7 +629,7 @@ static KeycodeInformer *sharedInstance = nil;
         #pragma mark - Brazilian replacement map
 
         // Note: When physically typing on a keyboard with this layout, typing with combining
-        // characters (e.g. ¨ plus u) words. But for some reason, when typing programmatically,
+        // characters (e.g. ¨ plus u) works. But for some reason, when typing programmatically,
         // they require a pretty long delay between keystrokes (50+ ms). And, more important,
         // in a sequence of those characters (e.g. "Äñé"), only the first one is correct,
         // while the others will result in the two characters (the right side of the map),
