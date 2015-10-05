@@ -66,7 +66,7 @@
 
     if ([data isEqualToString:@""]) {
         [NSException raise:@"InvalidCommandException"
-                    format:@"Missing argument to command “%@”: Expected s string. Examples: “%@:Hello” or “%@:'Hello world'”",
+                    format:@"Missing argument to command “%@”: Expected a string. Examples: “%@:Hello” or “%@:'Hello world'”",
          shortcut, shortcut, shortcut];
     }
 
