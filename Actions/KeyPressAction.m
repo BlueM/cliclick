@@ -48,6 +48,7 @@
 +(NSDictionary *)getSupportedKeycodes {
     return [NSDictionary dictionaryWithObjectsAndKeys:
             @"36", @"return",
+            @"76", @"enter",
             @"53", @"esc",
             @"48", @"tab",
             @"49", @"space",
