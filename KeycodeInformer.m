@@ -51,6 +51,16 @@ static KeycodeInformer *sharedInstance = nil;
     if (self) {
         keyboard       = TISCopyCurrentKeyboardInputSource();
         keyLayoutData  = TISGetInputSourceProperty(keyboard, kTISPropertyUnicodeKeyLayoutData);
+
+        if (NULL == keyLayoutData) {
+            keyboard = TISCopyCurrentASCIICapableKeyboardInputSource();
+            keyLayoutData  = TISGetInputSourceProperty(keyboard, kTISPropertyUnicodeKeyLayoutData);
+            if (NULL == keyLayoutData) {
+                [NSException raise:@"KeyboardLayoutException"
+                            format:@"Sorry, cliclick cannot handle your keyboard layout, so emulating typing is not possible."];
+            }
+        }
+
         keyboardLayout = (const UCKeyboardLayout *)CFDataGetBytePtr(keyLayoutData);
 
         map = [[NSMutableDictionary alloc] initWithCapacity:256];
