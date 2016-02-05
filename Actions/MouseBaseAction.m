@@ -32,7 +32,7 @@
 
 +(int)getCoordinate:(NSString *)unparsedValue
             forAxis:(CLICLICKAXIS)axis {
-
+    unparsedValue = [[self class] cleanCoordinateString:unparsedValue];
     [[self class] validateAxisValue:unparsedValue forAxis:axis];
 
     if ([[unparsedValue substringToIndex:1] isEqualToString:@"+"] ||
@@ -55,10 +55,13 @@
     // Else. Absolute value
     return [unparsedValue intValue];
 }
++(NSString*)cleanCoordinateString:(NSString *)string{
+    return  [string stringByReplacingOccurrencesOfString:@"+-" withString:@"-"];
 
+}
 +(void)validateAxisValue:(NSString *)string
                  forAxis:(CLICLICKAXIS)axis {
-    NSString *regex = @"^[+=-]?\\d+$";
+    NSString *regex = @"^[+=-]?\\d+(.\\d*)?$";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     if ([predicate evaluateWithObject:string] != YES) {
         [NSException raise:@"InvalidCommandException"
