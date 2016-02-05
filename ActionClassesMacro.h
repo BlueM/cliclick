@@ -11,6 +11,7 @@
         @"KeyUpAction", \
         @"MoveAction", \
         @"PrintAction", \
+        @"RightClickAction", \
         @"ScrollLineAction", \
         @"ScrollPixelAction", \
         @"TripleclickAction", \
