@@ -176,3 +176,10 @@ Either build in Xcode, as usual, or build from the shell by `cd`ing into the pro
 
 Please note that while the code will run on 10.6 (Intel or PPC) and later, Base SDK and architectures selected in the Xcode project are set to the 10.7 SDK and Intel32/64. Therefore, if you want to build for an older system, be sure to change these settings accordingly. If, on the other hand, you are on a system where only newer SDKs are available, simply change the project settings accordingly. Anything from 10.6 to 10.10 should work.
 
+Contributing
+------------
+If you would like to contribute a new feature, a bugfix or other improvement, please do so using a pull request. However, please take care that:
+
+* There is one pull request per topic. I.e.: if you would like to contribute a new feature and two bugfixes, open three pull requests.
+* All commit messages are in English.
+* Ideally, all non-obvious features or changes should be shortly explained. This might not only include *what* you committed, but also *why* you did it (motivation, usage scenario, …). 
