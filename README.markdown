@@ -174,7 +174,7 @@ Building cliclick
 -----------------
 Either build in Xcode, as usual, or build from the shell by `cd`ing into the project directory and then invoking either `xcodebuild` or `make` (whatever you prefer). In either case, cliclick will not be installed, but you will simply get an executable called “cliclick” in the project directory which you can then move wherever you want to have it. (You can put it anywhere you like.) To install it to `/usr/local/bin`, you can also simply invoke `sudo make install`, which will do this for you.
 
-Please note that while the code will run on 10.6 (Intel or PPC) and later, Base SDK and architectures selected in the Xcode project are set to the 10.7 SDK and Intel32/64. Therefore, if you want to build for an older system, be sure to change these settings accordingly. If, on the other hand, you are on a system where only newer SDKs are available, simply change the project settings accordingly. Anything from 10.6 to 10.10 should work.
+Please note that while the code will run on 10.6 (Intel or PPC) and later, Base SDK and architectures selected in the Xcode project are set to the 10.7 SDK and Intel32/64. Therefore, if you want to build for an older system, be sure to change these settings accordingly. If, on the other hand, you are on a system where only newer SDKs are available, simply change the project settings accordingly. Anything from 10.6 to 10.10 should work. If you have problems when building and get a message complaining about undefined symbols, chances are that this can be fixed by disabling “Implicitly link Objective-C Runtime Support” in the build settings.
 
 Contributing
 ------------
