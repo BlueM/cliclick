@@ -14,9 +14,6 @@ cliclick: Actions/ClickAction.o \
           Actions/MouseBaseAction.o \
           Actions/MoveAction.o \
           Actions/PrintAction.o \
-          Actions/ScrollBaseAction.o \
-          Actions/ScrollLineAction.o \
-          Actions/ScrollPixelAction.o \
           Actions/TripleclickAction.o \
           Actions/TypeAction.o \
           Actions/WaitAction.o \

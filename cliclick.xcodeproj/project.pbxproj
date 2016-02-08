@@ -13,9 +13,6 @@
 		226347791B998B80003C5D71 /* ColorPickerAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 226347781B998B80003C5D71 /* ColorPickerAction.m */; };
 		226A924F16AC9D7B0079165A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226A924E16AC9D7B0079165A /* Cocoa.framework */; };
 		228B7AA81B54179A003D6960 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228B7AA71B54179A003D6960 /* IOKit.framework */; };
-		2296EBA51BA035FD00069F59 /* ScrollBaseAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 2296EBA01BA035FD00069F59 /* ScrollBaseAction.m */; };
-		2296EBA61BA035FD00069F59 /* ScrollLineAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 2296EBA21BA035FD00069F59 /* ScrollLineAction.m */; };
-		2296EBA71BA035FD00069F59 /* ScrollPixelAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 2296EBA41BA035FD00069F59 /* ScrollPixelAction.m */; };
 		22998C7D197A85A300A4C691 /* TypeAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 22998C7C197A85A300A4C691 /* TypeAction.m */; };
 		22B4D99C15D6CB0A002C8478 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B4D99B15D6CB0A002C8478 /* Carbon.framework */; };
 		22C0ECEE16BAFD9800E3A46C /* KeyBaseAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C0ECED16BAFD9800E3A46C /* KeyBaseAction.m */; };
@@ -60,12 +57,6 @@
 		226347781B998B80003C5D71 /* ColorPickerAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorPickerAction.m; path = Actions/ColorPickerAction.m; sourceTree = "<group>"; };
 		226A924E16AC9D7B0079165A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		228B7AA71B54179A003D6960 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = ../../../../../../System/Library/Frameworks/IOKit.framework; sourceTree = "<group>"; };
-		2296EB9F1BA035FD00069F59 /* ScrollBaseAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScrollBaseAction.h; path = Actions/ScrollBaseAction.h; sourceTree = "<group>"; };
-		2296EBA01BA035FD00069F59 /* ScrollBaseAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScrollBaseAction.m; path = Actions/ScrollBaseAction.m; sourceTree = "<group>"; };
-		2296EBA11BA035FD00069F59 /* ScrollLineAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScrollLineAction.h; path = Actions/ScrollLineAction.h; sourceTree = "<group>"; };
-		2296EBA21BA035FD00069F59 /* ScrollLineAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScrollLineAction.m; path = Actions/ScrollLineAction.m; sourceTree = "<group>"; };
-		2296EBA31BA035FD00069F59 /* ScrollPixelAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScrollPixelAction.h; path = Actions/ScrollPixelAction.h; sourceTree = "<group>"; };
-		2296EBA41BA035FD00069F59 /* ScrollPixelAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScrollPixelAction.m; path = Actions/ScrollPixelAction.m; sourceTree = "<group>"; };
 		22998C7B197A85A300A4C691 /* TypeAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TypeAction.h; path = Actions/TypeAction.h; sourceTree = "<group>"; };
 		22998C7C197A85A300A4C691 /* TypeAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TypeAction.m; path = Actions/TypeAction.m; sourceTree = "<group>"; };
 		22B4D99B15D6CB0A002C8478 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
@@ -223,12 +214,6 @@
 				226347781B998B80003C5D71 /* ColorPickerAction.m */,
 				22E5626516BA589200CD5D86 /* PrintAction.h */,
 				22E5626616BA589200CD5D86 /* PrintAction.m */,
-				2296EB9F1BA035FD00069F59 /* ScrollBaseAction.h */,
-				2296EBA01BA035FD00069F59 /* ScrollBaseAction.m */,
-				2296EBA11BA035FD00069F59 /* ScrollLineAction.h */,
-				2296EBA21BA035FD00069F59 /* ScrollLineAction.m */,
-				2296EBA31BA035FD00069F59 /* ScrollPixelAction.h */,
-				2296EBA41BA035FD00069F59 /* ScrollPixelAction.m */,
 				22E5626916BA589200CD5D86 /* WaitAction.h */,
 				22E5626A16BA589200CD5D86 /* WaitAction.m */,
 			);
@@ -360,7 +345,6 @@
 				22E5626B16BA589200CD5D86 /* ClickAction.m in Sources */,
 				22E5626C16BA589200CD5D86 /* DoubleclickAction.m in Sources */,
 				22E5626D16BA589200CD5D86 /* KeyDownAction.m in Sources */,
-				2296EBA51BA035FD00069F59 /* ScrollBaseAction.m in Sources */,
 				22E5626E16BA589200CD5D86 /* KeyPressAction.m in Sources */,
 				22E5626F16BA589200CD5D86 /* KeyUpAction.m in Sources */,
 				22C68A501825A8960083A722 /* KeyDownUpBaseAction.m in Sources */,
@@ -369,12 +353,10 @@
 				22E5627116BA589200CD5D86 /* MoveAction.m in Sources */,
 				22E5627216BA589200CD5D86 /* PrintAction.m in Sources */,
 				22E5627316BA589200CD5D86 /* TripleclickAction.m in Sources */,
-				2296EBA61BA035FD00069F59 /* ScrollLineAction.m in Sources */,
 				22998C7D197A85A300A4C691 /* TypeAction.m in Sources */,
 				22E5627416BA589200CD5D86 /* WaitAction.m in Sources */,
 				226347791B998B80003C5D71 /* ColorPickerAction.m in Sources */,
 				22C0ECEE16BAFD9800E3A46C /* KeyBaseAction.m in Sources */,
-				2296EBA71BA035FD00069F59 /* ScrollPixelAction.m in Sources */,
 				F0A674F818EE2D0C0062FD29 /* DragDownAction.m in Sources */,
 				F0A674FB18EE3F220062FD29 /* DragUpAction.m in Sources */,
 			);
