@@ -12,10 +12,10 @@
 #define D(...) [NSDictionary dictionaryWithObjectsAndKeys:__VA_ARGS__, nil]
 
 // Version or branch
-#define VERSION     @"3.1"
+#define VERSION     @"3.2"
 
 // Date as m/d/Y
-#define RELEASEDATE @"07/18/2015"
+#define RELEASEDATE @"02/17/2016"
 
 #define MODE_REGULAR 0
 #define MODE_VERBOSE 1
