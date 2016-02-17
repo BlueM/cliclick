@@ -50,7 +50,7 @@ int main (int argc, const char * argv[]) {
     unsigned waitTime = 0;
     int optchar;
 
-    while ((optchar = getopt(argc, (char * const *)argv, "hVm:rf:w:d")) != -1) {
+    while ((optchar = getopt(argc, (char * const *)argv, "hoVm:rf:w:d")) != -1) {
         switch(optchar) {
             case 'h':
                 help();
@@ -61,7 +61,11 @@ int main (int argc, const char * argv[]) {
                 [pool release];
                 return EXIT_SUCCESS;
             case 'd':
-                [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.bluem.net/jump/donations/"]];
+                [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:DONATIONS_URL]];
+                [pool release];
+                return EXIT_SUCCESS;
+            case 'o':
+                [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:HISTORY_URL]];
                 [pool release];
                 return EXIT_SUCCESS;
             case 'm':
@@ -214,6 +218,7 @@ void help() {
     "            “cliclick -w 200 wait:500” will wait for 700 milliseconds.\n"
     "            The default (and minimum) value for -w is 20.\n"
     "  -V        Show cliclick version number and release date\n"
+    "  -o        Open version history in a browser\n"
     "  -d        Send a donation\n"
     "\n"
     "COMMANDS\n"
