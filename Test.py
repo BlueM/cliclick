@@ -53,6 +53,7 @@ expectStringForArguments("Invalid argument “1” to command “c”: Expected 
 expectStringForArguments("Invalid argument “1,” to command “c”: Expected two coordinates", "c:1,")
 expectStringForArguments("Click at 1129,64", "c:1129,64")
 expectStringForArguments("Click at +0,80", "c:+0,80")
+expectStringForArguments("Click at =-200,-100", "c:=-200,-100")
 
 # “dc” (double-click)
 expectStringForArguments("Missing argument to command “dc”: Expected", "dc")

@@ -58,7 +58,7 @@
 
 +(void)validateAxisValue:(NSString *)string
                  forAxis:(CLICLICKAXIS)axis {
-    NSString *regex = @"^[+=-]?\\d+$";
+    NSString *regex = @"^=?[+-]?\\d+$";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     if ([predicate evaluateWithObject:string] != YES) {
         [NSException raise:@"InvalidCommandException"
