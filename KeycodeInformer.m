@@ -32,8 +32,7 @@
 
 static KeycodeInformer *sharedInstance = nil;
 
-+ (id)sharedInstance
-{
++ (id)sharedInstance {
     @synchronized(self) {
         if(sharedInstance == nil)
             sharedInstance = [[super allocWithZone:NULL] init];
@@ -45,8 +44,7 @@ static KeycodeInformer *sharedInstance = nil;
     return [[self sharedInstance] retain];
 }
 
-- (KeycodeInformer *)init
-{
+- (KeycodeInformer *)init {
     self = [super init];
     if (self) {
         keyboard       = TISCopyCurrentKeyboardInputSource();
@@ -107,8 +105,7 @@ static KeycodeInformer *sharedInstance = nil;
     return UINT_MAX;
 }
 
-- (oneway void)release
-{
+- (oneway void)release {
     CFRelease(keyLayoutData);
     CFRelease(keyboard);
 }
@@ -117,14 +114,12 @@ static KeycodeInformer *sharedInstance = nil;
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [map release];
     [super dealloc];
 }
 
-- (NSArray *)keyCodesForString:(NSString *)string
-{
+- (NSArray *)keyCodesForString:(NSString *)string {
     NSMutableArray *keyCodes = [[NSMutableArray alloc] initWithCapacity:[string length]];
     string                   = [[self prepareString:string] decomposedStringWithCanonicalMapping];
     unsigned i, ii;
@@ -151,8 +146,7 @@ static KeycodeInformer *sharedInstance = nil;
     return [keyCodes autorelease];
 }
 
-- (NSString *)prepareString:(NSString *)string
-{
+- (NSString *)prepareString:(NSString *)string {
     NSString *layoutName         = TISGetInputSourceProperty(keyboard, kTISPropertyLocalizedName);
     NSDictionary *replacementMap = [self getReplacementMapForKeyboardLayoutNamed:layoutName];
     NSMutableString *tmp         = [NSMutableString stringWithString:string];
@@ -170,8 +164,7 @@ static KeycodeInformer *sharedInstance = nil;
     return tmp;
 }
 
-- (NSString *)stringForKeyCode:(CGKeyCode)keyCode andModifiers:(UInt32)modifiers
-{
+- (NSString *)stringForKeyCode:(CGKeyCode)keyCode andModifiers:(UInt32)modifiers {
     UInt32 keysDown = 0;
     UniChar chars[4];
     UniCharCount realLength;
@@ -190,8 +183,7 @@ static KeycodeInformer *sharedInstance = nil;
     return [NSString stringWithCharacters:chars length:1];
 }
 
-- (NSDictionary *)getReplacementMapForKeyboardLayoutNamed:(NSString *)layoutName
-{
+- (NSDictionary *)getReplacementMapForKeyboardLayoutNamed:(NSString *)layoutName {
     // Incomplete lists of characters which (dependent on the keyboard layout) cannot
     // be typed by a combination of keys, but require consecutive key presses. Many
     // characters are missing, as I did not yet find a way to auto-generate the map.
