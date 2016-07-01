@@ -47,6 +47,7 @@
 
 +(NSDictionary *)getSupportedKeycodes {
     return [NSDictionary dictionaryWithObjectsAndKeys:
+            // See /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/Headers/Events.h
             @"36", @"return",
             @"76", @"enter",
             @"53", @"esc",
@@ -78,6 +79,26 @@
             @"119", @"end",
             @"116", @"page-up",
             @"121", @"page-down",
+            // The following keys are also from Events.h, but are hardware-dependend (= represent physical
+            // keys, what is probably wanted when triggering numpad keys)
+            @"82",  @"num-0",
+            @"83",  @"num-1",
+            @"84",  @"num-2",
+            @"85",  @"num-3",
+            @"86",  @"num-4",
+            @"87",  @"num-5",
+            @"88",  @"num-6",
+            @"89",  @"num-7",
+            @"91",  @"num-8",
+            @"92",  @"num-9",
+            @"71",  @"num-clear",
+            @"81",  @"num-equals",
+            @"75",  @"num-divide",
+            @"67",  @"num-multiply",
+            @"78",  @"num-minus",
+            @"69",  @"num-plus",
+            @"76",  @"num-enter",
+
             // "NSSystemDefined" events, see list in IOKit/hidsystem/ev_keymap.h
             [NSString stringWithFormat:@"%i", NX_KEYTYPE_MUTE],  @"mute",
             [NSString stringWithFormat:@"%i", NX_KEYTYPE_SOUND_UP],  @"volume-up",
