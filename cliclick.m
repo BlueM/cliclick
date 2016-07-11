@@ -120,7 +120,7 @@ int main (int argc, const char * argv[]) {
             [pool release];
             return EXIT_FAILURE;
         }
-        if (![fm fileExistsAtPath:filepath]) {
+        if (![filepath isEqualToString:@"-"] && ![fm fileExistsAtPath:filepath]) {
             printf("There is no file at %s\n", [filepath UTF8String]);
             [pool release];
             return EXIT_FAILURE;
@@ -162,10 +162,20 @@ int main (int argc, const char * argv[]) {
 
 NSArray* parseCommandsFile(NSString *filepath) {
     NSMutableArray *commands = [[NSMutableArray alloc] initWithCapacity:32];
-    NSString *fileContents = [NSString stringWithContentsOfFile:filepath
-                                                       encoding:NSUTF8StringEncoding
-                                                          error:nil];
-    NSArray *lines = [fileContents componentsSeparatedByString:@"\n"];
+    NSArray *lines;
+
+    if ([filepath isEqualToString:@"-"]) {
+        // stdin
+        NSData *stdinData = [[NSFileHandle fileHandleWithStandardInput] readDataToEndOfFile];
+        NSString *configString = [[NSString alloc] initWithData:stdinData encoding:NSUTF8StringEncoding];
+        lines = [configString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    } else {
+        // File
+        NSString *fileContents = [NSString stringWithContentsOfFile:filepath
+                                                           encoding:NSUTF8StringEncoding
+                                                              error:nil];
+        lines = [fileContents componentsSeparatedByString:@"\n"];
+    }
 
     NSUInteger i, count = [lines count];
     for (i = 0; i < count; i++) {
@@ -205,7 +215,8 @@ void help() {
     "            performed) or “test” (cliclick will only print the\n"
     "            description, but not perform the action)\n"
     "  -f <file> Instead of passing commands as arguments, you may instead\n"
-    "            specify a file from which cliclick will read the commands.\n"
+    "            specify a file from which cliclick will read the commands\n"
+    "            (or stdin, when - is given as filename).\n"
     "            Each line in the file is expected to contain a command\n"
     "            in the same format/syntax as commands given as arguments\n"
     "            at the shell. Additionally, lines starting with the hash\n"
