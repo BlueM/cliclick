@@ -50,7 +50,7 @@ int main (int argc, const char * argv[]) {
     unsigned waitTime = 0;
     int optchar;
 
-    while ((optchar = getopt(argc, (char * const *)argv, "hoVm:rf:w:d")) != -1) {
+    while ((optchar = getopt(argc, (char * const *)argv, "hoVm:rf:w:n")) != -1) {
         switch(optchar) {
             case 'h':
                 help();
@@ -60,7 +60,7 @@ int main (int argc, const char * argv[]) {
                 printf("%s\n", [[NSString stringWithFormat:@"cliclick %@, %@", VERSION, RELEASEDATE] UTF8String]);
                 [pool release];
                 return EXIT_SUCCESS;
-            case 'd':
+            case 'n':
                 [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:DONATIONS_URL]];
                 [pool release];
                 return EXIT_SUCCESS;
