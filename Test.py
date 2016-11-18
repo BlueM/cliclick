@@ -69,6 +69,13 @@ expectStringForArguments("Invalid argument “1” to command “tc”: Expected
 expectStringForArguments("Invalid argument “1,” to command “tc”: Expected two coordinates", "tc:1,")
 expectStringForArguments("Triple-click at 1129,64", "tc:1129,64")
 
+# “rc” (right-click)
+expectStringForArguments("Missing argument to command “rc”: Expected", "rc")
+expectStringForArguments("Missing argument to command “rc”: Expected", "rc:")
+expectStringForArguments("Invalid argument “1” to command “rc”: Expected two coordinates", "rc:1")
+expectStringForArguments("Invalid argument “1,” to command “rc”: Expected two coordinates", "rc:1,")
+expectStringForArguments("Right-click at 1129,64", "rc:1129,64")
+
 # “kd” (key down)
 expectStringForArguments("Missing argument to command “kd”: Expected", "kd")
 expectStringForArguments("Missing argument to command “kd”: Expected", "kd:")
