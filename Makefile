@@ -31,6 +31,6 @@ install: cliclick
 	cp cliclick /usr/local/bin/
 
 clean:
-	@rm -vf ActionClassesMacro.h
-	@rm -vf *.o Actions/*.o
-	@rm -vf cliclick
+	$(RM) -v ActionClassesMacro.h
+	$(RM) -v *.o Actions/*.o
+	$(RM) -vr cliclick
