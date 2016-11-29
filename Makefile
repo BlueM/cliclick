@@ -1,6 +1,11 @@
 CC = cc 
 CFLAGS = -include cliclick_Prefix.pch -I Actions -I .
 
+all: macros cliclick
+
+macros:
+	./generate-action-classes-macro.sh
+
 cliclick: Actions/ClickAction.o \
           Actions/ColorPickerAction.o \
           Actions/DoubleclickAction.o \
@@ -26,5 +31,6 @@ install: cliclick
 	cp cliclick /usr/local/bin/
 
 clean:
-	@rm -vf *.o Actions/*.o
-	@rm -vf cliclick
+	$(RM) -v ActionClassesMacro.h
+	$(RM) -v *.o Actions/*.o
+	$(RM) -vr cliclick
