@@ -85,5 +85,8 @@ typedef enum {
 -(void)performActionWithData:(NSString *)data
                       inMode:(unsigned)mode;
 
+-(void)postHumanizedMouseEventsOfType:(CGEventType)eventType
+                                  toX:(float)endX
+                                  toY:(float)endY;
 
 @end

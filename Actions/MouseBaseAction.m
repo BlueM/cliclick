@@ -27,6 +27,9 @@
  */
 
 #import "MouseBaseAction.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <math.h>
 
 @implementation MouseBaseAction
 
@@ -86,17 +89,18 @@
     NSString *shortcut = [[self class] commandShortcut];
     NSString *verboseLoc;
 
+    CGEventRef ourEvent        = CGEventCreate(NULL);
+    CGPoint    currentLocation = CGEventGetLocation(ourEvent);
+    CFRelease(ourEvent);
+
     if ([data isEqualToString:@""]) {
         [NSException raise:@"InvalidCommandException"
                     format:@"Missing argument to command “%@”: Expected two coordinates (separated by a comma) or “.”. Examples: “%@:123,456” or “%@:.”",
                            shortcut, shortcut, shortcut];
     } else if ([data isEqualToString:@"."]) {
-        // Click at current location
-        CGEventRef ourEvent = CGEventCreate(NULL);
-        CGPoint    ourLoc   = CGEventGetLocation(ourEvent);
-        CFRelease(ourEvent);
-        p.x = (int)ourLoc.x;
-        p.y = (int)ourLoc.y;
+        // Use current location
+        p.x = (int)currentLocation.x;
+        p.y = (int)currentLocation.y;
         verboseLoc = @"current location";
     } else {
         NSArray *coords = [data componentsSeparatedByString:@","];
@@ -124,12 +128,65 @@
         return;
     }
 
-    // Move
-    CGEventRef move = CGEventCreateMouseEvent(NULL, kCGEventMouseMoved, CGPointMake(p.x, p.y), kCGMouseButtonLeft); // kCGMouseButtonLeft is ignored
-    CGEventPost(kCGHIDEventTap, move);
-    CFRelease(move);
-    
+    [self postHumanizedMouseEventsOfType:kCGEventMouseMoved toX:(float)p.x toY:(float)p.y];
+
     [self performActionAtPoint:p];
+}
+
+-(void)postHumanizedMouseEventsOfType:(CGEventType)eventType
+                                  toX:(float)endX
+                                  toY:(float)endY {
+
+    CGEventRef ourEvent        = CGEventCreate(NULL);
+    CGPoint    currentLocation = CGEventGetLocation(ourEvent);
+    CFRelease(ourEvent);
+    float startX = currentLocation.x;
+    float startY = currentLocation.y;
+    float distance = [self distanceBetweenPoint:currentLocation andPoint:NSMakePoint(endX, endY)];
+    
+    unsigned steps = ((int)distance * 2) + 1;
+
+    DLog(@"Distance: %f / Steps: %i", distance, steps);
+    float xDiff = (endX - startX);
+    float yDiff = (endY - startY);
+
+    DLog(@"Move from %f/%f to %f/%f", currentLocation.x, currentLocation.y, endX, endY);
+    DLog(@"xDiff: %f, yDiff: %f", xDiff, yDiff);
+
+    float stepSize = 1.0 / (float)steps;
+
+    CGEventRef eventRef;
+    for (unsigned i = 0; i < steps; i ++) {
+        float factor = [self cubicEaseInOut:(stepSize * i)];
+        eventRef = CGEventCreateMouseEvent(NULL, eventType, CGPointMake(startX + (factor * xDiff), startY + (factor * yDiff)), 0);
+        CGEventPost(kCGHIDEventTap, eventRef);
+        usleep(220);
+    }
+    CFRelease(eventRef);
+}
+
+- (float) distanceBetweenPoint:(NSPoint)a andPoint:(NSPoint)b {
+    float dX = a.x - b.x,
+          dY = a.y - b.y;
+    return sqrt(dX * dX + dY * dY);
+}
+
+// Modeled after the piecewise cubic
+// y = (1/2)((2x)^3)       ; [0, 0.5]
+// y = (1/2)((2x-2)^3 + 2) ; [0.5, 1]
+//
+// Source: AHEasing, License: WTFPL
+//
+// Expects the [whatever action] to be split up into small steps represented
+// by a float from 0 (start) to 1 (end). Method is to be called with the float
+// and returns an "eased float" for it.
+-(float)cubicEaseInOut:(float)p {
+    if (p < 0.5) {
+        return 4 * p * p * p;
+    } else {
+        float f = ((2 * p) - 2);
+        return 0.5 * f * f * f + 1;
+    }
 }
 
 @end
