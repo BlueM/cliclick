@@ -413,7 +413,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DDEBUG=1";
 				PREBINDING = NO;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -428,7 +428,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CFLAGS = "";
 				PREBINDING = NO;
-				SDKROOT = macosx10.7;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
