@@ -7,7 +7,6 @@ macros:
 	./generate-action-classes-macro.sh
 
 cliclick: Actions/ClickAction.o \
-          Actions/RightClickAction.o \
           Actions/ColorPickerAction.o \
           Actions/DoubleclickAction.o \
           Actions/DragDownAction.o \
