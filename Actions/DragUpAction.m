@@ -55,14 +55,14 @@
     CGEventPost(kCGHIDEventTap, leftDragged);
     CFRelease(leftDragged);
 
-    usleep(200000); // Some target applications require this to recognize the drop
+    usleep(300000); // Some target applications require this to recognize the drop
     
     // Left button up
     CGEventRef leftUp = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseUp, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
     CGEventPost(kCGHIDEventTap, leftUp);
     CFRelease(leftUp);
 
-    usleep(800000); // This delay should usually prevent that a subsequent "wait" command is necessary
+    usleep(1200000); // This delay should usually prevent that a subsequent "wait" command is necessary
 }
 
 @end
