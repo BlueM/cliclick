@@ -29,7 +29,7 @@ cliclick: Actions/ClickAction.o \
 	gcc -o cliclick $^ -framework Cocoa -framework Carbon
 
 install: macros cliclick
-	cp cliclick /tmp
+	cp cliclick /usr/local/bin/
 
 clean:
 	$(RM) -v ActionClassesMacro.h
