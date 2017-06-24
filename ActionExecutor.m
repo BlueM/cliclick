@@ -40,8 +40,8 @@
     struct timespec waitingtime;
     waitingtime.tv_sec = 0;
     
-    if (milliseconds < 30) {
-        milliseconds = 30;
+    if (milliseconds < 100) {
+        milliseconds = 100;
     }
 
     if (milliseconds > 999) {
