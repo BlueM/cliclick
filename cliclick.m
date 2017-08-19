@@ -230,7 +230,7 @@ void help() {
     "            The default (and minimum) value for -w is 20.\n"
     "  -V        Show cliclick version number and release date\n"
     "  -o        Open version history in a browser\n"
-    "  -d        Send a donation\n"
+    "  -n        Send a donation\n"
     "\n"
     "COMMANDS\n"
     "To use cliclick, you pass an arbitrary number of commands as arguments. A command consists of a "
