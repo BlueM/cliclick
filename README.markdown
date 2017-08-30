@@ -36,7 +36,7 @@ To get a quick first impression, this is what you will get when you invoke `clic
                 The default (and minimum) value for -w is 20.
       -V        Show cliclick version number and release date
       -o        Open version history in a browser
-      -d        Send a donation
+      -n        Send a donation
 
     COMMANDS
     To use cliclick, you pass an arbitrary number of commands as arguments. A command consists of a command identifier (a string that tells cliclick what kind of action to perform) and usually one or more arguments to the command, which are separated from the command identifier with a colon. Example: “c:123,456” is the command for clicking (the “c” is the command identifier for clicking) at the position with x coordinate 123 and y coordinate 456. See below for a list of all commands and the arguments they expect.
