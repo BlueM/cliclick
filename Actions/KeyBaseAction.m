@@ -59,7 +59,8 @@
 #pragma mark - ActionProtocol
 
 -(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode {
+                      inMode:(unsigned)mode
+            withEasingFactor:(unsigned)easing {
 
     NSString *shortcut = [[self class] commandShortcut];
 

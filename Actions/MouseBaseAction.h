@@ -83,10 +83,12 @@ typedef enum {
  @param mode One of: MODE_VERBOSE, MODE_TEST, MODE_REGULAR
  */
 -(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode;
+                      inMode:(unsigned)mode
+            withEasingFactor:(unsigned)easing;
 
 -(void)postHumanizedMouseEventsOfType:(CGEventType)eventType
                                   toX:(float)endX
-                                  toY:(float)endY;
+                                  toY:(float)endY
+                     withEasingFactor:(unsigned)easing;
 
 @end

@@ -42,7 +42,8 @@
 }
 
 -(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode {
+                      inMode:(unsigned)mode
+            withEasingFactor:(unsigned)easing {
 
     unsigned milliseconds = abs([data intValue]);
     NSString *shortcut = [[self class] commandShortcut];

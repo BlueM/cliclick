@@ -33,7 +33,8 @@
 
 +(void)executeActions:(NSArray *)actions
                inMode:(unsigned)mode
-  waitingMilliseconds:(int)milliseconds {
+  waitingMilliseconds:(int)milliseconds
+     withEasingFactor:(unsigned)easing {
 
     NSDictionary *shortcuts = [self shortcuts];
 
@@ -74,9 +75,13 @@
         }
         
         if ([action count] > 1) {
-            [actionClassInstance performActionWithData:[[action subarrayWithRange:NSMakeRange(1, [action count] - 1)] componentsJoinedByString:@":"] inMode:mode];
+            [actionClassInstance performActionWithData:[[action subarrayWithRange:NSMakeRange(1, [action count] - 1)] componentsJoinedByString:@":"]
+                                                inMode:mode
+                                      withEasingFactor:easing];
         } else {
-            [actionClassInstance performActionWithData:@"" inMode:mode];
+            [actionClassInstance performActionWithData:@""
+                                                inMode:mode
+                                      withEasingFactor:easing];
         }
         
         [actionClassInstance release];

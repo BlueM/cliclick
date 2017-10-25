@@ -38,6 +38,7 @@
 +(NSString *)commandDescription;
 
 -(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode;
+                      inMode:(unsigned)mode
+            withEasingFactor:(unsigned)easing;
 
 @end

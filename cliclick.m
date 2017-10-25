@@ -43,6 +43,7 @@ int main (int argc, const char * argv[]) {
 
     NSString *modeOption = nil;
     NSString *filepath = nil;
+    unsigned easing = 0;
     NSArray *actions;
     CGPoint initialMousePosition;
     BOOL restoreOption = NO;
@@ -50,7 +51,7 @@ int main (int argc, const char * argv[]) {
     unsigned waitTime = 0;
     int optchar;
 
-    while ((optchar = getopt(argc, (char * const *)argv, "hoVm:rf:w:n")) != -1) {
+    while ((optchar = getopt(argc, (char * const *)argv, "horVne:f:m:w:")) != -1) {
         switch(optchar) {
             case 'h':
                 help();
@@ -71,6 +72,9 @@ int main (int argc, const char * argv[]) {
             case 'm':
                 modeOption = [NSString stringWithCString:optarg encoding:NSASCIIStringEncoding];
                 break;
+            case 'e':
+                easing = atoi(optarg) > 0 ? atoi(optarg) : 0;
+                break;
             case 'f':
                 filepath = [NSString stringWithCString:optarg encoding:NSASCIIStringEncoding];
                 break;
@@ -78,7 +82,7 @@ int main (int argc, const char * argv[]) {
                 restoreOption = YES;
                 break;
             case 'w':
-                waitTime = atoi(optarg);
+                waitTime = atoi(optarg) > 0 ? atoi(optarg) : 0;
                 break;
             default:
                 [pool release];
@@ -134,7 +138,8 @@ int main (int argc, const char * argv[]) {
     @try {
         [ActionExecutor executeActions:actions
                                 inMode:mode
-                   waitingMilliseconds:waitTime];
+                   waitingMilliseconds:waitTime
+                      withEasingFactor:easing];
     }
     @catch (NSException *e) {
         printf("%s\n", [[e reason] UTF8String]);
@@ -149,7 +154,9 @@ int main (int argc, const char * argv[]) {
         NSString *positionString = [NSString stringWithFormat:@"%d,%d", (int)initialMousePosition.x, (int)initialMousePosition.y];
         id moveAction = [[MoveAction alloc] init];
         [moveAction performActionWithData:positionString
-                                   inMode:MODE_REGULAR];
+                                   inMode:MODE_REGULAR
+                         withEasingFactor:(unsigned)easing];
+
         [moveAction release];
         if (mode == MODE_VERBOSE) {
             printf("Restoring mouse position to %s\n", [positionString UTF8String]);
@@ -209,28 +216,35 @@ void help() {
     "  cliclick [-m <mode>] [-f <file>] [-w <num>] [-r] command1 [command2] [...]\n"
     "\n"
     "OPTIONS\n"
-    "  -r        Restore initial mouse location when finished\n"
-    "  -m <mode> The mode can be either “verbose” (cliclick will print a\n"
-    "            description of each action to stdout just before it is\n"
-    "            performed) or “test” (cliclick will only print the\n"
-    "            description, but not perform the action)\n"
-    "  -f <file> Instead of passing commands as arguments, you may instead\n"
-    "            specify a file from which cliclick will read the commands\n"
-    "            (or stdin, when - is given as filename).\n"
-    "            Each line in the file is expected to contain a command\n"
-    "            in the same format/syntax as commands given as arguments\n"
-    "            at the shell. Additionally, lines starting with the hash\n"
-    "            character # are regarded as comments, i.e.: ignored. Leading\n"
-    "            and trailing whitespace is ignored, too.\n"
-    "  -w <num>  Wait the given number of milliseconds after each event.\n"
-    "            If you find that you use the “wait” command too often,\n"
-    "            using -w could make things easier. Please note that “wait”\n"
-    "            is not affected by -w. This means that invoking\n"
-    "            “cliclick -w 200 wait:500” will wait for 700 milliseconds.\n"
-    "            The default (and minimum) value for -w is 20.\n"
-    "  -V        Show cliclick version number and release date\n"
-    "  -o        Open version history in a browser\n"
-    "  -n        Send a donation\n"
+    "  -r          Restore initial mouse location when finished\n"
+    "  -m <mode>   The mode can be either “verbose” (cliclick will print a\n"
+    "              description of each action to stdout just before it is\n"
+    "              performed) or “test” (cliclick will only print the\n"
+    "              description, but not perform the action)\n"
+    "  -e <easing> Set an easing factor for mouse movements. The higher this\n"
+    "              value is (default: 0), the more will mouse movements seem\n"
+    "              “natural” or “human-like”, which also implies: will be slower.\n"
+    "              If this option is used, the actual speed will also depend\n"
+    "              on the distance between the start and the end position, i.e.\n"
+    "              the time needed for moving will be higher if the distance\n"
+    "              is larger.\n"
+    "  -f <file>   Instead of passing commands as arguments, you may instead\n"
+    "              specify a file from which cliclick will read the commands\n"
+    "              (or stdin, when - is given as filename).\n"
+    "              Each line in the file is expected to contain a command\n"
+    "              in the same format/syntax as commands given as arguments\n"
+    "              at the shell. Additionally, lines starting with the hash\n"
+    "              character # are regarded as comments, i.e.: ignored. Leading\n"
+    "              and trailing whitespace is ignored, too.\n"
+    "  -w <num>    Wait the given number of milliseconds after each event.\n"
+    "              If you find that you use the “wait” command too often,\n"
+    "              using -w could make things easier. Please note that “wait”\n"
+    "              is not affected by -w. This means that invoking\n"
+    "              “cliclick -w 200 wait:500” will wait for 700 milliseconds.\n"
+    "              The default (and minimum) value for -w is 20.\n"
+    "  -V          Show cliclick version number and release date\n"
+    "  -o          Open version history in a browser\n"
+    "  -n          Send a donation\n"
     "\n"
     "COMMANDS\n"
     "To use cliclick, you pass an arbitrary number of commands as arguments. A command consists of a "

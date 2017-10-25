@@ -84,6 +84,7 @@
  @param mode One of: MODE_VERBOSE, MODE_TEST, MODE_REGULAR
  */
 -(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode;
+                      inMode:(unsigned)mode
+            withEasingFactor:(unsigned)easing;
 
 @end

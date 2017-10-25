@@ -56,7 +56,9 @@
     CFRelease(e2);
 }
 
--(void)performActionWithData:(NSString *)data inMode:(unsigned)mode {
+-(void)performActionWithData:(NSString *)data
+                      inMode:(unsigned)mode
+            withEasingFactor:(unsigned)easing {
 
     struct timespec waitingtime;
     waitingtime.tv_sec = 0;

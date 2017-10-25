@@ -83,7 +83,8 @@
 #pragma mark - ActionProtocol
 
 -(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode {
+                      inMode:(unsigned)mode
+            withEasingFactor:(unsigned)easing {
     
     CGPoint p;
     NSString *shortcut = [[self class] commandShortcut];
@@ -128,14 +129,20 @@
         return;
     }
 
-    [self postHumanizedMouseEventsOfType:kCGEventMouseMoved toX:(float)p.x toY:(float)p.y];
+    if (easing) {
+        [self postHumanizedMouseEventsOfType:kCGEventMouseMoved
+                                         toX:(float)p.x
+                                         toY:(float)p.y
+                            withEasingFactor:easing];
+    }
 
     [self performActionAtPoint:p];
 }
 
 -(void)postHumanizedMouseEventsOfType:(CGEventType)eventType
                                   toX:(float)endX
-                                  toY:(float)endY {
+                                  toY:(float)endY
+                     withEasingFactor:(unsigned)easing {
 
     CGEventRef ourEvent        = CGEventCreate(NULL);
     CGPoint    currentLocation = CGEventGetLocation(ourEvent);
@@ -144,7 +151,7 @@
     float startY = currentLocation.y;
     float distance = [self distanceBetweenPoint:currentLocation andPoint:NSMakePoint(endX, endY)];
     
-    unsigned steps = ((int)distance * 2) + 1;
+    unsigned steps = ((int)(distance * easing / 100)) + 1;
 
     DLog(@"Distance: %f / Steps: %i", distance, steps);
     float xDiff = (endX - startX);
@@ -177,7 +184,7 @@
 //
 // Source: AHEasing, License: WTFPL
 //
-// Expects the [whatever action] to be split up into small steps represented
+// Expects [whatever action] to be split up into small steps represented
 // by a float from 0 (start) to 1 (end). Method is to be called with the float
 // and returns an "eased float" for it.
 -(float)cubicEaseInOut:(float)p {

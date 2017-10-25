@@ -35,7 +35,8 @@
 
 +(void)executeActions:(NSArray *)actions
                inMode:(unsigned)mode
-  waitingMilliseconds:(int)milliseconds;
+  waitingMilliseconds:(int)milliseconds
+     withEasingFactor:(unsigned)easing;
 
 +(NSDictionary *)shortcuts;
 
