@@ -84,7 +84,7 @@
 
     NSArray *keyCodeInfos = [ki keyCodesForString:data];
 
-    unsigned j, jj;
+    NSUInteger j, jj;
     
     for (j = 0, jj = [keyCodeInfos count]; j < jj; ++j) {
 
