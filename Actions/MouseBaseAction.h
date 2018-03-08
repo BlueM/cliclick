@@ -86,9 +86,8 @@ typedef enum {
                       inMode:(unsigned)mode
             withEasingFactor:(unsigned)easing;
 
--(void)postHumanizedMouseEventsOfType:(CGEventType)eventType
-                                  toX:(float)endX
-                                  toY:(float)endY
-                     withEasingFactor:(unsigned)easing;
+-(void)postHumanizedMouseEventsWithEasingFactor:(unsigned)easing
+                                            toX:(float)endX
+                                            toY:(float)endY;
 
 @end

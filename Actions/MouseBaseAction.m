@@ -130,21 +130,25 @@
     }
 
     if (easing) {
-        [self postHumanizedMouseEventsOfType:kCGEventMouseMoved
-                                         toX:(float)p.x
-                                         toY:(float)p.y
-                            withEasingFactor:easing];
+        // Eased move
+        [self postHumanizedMouseEventsWithEasingFactor:easing
+                                                   toX:(float)p.x
+                                                   toY:(float)p.y];
+    } else {
+        // Move
+        CGEventRef move = CGEventCreateMouseEvent(NULL, kCGEventMouseMoved, CGPointMake(p.x, p.y), kCGMouseButtonLeft); // kCGMouseButtonLeft is ignored
+        CGEventPost(kCGHIDEventTap, move);
+        CFRelease(move);
     }
 
     [self performActionAtPoint:p];
 }
 
--(void)postHumanizedMouseEventsOfType:(CGEventType)eventType
-                                  toX:(float)endX
-                                  toY:(float)endY
-                     withEasingFactor:(unsigned)easing {
+-(void)postHumanizedMouseEventsWithEasingFactor:(unsigned)easing
+                                            toX:(float)endX
+                                            toY:(float)endY {
 
-    CGEventRef ourEvent        = CGEventCreate(NULL);
+    CGEventRef ourEvent = CGEventCreate(NULL);
     CGPoint    currentLocation = CGEventGetLocation(ourEvent);
     CFRelease(ourEvent);
     float startX = currentLocation.x;
@@ -165,7 +169,7 @@
     CGEventRef eventRef;
     for (unsigned i = 0; i < steps; i ++) {
         float factor = [self cubicEaseInOut:(stepSize * i)];
-        eventRef = CGEventCreateMouseEvent(NULL, eventType, CGPointMake(startX + (factor * xDiff), startY + (factor * yDiff)), 0);
+        eventRef = CGEventCreateMouseEvent(NULL, kCGEventMouseMoved, CGPointMake(startX + (factor * xDiff), startY + (factor * yDiff)), 0);
         CGEventPost(kCGHIDEventTap, eventRef);
         usleep(220);
     }
