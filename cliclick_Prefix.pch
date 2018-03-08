@@ -7,10 +7,6 @@
     #import <Cocoa/Cocoa.h>
 #endif
 
-// Compatibiliy macros for 10.6, which knows neither @123 nor @{@"Foo": @"Bar"}
-#define N(x) [NSNumber numberWithInt: x]
-#define D(...) [NSDictionary dictionaryWithObjectsAndKeys:__VA_ARGS__, nil]
-
 // Version or branch
 #define VERSION     @"4.0b2"
 
