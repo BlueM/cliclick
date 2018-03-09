@@ -45,8 +45,7 @@
 }
 
 -(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode
-            withEasingFactor:(unsigned)easing {
+                 withOptions:(struct ExecutionOptions)options {
 
     NSString *shortcut = [[self class] commandShortcut];
 
@@ -72,7 +71,7 @@
             }
         }
 
-        if (MODE_TEST == mode) {
+        if (MODE_TEST == options.mode) {
             if ([data isEqualToString:@"."]) {
                 printf("Print color at current mouse position\n");
             } else {

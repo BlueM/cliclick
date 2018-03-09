@@ -42,8 +42,7 @@
 }
 
 -(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode
-            withEasingFactor:(unsigned)easing {
+                 withOptions:(struct ExecutionOptions)options {
 
     unsigned milliseconds = abs([data intValue]);
     NSString *shortcut = [[self class] commandShortcut];
@@ -54,11 +53,11 @@
                     format:@"Invalid or missing argument to command “%@”: Expected number of milliseconds. Example: “%@:50”", shortcut, shortcut];
     }
     
-    if (MODE_REGULAR != mode) {
+    if (MODE_REGULAR != options.mode) {
         printf("Wait %i milliseconds\n", milliseconds);
     }
     
-    if (MODE_TEST == mode) {
+    if (MODE_TEST == options.mode) {
         return;
     }
     

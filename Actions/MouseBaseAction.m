@@ -83,8 +83,7 @@
 #pragma mark - ActionProtocol
 
 -(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode
-            withEasingFactor:(unsigned)easing {
+                 withOptions:(struct ExecutionOptions)options {
     
     CGPoint p;
     NSString *shortcut = [[self class] commandShortcut];
@@ -121,17 +120,17 @@
         verboseLoc = [NSString stringWithFormat:@"%@,%@", [coords objectAtIndex:0], [coords objectAtIndex:1]];
     }
     
-    if (MODE_REGULAR != mode) {
+    if (MODE_REGULAR != options.mode) {
         printf("%s\n", [[self actionDescriptionString:verboseLoc] UTF8String]);
     }
     
-    if (MODE_TEST == mode) {
+    if (MODE_TEST == options.mode) {
         return;
     }
 
-    if (easing) {
+    if (options.easing) {
         // Eased move
-        [self postHumanizedMouseEventsWithEasingFactor:easing
+        [self postHumanizedMouseEventsWithEasingFactor:options.easing
                                                    toX:(float)p.x
                                                    toY:(float)p.y];
     } else {

@@ -36,7 +36,6 @@
 +(NSString *)commandShortcut;
 
 -(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode
-            withEasingFactor:(unsigned)easing;
+                 withOptions:(struct ExecutionOptions)options;
 
 @end

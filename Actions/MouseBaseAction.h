@@ -68,7 +68,7 @@ typedef enum {
 /**
  Performs the mouse-related action an inheriting command provides
  
- This method is called as last step of method performActionWithData:inMode: It should only perform the action, not print a description when in MODE_VERBOSE mode, as this is done by performActionWithData:inMode:
+ This method is called as last step of method performActionWithData:withOptions: It should only perform the action, not print a description when in MODE_VERBOSE mode, as this is done by performActionWithData:withOptions:
  
  @note This method will only be invoked when in MODE_REGULAR or MODE_VERBOSE mode.
  */
@@ -80,11 +80,10 @@ typedef enum {
  Depending on the mode argument, this can be the action, printing a description of the action to STDOUT or both. This implementation performs the preparatory steps such as validating arguments, calculating the mouse position etc., but leaves performing the action to subclasses, whose performActionAtPoint: method it eventually invokes.
 
  @param data Part of the argument remaining after stripping the leading command identifier
- @param mode One of: MODE_VERBOSE, MODE_TEST, MODE_REGULAR
+ @param options
  */
 -(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode
-            withEasingFactor:(unsigned)easing;
+                 withOptions:(struct ExecutionOptions)options;
 
 -(void)postHumanizedMouseEventsWithEasingFactor:(unsigned)easing
                                             toX:(float)endX

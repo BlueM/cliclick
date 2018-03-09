@@ -32,6 +32,7 @@
 #import <Cocoa/Cocoa.h>
 #import "ActionExecutor.h"
 #import "MoveAction.h"
+#import "ExecutionOptions.h"
 
 void error();
 void help();
@@ -41,14 +42,14 @@ int main (int argc, const char * argv[]) {
 
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 
+    struct ExecutionOptions executionOptions;
+    executionOptions.easing = 0;
+    executionOptions.waitTime = 0;
     NSString *modeOption = nil;
     NSString *filepath = nil;
-    unsigned easing = 0;
     NSArray *actions;
     CGPoint initialMousePosition;
     BOOL restoreOption = NO;
-    unsigned mode;
-    unsigned waitTime = 0;
     int optchar;
 
     while ((optchar = getopt(argc, (char * const *)argv, "horVne:f:m:w:")) != -1) {
@@ -73,7 +74,7 @@ int main (int argc, const char * argv[]) {
                 modeOption = [NSString stringWithCString:optarg encoding:NSASCIIStringEncoding];
                 break;
             case 'e':
-                easing = atoi(optarg) > 0 ? atoi(optarg) : 0;
+                executionOptions.easing = atoi(optarg) > 0 ? atoi(optarg) : 0;
                 break;
             case 'f':
                 filepath = [NSString stringWithCString:optarg encoding:NSASCIIStringEncoding];
@@ -82,7 +83,7 @@ int main (int argc, const char * argv[]) {
                 restoreOption = YES;
                 break;
             case 'w':
-                waitTime = atoi(optarg) > 0 ? atoi(optarg) : 0;
+                executionOptions.waitTime = atoi(optarg) > 0 ? atoi(optarg) : 0;
                 break;
             default:
                 [pool release];
@@ -91,11 +92,11 @@ int main (int argc, const char * argv[]) {
     }
 
     if ([modeOption isEqualToString:@"verbose"]) {
-        mode = MODE_VERBOSE;
+        executionOptions.mode = MODE_VERBOSE;
     } else if ([modeOption isEqualToString:@"test"]) {
-        mode = MODE_TEST;
+        executionOptions.mode = MODE_TEST;
     } else if (!modeOption) {
-        mode = MODE_REGULAR;
+        executionOptions.mode = MODE_REGULAR;
     } else {
         printf("Only “verbose” or “test” are valid values for the -m argument\n");
         [pool release];
@@ -113,7 +114,7 @@ int main (int argc, const char * argv[]) {
         return EXIT_FAILURE;
     }
 
-    if (mode == MODE_TEST) {
+    if (executionOptions.mode == MODE_TEST) {
         printf("Running in test mode. These command(s) would be executed:\n");
     }
 
@@ -136,10 +137,7 @@ int main (int argc, const char * argv[]) {
     }
 
     @try {
-        [ActionExecutor executeActions:actions
-                                inMode:mode
-                   waitingMilliseconds:waitTime
-                      withEasingFactor:easing];
+        [ActionExecutor executeActions:actions withOptions:executionOptions];
     }
     @catch (NSException *e) {
         printf("%s\n", [[e reason] UTF8String]);
@@ -154,13 +152,8 @@ int main (int argc, const char * argv[]) {
         NSString *positionString = [NSString stringWithFormat:@"%d,%d", (int)initialMousePosition.x, (int)initialMousePosition.y];
         id moveAction = [[MoveAction alloc] init];
         [moveAction performActionWithData:positionString
-                                   inMode:MODE_REGULAR
-                         withEasingFactor:(unsigned)easing];
-
+                              withOptions:executionOptions];
         [moveAction release];
-        if (mode == MODE_VERBOSE) {
-            printf("Restoring mouse position to %s\n", [positionString UTF8String]);
-        }
     }
 
     [pool release];

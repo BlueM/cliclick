@@ -57,8 +57,7 @@
 }
 
 -(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode
-            withEasingFactor:(unsigned)easing {
+                 withOptions:(struct ExecutionOptions)options {
 
     struct timespec waitingtime;
     waitingtime.tv_sec = 0;
@@ -72,9 +71,9 @@
          shortcut, shortcut, shortcut];
     }
 
-    if (MODE_REGULAR != mode) {
+    if (MODE_REGULAR != options.mode) {
         printf("Type: “%s”\n", [data UTF8String]);
-        if (MODE_TEST == mode) {
+        if (MODE_TEST == options.mode) {
             return;
         }
     }

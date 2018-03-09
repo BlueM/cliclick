@@ -27,6 +27,7 @@
  */
 
 #import "KeyBaseAction.h"
+#import "ExecutionOptions.h"
 
 @implementation KeyBaseAction
 
@@ -59,8 +60,7 @@
 #pragma mark - ActionProtocol
 
 -(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode
-            withEasingFactor:(unsigned)easing {
+                 withOptions:(struct ExecutionOptions)options {
 
     NSString *shortcut = [[self class] commandShortcut];
 
@@ -92,12 +92,12 @@
     for (i = 0; i < count; i++) {
         unsigned code = [[keycodes objectForKey:[keys objectAtIndex:i]] intValue];
 
-        if (MODE_REGULAR != mode) {
+        if (MODE_REGULAR != options.mode) {
             NSString *description = [self actionDescriptionString:[keys objectAtIndex:i]];
             printf("%s\n", [description UTF8String]);
         }
 
-        if (MODE_TEST != mode) {
+        if (MODE_TEST != options.mode) {
             nanosleep(&waitingtime, NULL);
             [self performActionWithKeycode:(CGKeyCode)code];
         }

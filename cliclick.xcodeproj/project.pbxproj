@@ -57,6 +57,7 @@
 		226347771B998B80003C5D71 /* ColorPickerAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorPickerAction.h; path = Actions/ColorPickerAction.h; sourceTree = "<group>"; };
 		226347781B998B80003C5D71 /* ColorPickerAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorPickerAction.m; path = Actions/ColorPickerAction.m; sourceTree = "<group>"; };
 		226A924E16AC9D7B0079165A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		22760C9420526A5000467D47 /* ExecutionOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExecutionOptions.h; sourceTree = "<group>"; };
 		228B7AA71B54179A003D6960 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = ../../../../../../System/Library/Frameworks/IOKit.framework; sourceTree = "<group>"; };
 		22998C7B197A85A300A4C691 /* TypeAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TypeAction.h; path = Actions/TypeAction.h; sourceTree = "<group>"; };
 		22998C7C197A85A300A4C691 /* TypeAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TypeAction.m; path = Actions/TypeAction.m; sourceTree = "<group>"; };
@@ -133,6 +134,7 @@
 				223F8ECA15BDF8290078A313 /* ActionExecutor.m */,
 				32A70AAB03705E1F00C91783 /* cliclick_Prefix.pch */,
 				08FB7796FE84155DC02AAC07 /* cliclick.m */,
+				22760C9420526A5000467D47 /* ExecutionOptions.h */,
 				2250A9281966D39000150E07 /* KeycodeInformer.h */,
 				2250A9291966D39000150E07 /* KeycodeInformer.m */,
 			);

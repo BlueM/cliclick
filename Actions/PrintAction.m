@@ -45,12 +45,11 @@
 }
 
 -(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode
-            withEasingFactor:(unsigned)easing {
+                 withOptions:(struct ExecutionOptions)options {
 
     if ([data isEqualToString:@""] ||
         [data isEqualToString:@"."]) {
-        if (MODE_TEST == mode) {
+        if (MODE_TEST == options.mode) {
             printf("Print the current mouse position");
         } else {
             CGEventRef ourEvent = CGEventCreate(NULL);
@@ -62,7 +61,7 @@
         return;
     }
     
-    if (MODE_TEST == mode) {
+    if (MODE_TEST == options.mode) {
         printf("Print message “%s”\n", [data UTF8String]);
     } else {
         printf("%s\n", [data UTF8String]);

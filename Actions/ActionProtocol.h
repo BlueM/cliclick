@@ -27,6 +27,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "ExecutionOptions.h"
 
 @protocol ActionProtocol
 
@@ -53,10 +54,9 @@
  Depending on the `mode` argument, this can be the action, printing a description of the action to STDOUT or both.
  
  @param data Part of the argument remaining after stripping the leading command identifier
- @param mode One of: MODE_VERBOSE, MODE_TEST, MODE_REGULAR
+ @param options
  */
 -(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode
-            withEasingFactor:(unsigned)easing;
+                 withOptions:(struct ExecutionOptions)options;
 
 @end

@@ -28,29 +28,28 @@
 
 #import "ActionExecutor.h"
 #include "ActionClassesMacro.h"
+#include "ExecutionOptions.h"
 
 @implementation ActionExecutor
 
 +(void)executeActions:(NSArray *)actions
-               inMode:(unsigned)mode
-  waitingMilliseconds:(int)milliseconds
-     withEasingFactor:(unsigned)easing {
+          withOptions:(struct ExecutionOptions)options {
 
     NSDictionary *shortcuts = [self shortcuts];
 
     struct timespec waitingtime;
     waitingtime.tv_sec = 0;
     
-    if (milliseconds < 100) {
-        milliseconds = 100;
+    if (options.waitTime < 100) {
+        options.waitTime = 100;
     }
 
-    if (milliseconds > 999) {
-        waitingtime.tv_sec = (int)floor(milliseconds / 1000);
-        waitingtime.tv_nsec = (milliseconds - waitingtime.tv_sec * 1000) * 1000000;
+    if (options.waitTime > 999) {
+        waitingtime.tv_sec = (int)floor(options.waitTime / 1000);
+        waitingtime.tv_nsec = (options.waitTime - waitingtime.tv_sec * 1000) * 1000000;
     } else {
         waitingtime.tv_sec = 0;
-        waitingtime.tv_nsec = milliseconds * 1000000;
+        waitingtime.tv_nsec = options.waitTime * 1000000;
     }
     
     NSUInteger i, count = [actions count];
@@ -76,12 +75,10 @@
         
         if ([action count] > 1) {
             [actionClassInstance performActionWithData:[[action subarrayWithRange:NSMakeRange(1, [action count] - 1)] componentsJoinedByString:@":"]
-                                                inMode:mode
-                                      withEasingFactor:easing];
+                                           withOptions:options];
         } else {
             [actionClassInstance performActionWithData:@""
-                                                inMode:mode
-                                      withEasingFactor:easing];
+                                           withOptions:options];
         }
         
         [actionClassInstance release];

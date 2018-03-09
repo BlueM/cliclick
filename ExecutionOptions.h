@@ -26,19 +26,17 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import <Foundation/Foundation.h>
-#import "ActionProtocol.h"
-#import "ExecutionOptions.h"
+#import "OutputHandler.h"
 
-@interface ActionExecutor : NSObject {
+#ifndef ExecutionOptions_h
+#define ExecutionOptions_h
 
-}
+struct ExecutionOptions {
+    unsigned mode;
+    unsigned easing;
+    unsigned waitTime;
+    OutputHandler *verbosityOutputHandler;
+    OutputHandler *commandOutputHandler;
+};
 
-+(void)executeActions:(NSArray *)actions
-          withOptions:(struct ExecutionOptions)options;
-
-+(NSDictionary *)shortcuts;
-
-+(NSArray *)actionClasses;
-
-@end
+#endif /* ExecutionOptions_h */
