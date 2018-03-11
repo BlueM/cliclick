@@ -55,7 +55,7 @@
             CGEventRef ourEvent = CGEventCreate(NULL);
             CGPoint ourLoc   = CGEventGetLocation(ourEvent);
             NSPoint point    = NSPointFromCGPoint(ourLoc);
-            [options.commandOutputHandler write:[NSString stringWithFormat: @"Current mouse position: %.0f,%.0f", point.x, point.y]];
+            [options.commandOutputHandler write:[NSString stringWithFormat: @"%.0f,%.0f", point.x, point.y]];
             CFRelease(ourEvent);
         }
         return;
