@@ -121,12 +121,12 @@ int main (int argc, const char * argv[]) {
     if (filepath) {
         NSFileManager *fm = [NSFileManager defaultManager];
         if ([filepath isEqualToString:@""]) {
-            printf("Option -f expects a path: -f /path/to/the/file\n");
+            fprintf(stderr, "Option -f expects a path: -f /path/to/the/file\n");
             [pool release];
             return EXIT_FAILURE;
         }
         if (![filepath isEqualToString:@"-"] && ![fm fileExistsAtPath:filepath]) {
-            printf("There is no file at %s\n", [filepath UTF8String]);
+            fprintf(stderr, "There is no file at %s\n", [filepath UTF8String]);
             [pool release];
             return EXIT_FAILURE;
         }
@@ -140,12 +140,9 @@ int main (int argc, const char * argv[]) {
         [ActionExecutor executeActions:actions withOptions:executionOptions];
     }
     @catch (NSException *e) {
-        printf("%s\n", [[e reason] UTF8String]);
+        fprintf(stderr, "%s\n", [[e reason] UTF8String]);
         [pool release];
         return EXIT_FAILURE;
-    }
-    @finally {
-        // Nothing to clean up
     }
 
     if (restoreOption) {
@@ -193,8 +190,8 @@ NSArray* parseCommandsFile(NSString *filepath) {
 }
 
 void error() {
-    printf("You did not pass any commands as argument to cliclick.\n");
-    printf("Call cliclick with option -h to see usage instructions.\n");
+    fprintf(stderr, "You did not pass any commands as argument to cliclick.\n");
+    fprintf(stderr, "Call cliclick with option -h to see usage instructions.\n");
 }
 
 void help() {
