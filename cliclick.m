@@ -28,10 +28,12 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 #include <time.h>
 #import <Cocoa/Cocoa.h>
 #import "ActionExecutor.h"
 #import "MoveAction.h"
+#import "OutputHandler.h"
 #import "ExecutionOptions.h"
 
 void error();
@@ -45,14 +47,17 @@ int main (int argc, const char * argv[]) {
     struct ExecutionOptions executionOptions;
     executionOptions.easing = 0;
     executionOptions.waitTime = 0;
-    NSString *modeOption = nil;
+    executionOptions.mode = MODE_REGULAR;
+    NSArray *modeOptionArg;
+    NSString *verbosityOutputDestination = nil;
     NSString *filepath = nil;
+    NSString *commandOutputDestination = nil;
     NSArray *actions;
     CGPoint initialMousePosition;
     BOOL restoreOption = NO;
     int optchar;
 
-    while ((optchar = getopt(argc, (char * const *)argv, "horVne:f:m:w:")) != -1) {
+    while ((optchar = getopt(argc, (char * const *)argv, "horVne:f:d:m:w:")) != -1) {
         switch(optchar) {
             case 'h':
                 help();
@@ -71,13 +76,28 @@ int main (int argc, const char * argv[]) {
                 [pool release];
                 return EXIT_SUCCESS;
             case 'm':
-                modeOption = [NSString stringWithCString:optarg encoding:NSASCIIStringEncoding];
+                modeOptionArg = [[NSString stringWithCString:optarg encoding:NSASCIIStringEncoding] componentsSeparatedByString:@":"];
+                if ([[modeOptionArg objectAtIndex:0] isEqualToString:@"verbose"]) {
+                    executionOptions.mode = MODE_VERBOSE;
+                } else if ([[modeOptionArg objectAtIndex:0] isEqualToString:@"test"]) {
+                    executionOptions.mode = MODE_TEST;
+                } else {
+                    fprintf(stderr, "Only “verbose” or “test” are valid values for the -m argument\n");
+                    [pool release];
+                    return EXIT_FAILURE;
+                }
+                if ([modeOptionArg count] > 1 && [modeOptionArg objectAtIndex:1]) {
+                    verbosityOutputDestination = [modeOptionArg objectAtIndex:1];
+                }
                 break;
             case 'e':
                 executionOptions.easing = atoi(optarg) > 0 ? atoi(optarg) : 0;
                 break;
             case 'f':
                 filepath = [NSString stringWithCString:optarg encoding:NSASCIIStringEncoding];
+                break;
+            case 'd':
+                commandOutputDestination = [NSString stringWithCString:optarg encoding:NSASCIIStringEncoding];
                 break;
             case 'r':
                 restoreOption = YES;
@@ -90,15 +110,13 @@ int main (int argc, const char * argv[]) {
                 return EXIT_FAILURE;
         }
     }
-
-    if ([modeOption isEqualToString:@"verbose"]) {
-        executionOptions.mode = MODE_VERBOSE;
-    } else if ([modeOption isEqualToString:@"test"]) {
-        executionOptions.mode = MODE_TEST;
-    } else if (!modeOption) {
-        executionOptions.mode = MODE_REGULAR;
-    } else {
-        printf("Only “verbose” or “test” are valid values for the -m argument\n");
+    
+    @try {
+        executionOptions.commandOutputHandler = [[OutputHandler alloc] initWithTarget:commandOutputDestination];
+        executionOptions.verbosityOutputHandler = [[OutputHandler alloc] initWithTarget:verbosityOutputDestination];
+    }
+    @catch (NSException *e) {
+        fprintf(stderr, "%s\n", [[e reason] UTF8String]);
         [pool release];
         return EXIT_FAILURE;
     }
@@ -115,7 +133,7 @@ int main (int argc, const char * argv[]) {
     }
 
     if (executionOptions.mode == MODE_TEST) {
-        printf("Running in test mode. These command(s) would be executed:\n");
+        [executionOptions.verbosityOutputHandler write:@"Running in test mode. These command(s) would be executed:"];
     }
 
     if (filepath) {
@@ -211,6 +229,10 @@ void help() {
     "              description of each action to stdout just before it is\n"
     "              performed) or “test” (cliclick will only print the\n"
     "              description, but not perform the action)\n"
+    "  -d <target> Specify the target when using the “p” (“print”) command.\n"
+    "              Possible values are: stdout, stderr, clipboard or the path \n"
+    "              to a file (which will be overwritten if it exists).\n"
+    "              By default (if option not given), stdout is used for printing\n"
     "  -e <easing> Set an easing factor for mouse movements. The higher this\n"
     "              value is (default: 0), the more will mouse movements seem\n"
     "              “natural” or “human-like”, which also implies: will be slower.\n"

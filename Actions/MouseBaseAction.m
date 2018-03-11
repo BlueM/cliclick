@@ -121,7 +121,7 @@
     }
     
     if (MODE_REGULAR != options.mode) {
-        printf("%s\n", [[self actionDescriptionString:verboseLoc] UTF8String]);
+        [options.verbosityOutputHandler write:[self actionDescriptionString:verboseLoc]];
     }
     
     if (MODE_TEST == options.mode) {
@@ -155,14 +155,8 @@
     float distance = [self distanceBetweenPoint:currentLocation andPoint:NSMakePoint(endX, endY)];
     
     unsigned steps = ((int)(distance * easing / 100)) + 1;
-
-    DLog(@"Distance: %f / Steps: %i", distance, steps);
     float xDiff = (endX - startX);
     float yDiff = (endY - startY);
-
-    DLog(@"Move from %f/%f to %f/%f", currentLocation.x, currentLocation.y, endX, endY);
-    DLog(@"xDiff: %f, yDiff: %f", xDiff, yDiff);
-
     float stepSize = 1.0 / (float)steps;
 
     CGEventRef eventRef;

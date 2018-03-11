@@ -73,9 +73,9 @@
 
         if (MODE_TEST == options.mode) {
             if ([data isEqualToString:@"."]) {
-                printf("Print color at current mouse position\n");
+                [options.verbosityOutputHandler write:@"Print color at current mouse position"];
             } else {
-                printf("Print color at location %i,%i\n", [[coords objectAtIndex:0] intValue], [[coords objectAtIndex:1] intValue]);
+                [options.verbosityOutputHandler write:[NSString stringWithFormat:@"Print color at location %i,%i\n", [[coords objectAtIndex:0] intValue], [[coords objectAtIndex:1] intValue]]];
             }
         } else {
             CGPoint p;
@@ -89,7 +89,7 @@
             NSColor *color = [bitmap colorAtX:0 y:0];
             [bitmap release];
 
-            printf("%d %d %d\n", (int)(color.redComponent*255), (int)(color.greenComponent*255), (int)(color.blueComponent*255));
+            [options.commandOutputHandler write:[NSString stringWithFormat:@"%d %d %d\n", (int)(color.redComponent*255), (int)(color.greenComponent*255), (int)(color.blueComponent*255)]];
         }
     }
 

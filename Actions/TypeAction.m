@@ -72,7 +72,7 @@
     }
 
     if (MODE_REGULAR != options.mode) {
-        printf("Type: “%s”\n", [data UTF8String]);
+        [options.verbosityOutputHandler write:[NSString stringWithFormat:@"Type: “%@”", data]];
         if (MODE_TEST == options.mode) {
             return;
         }

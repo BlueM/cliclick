@@ -50,21 +50,21 @@
     if ([data isEqualToString:@""] ||
         [data isEqualToString:@"."]) {
         if (MODE_TEST == options.mode) {
-            printf("Print the current mouse position");
+            [options.verbosityOutputHandler write:@"Print the current mouse position"];
         } else {
             CGEventRef ourEvent = CGEventCreate(NULL);
-            CGPoint    ourLoc   = CGEventGetLocation(ourEvent);
-            NSPoint    point    = NSPointFromCGPoint(ourLoc);
-            printf("Current mouse position: %.0f,%.0f\n", point.x, point.y);
+            CGPoint ourLoc   = CGEventGetLocation(ourEvent);
+            NSPoint point    = NSPointFromCGPoint(ourLoc);
+            [options.commandOutputHandler write:[NSString stringWithFormat: @"Current mouse position: %.0f,%.0f", point.x, point.y]];
             CFRelease(ourEvent);
         }
         return;
     }
     
     if (MODE_TEST == options.mode) {
-        printf("Print message “%s”\n", [data UTF8String]);
+        [options.verbosityOutputHandler write:[NSString stringWithFormat: @"Print message “%@”", data]];
     } else {
-        printf("%s\n", [data UTF8String]);
+        [options.commandOutputHandler write:data];
     }
 }
 

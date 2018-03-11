@@ -25,6 +25,7 @@ cliclick: Actions/ClickAction.o \
           Actions/WaitAction.o \
           ActionExecutor.o \
           KeycodeInformer.o \
+          OutputHandler.o \
           cliclick.o
 	gcc -o cliclick $^ -framework Cocoa -framework Carbon
 

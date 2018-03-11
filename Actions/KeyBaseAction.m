@@ -93,8 +93,7 @@
         unsigned code = [[keycodes objectForKey:[keys objectAtIndex:i]] intValue];
 
         if (MODE_REGULAR != options.mode) {
-            NSString *description = [self actionDescriptionString:[keys objectAtIndex:i]];
-            printf("%s\n", [description UTF8String]);
+            [options.verbosityOutputHandler write:[self actionDescriptionString:[keys objectAtIndex:i]]];
         }
 
         if (MODE_TEST != options.mode) {
