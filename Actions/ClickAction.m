@@ -27,6 +27,7 @@
  */
 
 #import "ClickAction.h"
+#include <unistd.h>
 
 @implementation ClickAction
 
@@ -56,6 +57,8 @@
     CGEventPost(kCGHIDEventTap, leftDown);
     CFRelease(leftDown);
 
+    usleep(15000); // Improve reliability
+    
     // Left button up
     CGEventRef leftUp = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseUp, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
     CGEventPost(kCGHIDEventTap, leftUp);

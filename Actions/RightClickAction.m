@@ -27,6 +27,7 @@
  */
 
 #import "RightClickAction.h"
+#include <unistd.h>
 
 @implementation RightClickAction
 
@@ -55,6 +56,8 @@
     CGEventRef rightDown = CGEventCreateMouseEvent(NULL, kCGEventRightMouseDown, CGPointMake(p.x, p.y), kCGMouseButtonRight);
     CGEventPost(kCGHIDEventTap, rightDown);
     CFRelease(rightDown);
+
+    usleep(15000); // Improve reliability
 
     // Right button up
     CGEventRef rightUp = CGEventCreateMouseEvent(NULL, kCGEventRightMouseUp, CGPointMake(p.x, p.y), kCGMouseButtonRight);
