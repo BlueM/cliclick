@@ -135,12 +135,16 @@
                                                    toY:(float)p.y];
     } else {
         // Move
-        CGEventRef move = CGEventCreateMouseEvent(NULL, kCGEventMouseMoved, CGPointMake(p.x, p.y), kCGMouseButtonLeft); // kCGMouseButtonLeft is ignored
+        CGEventRef move = CGEventCreateMouseEvent(NULL, [self getMoveEventConstant], CGPointMake(p.x, p.y), kCGMouseButtonLeft); // kCGMouseButtonLeft is ignored
         CGEventPost(kCGHIDEventTap, move);
         CFRelease(move);
     }
 
     [self performActionAtPoint:p];
+}
+
+-(uint32_t)getMoveEventConstant {
+    return kCGEventMouseMoved;
 }
 
 -(void)postHumanizedMouseEventsWithEasingFactor:(unsigned)easing
@@ -150,6 +154,7 @@
     CGEventRef ourEvent = CGEventCreate(NULL);
     CGPoint    currentLocation = CGEventGetLocation(ourEvent);
     CFRelease(ourEvent);
+    uint32_t eventConstant = [self getMoveEventConstant];
     float startX = currentLocation.x;
     float startY = currentLocation.y;
     float distance = [self distanceBetweenPoint:currentLocation andPoint:NSMakePoint(endX, endY)];
@@ -162,7 +167,7 @@
     CGEventRef eventRef;
     for (unsigned i = 0; i < steps; i ++) {
         float factor = [self cubicEaseInOut:(stepSize * i)];
-        eventRef = CGEventCreateMouseEvent(NULL, kCGEventMouseMoved, CGPointMake(startX + (factor * xDiff), startY + (factor * yDiff)), 0);
+        eventRef = CGEventCreateMouseEvent(NULL, eventConstant, CGPointMake(startX + (factor * xDiff), startY + (factor * yDiff)), 0);
         CGEventPost(kCGHIDEventTap, eventRef);
         usleep(220);
     }

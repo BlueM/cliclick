@@ -89,4 +89,6 @@ typedef enum {
                                             toX:(float)endX
                                             toY:(float)endY;
 
+-(uint32_t)getMoveEventConstant;
+
 @end
