@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007-2015, Carsten Blüm <carsten@bluem.net>
+ * Copyright (c) 2007-2018, Carsten Blüm <carsten@bluem.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,12 +34,12 @@
 
 }
 
-+(NSString *)commandShortcut;
++ (NSString *)commandShortcut;
 
-+(NSString *)commandDescription;
++ (NSString *)commandDescription;
 
--(NSString *)actionDescriptionString:(NSString *)locationDescription;
+- (NSString *)actionDescriptionString:(NSString *)locationDescription;
 
--(void)performActionAtPoint:(CGPoint) p;
+- (void)performActionAtPoint:(CGPoint) p;
 
 @end

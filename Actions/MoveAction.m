@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007-2015, Carsten Blüm <carsten@bluem.net>
+ * Copyright (c) 2007-2018, Carsten Blüm <carsten@bluem.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,11 +32,11 @@
 
 #pragma mark - ActionProtocol
 
-+(NSString *)commandShortcut {
++ (NSString *)commandShortcut {
     return @"m";
 }
 
-+(NSString *)commandDescription {
++ (NSString *)commandDescription {
     return @"  m:x,y   Will MOVE the mouse to the point with the given coordinates.\n"
     "          Example: “m:12,34” will move the mouse to the point with\n"
     "          x coordinate 12 and y coordinate 34.";
@@ -44,12 +44,12 @@
 
 #pragma mark - MouseBaseAction
 
--(NSString *)actionDescriptionString:(NSString *)locationDescription {
+- (NSString *)actionDescriptionString:(NSString *)locationDescription {
     return [NSString stringWithFormat:@"Move to %@", locationDescription];
 }
 
--(void)performActionAtPoint:(CGPoint) p {
-    // Simply does nothing. Moving is done by the parent.    
+- (void)performActionAtPoint:(CGPoint) p {
+    // Simply does nothing. Moving is done by the parent.
 }
 
 @end

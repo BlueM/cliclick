@@ -7,33 +7,29 @@
     #import <Cocoa/Cocoa.h>
 #endif
 
-// Compatibiliy macros for 10.6, which knows neither @123 nor @{@"Foo": @"Bar"}
-#define N(x) [NSNumber numberWithInt: x]
-#define D(...) [NSDictionary dictionaryWithObjectsAndKeys:__VA_ARGS__, nil]
-
 // Version or branch
-#define VERSION     @"3.3"
+#define VERSION @"4.0"
 
 // Date as m/d/Y
-#define RELEASEDATE @"11/12/2016"
+#define RELEASEDATE @"2018-03-24"
 
 #define MODE_REGULAR 0
 #define MODE_VERBOSE 1
-#define MODE_TEST    2
+#define MODE_TEST 2
 
-#define MODIFIER_SHIFT              32
-#define MODIFIER_ALT                64
-#define MODIFIER_SHIFT_ALT          (MODIFIER_SHIFT | MODIFIER_ALT)
-#define NSNUMBER_MODIFIER_SHIFT     [NSNumber numberWithInt:MODIFIER_SHIFT]
-#define NSNUMBER_MODIFIER_ALT       [NSNumber numberWithInt:MODIFIER_ALT]
+#define MODIFIER_SHIFT 32
+#define MODIFIER_ALT 64
+#define MODIFIER_SHIFT_ALT (MODIFIER_SHIFT | MODIFIER_ALT)
+#define NSNUMBER_MODIFIER_SHIFT [NSNumber numberWithInt:MODIFIER_SHIFT]
+#define NSNUMBER_MODIFIER_ALT [NSNumber numberWithInt:MODIFIER_ALT]
 #define NSNUMBER_MODIFIER_SHIFT_ALT [NSNumber numberWithInt:MODIFIER_SHIFT_ALT]
 
 #define KEYCODE_SHIFT 56
-#define KEYCODE_ALT   58
+#define KEYCODE_ALT 58
 
 #define CHARINFO_URL_TEMPLATE @"https://github.com/BlueM/cliclick/blob/%@/README-Characters.md"
-#define HISTORY_URL           @"http://www.bluem.net/jump/cliclick-versions/"
-#define DONATIONS_URL         @"http://www.bluem.net/jump/donations/"
+#define HISTORY_URL @"https://www.bluem.net/jump/cliclick-versions/"
+#define DONATIONS_URL @"https://www.bluem.net/jump/donations/"
 
 #ifdef DEBUG
     #define DLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])

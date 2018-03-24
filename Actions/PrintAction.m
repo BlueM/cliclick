@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007-2015, Carsten Blüm <carsten@bluem.net>
+ * Copyright (c) 2007-2018, Carsten Blüm <carsten@bluem.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,11 +32,11 @@
 
 #pragma mark - ActionProtocol
 
-+(NSString *)commandShortcut {
++ (NSString *)commandShortcut {
     return @"p";
 }
 
-+(NSString *)commandDescription {
++ (NSString *)commandDescription {
     return @"  p[:str] Will PRINT the given string. If the string is “.”, the current\n"
     "          MOUSE POSITION is printed. As a convenience, you can skip the\n"
     "          string completely and just write “p” to get the current position.\n"
@@ -44,27 +44,27 @@
     "          Example: “p:'Hello world'” will print “Hello world”";
 }
 
--(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode {
+- (void)performActionWithData:(NSString *)data
+                  withOptions:(struct ExecutionOptions)options {
 
     if ([data isEqualToString:@""] ||
         [data isEqualToString:@"."]) {
-        if (MODE_TEST == mode) {
-            printf("Print the current mouse position");
+        if (MODE_TEST == options.mode) {
+            [options.verbosityOutputHandler write:@"Print the current mouse position"];
         } else {
             CGEventRef ourEvent = CGEventCreate(NULL);
-            CGPoint    ourLoc   = CGEventGetLocation(ourEvent);
-            NSPoint    point    = NSPointFromCGPoint(ourLoc);
-            printf("Current mouse position: %.0f,%.0f\n", point.x, point.y);
+            CGPoint ourLoc = CGEventGetLocation(ourEvent);
+            NSPoint point = NSPointFromCGPoint(ourLoc);
+            [options.commandOutputHandler write:[NSString stringWithFormat: @"%.0f,%.0f", point.x, point.y]];
             CFRelease(ourEvent);
         }
         return;
     }
-    
-    if (MODE_TEST == mode) {
-        printf("Print message “%s”\n", [data UTF8String]);
+
+    if (MODE_TEST == options.mode) {
+        [options.verbosityOutputHandler write:[NSString stringWithFormat: @"Print message “%@”", data]];
     } else {
-        printf("%s\n", [data UTF8String]);
+        [options.commandOutputHandler write:data];
     }
 }
 

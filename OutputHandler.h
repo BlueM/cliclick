@@ -26,34 +26,14 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "DragDownAction.h"
+#import <Foundation/Foundation.h>
 
-@implementation DragDownAction
-
-#pragma mark - ActionProtocol
-
-+ (NSString *)commandShortcut {
-    return @"dd";
+@interface OutputHandler : NSObject {
+    NSString *outputTarget;
 }
 
-+ (NSString *)commandDescription {
-    return @"  dd:x,y  Will press down to START A DRAG at the given coordinates.\n"
-    "          Example: “dd:12,34” will press down at the point with x\n"
-    "          coordinate 12 and y coordinate 34. Instead of x and y values,\n"
-    "          you may also use “.”, which means: the current position.";
-}
+- (id)initWithTarget:(NSString *)target;
 
-#pragma mark - MouseBaseAction
-
-- (NSString *)actionDescriptionString:(NSString *)locationDescription {
-    return [NSString stringWithFormat:@"Drag press down at %@", locationDescription];
-}
-
-- (void)performActionAtPoint:(CGPoint) p {
-    // Left button down, but don't release
-    CGEventRef leftDown = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDown, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
-    CGEventPost(kCGHIDEventTap, leftDown);
-    CFRelease(leftDown);
-}
+- (void)write:(NSString *)message;
 
 @end

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007-2015, Carsten Blüm <carsten@bluem.net>
+ * Copyright (c) 2007-2018, Carsten Blüm <carsten@bluem.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,17 +28,17 @@
 
 #import <Foundation/Foundation.h>
 #import "ActionProtocol.h"
+#import "ExecutionOptions.h"
 
 @interface ActionExecutor : NSObject {
 
 }
 
-+(void)executeActions:(NSArray *)actions
-               inMode:(unsigned)mode
-  waitingMilliseconds:(int)milliseconds;
++ (void)executeActions:(NSArray *)actions
+           withOptions:(struct ExecutionOptions)options;
 
-+(NSDictionary *)shortcuts;
++ (NSDictionary *)shortcuts;
 
-+(NSArray *)actionClasses;
++ (NSArray *)actionClasses;
 
 @end

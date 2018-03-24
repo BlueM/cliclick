@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007-2015, Carsten Blüm <carsten@bluem.net>
+ * Copyright (c) 2007-2018, Carsten Blüm <carsten@bluem.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,62 +28,57 @@
 
 #import <Cocoa/Cocoa.h>
 #import "ActionProtocol.h"
+#import "ExecutionOptions.h"
 
 @interface KeyBaseAction : NSObject {
 
 }
 
 /**
- Returns the keys that are supported by the command.
-
- @return An NSDictionary which has keyboard key name as dictionary keys and keyboard key codes (strings) as dictionary values.
+ * Returns the keys that are supported by the command.
+ *
+ * @return An NSDictionary which has keyboard key name as dictionary keys and keyboard key codes (strings) as dictionary values.
  */
-+(NSDictionary *)getSupportedKeycodes;
-
++ (NSDictionary *)getSupportedKeycodes;
 
 /**
- Returns the list of keys supported by the command
- 
- @param indent String to use as indentation string at the beginning of each line
-
- @return Newline-separated string
+ * Returns the list of keys supported by the command
+ *
+ * @param indent String to use as indentation string at the beginning of each line
+ *
+ * @return Newline-separated string
  */
-+(NSString *)getSupportedKeysIndentedWith:(NSString *)indent;
-
++ (NSString *)getSupportedKeysIndentedWith:(NSString *)indent;
 
 /**
- Returns a string describing the action performed be the command
- 
- @param keyName Name of the key
- 
- @return Human-readable phrase such as @@"Press blahblah key"
- 
- @note This method must be overwritten by subclasses
+ * Returns a string describing the action performed be the command
+ *
+ * @param keyName Name of the key
+ * @return Human-readable phrase such as @@"Press blahblah key"
+ * @note This method must be overwritten by subclasses
  */
--(NSString *)actionDescriptionString:(NSString *)keyName;
-
+- (NSString *)actionDescriptionString:(NSString *)keyName;
 
 /**
- Performs the command's action
-
- @param code The key code
- 
- @note This method must be overwritten by subclasses
+ * Performs the command's action
+ *
+ * @param code The key code
+ *
+ * @note This method must be overwritten by subclasses
  */
--(void)performActionWithKeycode:(CGKeyCode)code;
-
+- (void)performActionWithKeycode:(CGKeyCode)code;
 
 #pragma mark - ActionProtocol
 
 /**
- Performs the action
-
- Depending on the `mode` argument, this can be the action, printing a description of the action to STDOUT or both.
-
- @param data Part of the argument remaining after stripping the leading command identifier
- @param mode One of: MODE_VERBOSE, MODE_TEST, MODE_REGULAR
+ * Performs the action
+ *
+ * Depending on the `mode` argument, this can be the action, printing a description of the action to STDOUT or both.
+ *
+ * @param data Part of the argument remaining after stripping the leading command identifier
+ * @param options
  */
--(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode;
+- (void)performActionWithData:(NSString *)data
+                  withOptions:(struct ExecutionOptions)options;
 
 @end

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007-2015, Carsten Blüm <carsten@bluem.net>
+ * Copyright (c) 2007-2018, Carsten Blüm <carsten@bluem.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,9 +33,9 @@
 
 }
 
-+(NSString *)commandShortcut;
++ (NSString *)commandShortcut;
 
--(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode;
+- (void)performActionWithData:(NSString *)data
+                  withOptions:(struct ExecutionOptions)options;
 
 @end

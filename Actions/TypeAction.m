@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007-2015, Carsten Blüm <carsten@bluem.net>
+ * Copyright (c) 2007-2018, Carsten Blüm <carsten@bluem.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,21 +32,20 @@
 
 #pragma mark - ActionProtocol
 
-+(NSString *)commandShortcut {
++ (NSString *)commandShortcut {
     return @"t";
 }
 
-+(NSString *)commandDescription {
++ (NSString *)commandDescription {
     return @"  t:text  Will TYPE the given TEXT into the frontmost application.\n"
             "          If the text includes space(s), it must be enclosed in quotes.\n"
             "          Example: “type:Test” will type “Test” \n"
             "          Example: “type:'Viele Grüße'” will type “Viele Grüße”";
 }
 
-
 #pragma mark - KeyBaseAction
 
--(void)performActionWithKeycode:(CGKeyCode)code {
+- (void)performActionWithKeycode:(CGKeyCode)code {
     CGEventRef e1 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, true);
     CGEventPost(kCGSessionEventTap, e1);
     CFRelease(e1);
@@ -56,7 +55,8 @@
     CFRelease(e2);
 }
 
--(void)performActionWithData:(NSString *)data inMode:(unsigned)mode {
+- (void)performActionWithData:(NSString *)data
+                  withOptions:(struct ExecutionOptions)options {
 
     struct timespec waitingtime;
     waitingtime.tv_sec = 0;
@@ -70,9 +70,9 @@
          shortcut, shortcut, shortcut];
     }
 
-    if (MODE_REGULAR != mode) {
-        printf("Type: “%s”\n", [data UTF8String]);
-        if (MODE_TEST == mode) {
+    if (MODE_REGULAR != options.mode) {
+        [options.verbosityOutputHandler write:[NSString stringWithFormat:@"Type: “%@”", data]];
+        if (MODE_TEST == options.mode) {
             return;
         }
     }
@@ -83,7 +83,7 @@
     NSArray *keyCodeInfos = [ki keyCodesForString:data];
 
     NSUInteger j, jj;
-    
+
     for (j = 0, jj = [keyCodeInfos count]; j < jj; ++j) {
 
         NSArray *keyCodeInfo = [keyCodeInfos objectAtIndex:j];

@@ -12,6 +12,7 @@
 		2250A92A1966D39000150E07 /* KeycodeInformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2250A9291966D39000150E07 /* KeycodeInformer.m */; };
 		226347791B998B80003C5D71 /* ColorPickerAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 226347781B998B80003C5D71 /* ColorPickerAction.m */; };
 		226A924F16AC9D7B0079165A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226A924E16AC9D7B0079165A /* Cocoa.framework */; };
+		22760C932052632600467D47 /* OutputHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 22760C922052632600467D47 /* OutputHandler.m */; };
 		228B7AA81B54179A003D6960 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228B7AA71B54179A003D6960 /* IOKit.framework */; };
 		22998C7D197A85A300A4C691 /* TypeAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 22998C7C197A85A300A4C691 /* TypeAction.m */; };
 		22B4D99C15D6CB0A002C8478 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B4D99B15D6CB0A002C8478 /* Carbon.framework */; };
@@ -57,6 +58,9 @@
 		226347771B998B80003C5D71 /* ColorPickerAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColorPickerAction.h; path = Actions/ColorPickerAction.h; sourceTree = "<group>"; };
 		226347781B998B80003C5D71 /* ColorPickerAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColorPickerAction.m; path = Actions/ColorPickerAction.m; sourceTree = "<group>"; };
 		226A924E16AC9D7B0079165A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		22760C912052632600467D47 /* OutputHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputHandler.h; sourceTree = "<group>"; };
+		22760C922052632600467D47 /* OutputHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutputHandler.m; sourceTree = "<group>"; };
+		22760C9420526A5000467D47 /* ExecutionOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExecutionOptions.h; sourceTree = "<group>"; };
 		228B7AA71B54179A003D6960 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = ../../../../../../System/Library/Frameworks/IOKit.framework; sourceTree = "<group>"; };
 		22998C7B197A85A300A4C691 /* TypeAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TypeAction.h; path = Actions/TypeAction.h; sourceTree = "<group>"; };
 		22998C7C197A85A300A4C691 /* TypeAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TypeAction.m; path = Actions/TypeAction.m; sourceTree = "<group>"; };
@@ -133,8 +137,11 @@
 				223F8ECA15BDF8290078A313 /* ActionExecutor.m */,
 				32A70AAB03705E1F00C91783 /* cliclick_Prefix.pch */,
 				08FB7796FE84155DC02AAC07 /* cliclick.m */,
+				22760C9420526A5000467D47 /* ExecutionOptions.h */,
 				2250A9281966D39000150E07 /* KeycodeInformer.h */,
 				2250A9291966D39000150E07 /* KeycodeInformer.m */,
+				22760C912052632600467D47 /* OutputHandler.h */,
+				22760C922052632600467D47 /* OutputHandler.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -263,7 +270,7 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0920;
 			};
 			buildConfigurationList = 1DEB927808733DD40010E9CD /* Build configuration list for PBXProject "cliclick" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -354,6 +361,7 @@
 				22E5626F16BA589200CD5D86 /* KeyUpAction.m in Sources */,
 				22C68A501825A8960083A722 /* KeyDownUpBaseAction.m in Sources */,
 				22E5627016BA589200CD5D86 /* MouseBaseAction.m in Sources */,
+				22760C932052632600467D47 /* OutputHandler.m in Sources */,
 				2250A92A1966D39000150E07 /* KeycodeInformer.m in Sources */,
 				22E5627116BA589200CD5D86 /* MoveAction.m in Sources */,
 				22E5627216BA589200CD5D86 /* PrintAction.m in Sources */,
@@ -408,12 +416,18 @@
 			buildSettings = {
 				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -441,12 +455,18 @@
 			buildSettings = {
 				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

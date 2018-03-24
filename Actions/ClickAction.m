@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007-2015, Carsten Blüm <carsten@bluem.net>
+ * Copyright (c) 2007-2018, Carsten Blüm <carsten@bluem.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,16 +27,17 @@
  */
 
 #import "ClickAction.h"
+#include <unistd.h>
 
 @implementation ClickAction
 
 #pragma mark - ActionProtocol
 
-+(NSString *)commandShortcut {
++ (NSString *)commandShortcut {
     return @"c";
 }
 
-+(NSString *)commandDescription {
++ (NSString *)commandDescription {
     return @"  c:x,y   Will CLICK at the point with the given coordinates.\n"
     "          Example: “c:12,34” will click at the point with x coordinate\n"
     "          12 and y coordinate 34. Instead of x and y values, you may\n"
@@ -46,15 +47,17 @@
 
 #pragma mark - MouseBaseAction
 
--(NSString *)actionDescriptionString:(NSString *)locationDescription {
+- (NSString *)actionDescriptionString:(NSString *)locationDescription {
     return [NSString stringWithFormat:@"Click at %@", locationDescription];
 }
 
--(void)performActionAtPoint:(CGPoint) p {
+- (void)performActionAtPoint:(CGPoint) p {
     // Left button down
     CGEventRef leftDown = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDown, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
     CGEventPost(kCGHIDEventTap, leftDown);
     CFRelease(leftDown);
+
+    usleep(15000); // Improve reliability
 
     // Left button up
     CGEventRef leftUp = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseUp, CGPointMake(p.x, p.y), kCGMouseButtonLeft);

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007-2015, Carsten Blüm <carsten@bluem.net>
+ * Copyright (c) 2007-2018, Carsten Blüm <carsten@bluem.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,11 +33,11 @@
 
 #pragma mark - ActionProtocol
 
-+(NSString *)commandShortcut {
++ (NSString *)commandShortcut {
     return @"du";
 }
 
-+(NSString *)commandDescription {
++ (NSString *)commandDescription {
     return @"  du:x,y  Will release to END A DRAG at the given coordinates.\n"
     "          Example: “du:112,134” will release at the point with x\n"
     "          coordinate 112 and y coordinate 134.";
@@ -45,24 +45,19 @@
 
 #pragma mark - MouseBaseAction
 
--(NSString *)actionDescriptionString:(NSString *)locationDescription {
+- (NSString *)actionDescriptionString:(NSString *)locationDescription {
     return [NSString stringWithFormat:@"Drag release at %@", locationDescription];
 }
 
--(void)performActionAtPoint:(CGPoint) p {
-    // Left button dragged
-    CGEventRef leftDragged = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDragged, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
-    CGEventPost(kCGHIDEventTap, leftDragged);
-    CFRelease(leftDragged);
-
-    usleep(200000); // Some target applications require this to recognize the drop
-    
+- (void)performActionAtPoint:(CGPoint) p {
     // Left button up
     CGEventRef leftUp = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseUp, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
     CGEventPost(kCGHIDEventTap, leftUp);
     CFRelease(leftUp);
+}
 
-    usleep(800000); // This delay should usually prevent that a subsequent "wait" command is necessary
+- (uint32_t)getMoveEventConstant {
+    return kCGEventLeftMouseDragged;
 }
 
 @end

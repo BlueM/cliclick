@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007-2015, Carsten Blüm <carsten@bluem.net>
+ * Copyright (c) 2007-2018, Carsten Blüm <carsten@bluem.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,16 +27,17 @@
  */
 
 #import "KeyBaseAction.h"
+#import "ExecutionOptions.h"
 
 @implementation KeyBaseAction
 
-+(NSDictionary *)getSupportedKeycodes {
++ (NSDictionary *)getSupportedKeycodes {
     [NSException raise:@"InvalidCommandException"
                 format:@"To be implemented by subclasses"];
     return [NSDictionary dictionaryWithObject:@"Will never be reached, but makes Xcode happy" forKey:@"Foo"];
 }
 
-+(NSString *)getSupportedKeysIndentedWith:(NSString *)indent {
++ (NSString *)getSupportedKeysIndentedWith:(NSString *)indent {
 
     NSArray *sortedkeyNames = [[[[self class] getSupportedKeycodes] allKeys] sortedArrayUsingComparator:^(id obj1, id obj2) {
         return [obj1 compare:obj2 options:NSNumericSearch];
@@ -45,27 +46,31 @@
     return [NSString stringWithFormat:@"%@%@", indent, [sortedkeyNames componentsJoinedByString:[@"\n" stringByAppendingString:indent]]];
 }
 
--(NSString *)actionDescriptionString:(NSString *)keyName {
+- (NSString *)actionDescriptionString:(NSString *)keyName {
     [NSException raise:@"InvalidCommandException"
                 format:@"To be implemented by subclasses"];
     return @"Will never be reached, but makes Xcode happy";
 }
 
--(void)performActionWithKeycode:(CGKeyCode)code {
+- (void)performActionWithKeycode:(CGKeyCode)code {
     [NSException raise:@"InvalidCommandException"
                 format:@"To be implemented by subclasses"];
 }
 
 #pragma mark - ActionProtocol
 
--(void)performActionWithData:(NSString *)data
-                      inMode:(unsigned)mode {
+- (void)performActionWithData:(NSString *)data
+                  withOptions:(struct ExecutionOptions)options {
 
     NSString *shortcut = [[self class] commandShortcut];
 
+    // Wait before executing the key event(s). If this is the very first action, use a longer
+    // delay (as it could be observed that an initial keyboard was swallowed, cf. issue #39),
+    // otherwise only a short delay.
     struct timespec waitingtime;
     waitingtime.tv_sec = 0;
-    waitingtime.tv_nsec = 5 * 1000000; // Milliseconds
+    waitingtime.tv_nsec = (options.isFirstAction ? 65 : 20) * 1000000; // Milliseconds
+    nanosleep(&waitingtime, NULL);
 
     if ([data isEqualToString:@""]) {
         [NSException raise:@"InvalidCommandException"
@@ -74,8 +79,8 @@
     }
 
     NSDictionary *keycodes = [[self class] getSupportedKeycodes];
-    NSArray *keys          = [data componentsSeparatedByString:@","];
-    NSUInteger i, count    = [keys count];
+    NSArray *keys = [data componentsSeparatedByString:@","];
+    NSUInteger i, count = [keys count];
 
     // First, validate the key names
     for (i = 0; i < count; i++) {
@@ -86,18 +91,16 @@
                                keyname, shortcut, [[self class] getSupportedKeysIndentedWith:@"  - "]];
         }
     }
-    
+
     // Then, perform whatever action is requested
     for (i = 0; i < count; i++) {
         unsigned code = [[keycodes objectForKey:[keys objectAtIndex:i]] intValue];
 
-        if (MODE_REGULAR != mode) {
-            NSString *description = [self actionDescriptionString:[keys objectAtIndex:i]];
-            printf("%s\n", [description UTF8String]);
+        if (MODE_REGULAR != options.mode) {
+            [options.verbosityOutputHandler write:[self actionDescriptionString:[keys objectAtIndex:i]]];
         }
 
-        if (MODE_TEST != mode) {
-            nanosleep(&waitingtime, NULL);
+        if (MODE_TEST != options.mode) {
             [self performActionWithKeycode:(CGKeyCode)code];
         }
     }
