@@ -55,7 +55,7 @@
     NSUInteger i, count = [actions count];
     for (i = 0; i < count; i++) {
         NSArray *action = [[actions objectAtIndex:i] componentsSeparatedByString:@":"];
-        NSString *actionClass = [shortcuts objectForKey:[action objectAtIndex:0]];
+        Class actionClass = [shortcuts objectForKey:[action objectAtIndex:0]];
         if (nil == actionClass) {
             if ([[action objectAtIndex:0] isEqualToString:[actions objectAtIndex:i]]) {
                 [NSException raise:@"InvalidCommandException"
@@ -66,7 +66,7 @@
             }
         }
         
-        id actionClassInstance = [[NSClassFromString(actionClass) alloc] init];
+        id actionClassInstance = [[actionClass alloc] init];
         
         if (![actionClassInstance conformsToProtocol:@protocol(ActionProtocol)]) {
             [NSException raise:@"InvalidCommandException"
@@ -105,12 +105,13 @@
     
     for (i = 0, ii = [actionClasses count]; i < ii; i++) {
         NSString *classname = [actionClasses objectAtIndex:i];
-        NSString *shortcut = [NSClassFromString(classname) commandShortcut];
+        Class actionClass = NSClassFromString(classname);
+        NSString *shortcut = [actionClass commandShortcut];
         if (nil != [shortcuts objectForKey:shortcut]) {
             [NSException raise:@"ShortcutConflictException"
                         format:@"Shortcut “%@” is used by more than one action class", shortcut];
         }        
-        [shortcuts setObject:classname forKey:shortcut];
+        [shortcuts setObject:actionClass forKey:shortcut];
     }
     
     return [[shortcuts retain] autorelease];
