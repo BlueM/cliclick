@@ -152,7 +152,7 @@
                                             toY:(float)endY {
 
     CGEventRef ourEvent = CGEventCreate(NULL);
-    CGPoint    currentLocation = CGEventGetLocation(ourEvent);
+    CGPoint currentLocation = CGEventGetLocation(ourEvent);
     CFRelease(ourEvent);
     uint32_t eventConstant = [self getMoveEventConstant];
     float startX = currentLocation.x;
@@ -164,14 +164,13 @@
     float yDiff = (endY - startY);
     float stepSize = 1.0 / (float)steps;
 
-    CGEventRef eventRef;
     for (unsigned i = 0; i < steps; i ++) {
         float factor = [self cubicEaseInOut:(stepSize * i)];
-        eventRef = CGEventCreateMouseEvent(NULL, eventConstant, CGPointMake(startX + (factor * xDiff), startY + (factor * yDiff)), 0);
+        CGEventRef eventRef = CGEventCreateMouseEvent(NULL, eventConstant, CGPointMake(startX + (factor * xDiff), startY + (factor * yDiff)), 0);
         CGEventPost(kCGHIDEventTap, eventRef);
+        CFRelease(eventRef);
         usleep(220);
     }
-    CFRelease(eventRef);
 }
 
 - (float) distanceBetweenPoint:(NSPoint)a andPoint:(NSPoint)b {

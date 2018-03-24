@@ -36,8 +36,9 @@
 #import "OutputHandler.h"
 #import "ExecutionOptions.h"
 
-void error();
-void help();
+void error(void);
+void help(void);
+
 NSArray* parseCommandsFile(NSString *filepath);
 
 int main (int argc, const char * argv[]) {
@@ -184,6 +185,7 @@ NSArray* parseCommandsFile(NSString *filepath) {
         NSData *stdinData = [[NSFileHandle fileHandleWithStandardInput] readDataToEndOfFile];
         NSString *configString = [[NSString alloc] initWithData:stdinData encoding:NSUTF8StringEncoding];
         lines = [configString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+        [configString release];
     } else {
         // File
         NSString *fileContents = [NSString stringWithContentsOfFile:filepath
