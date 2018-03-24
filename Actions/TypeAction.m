@@ -32,21 +32,20 @@
 
 #pragma mark - ActionProtocol
 
-+(NSString *)commandShortcut {
++ (NSString *)commandShortcut {
     return @"t";
 }
 
-+(NSString *)commandDescription {
++ (NSString *)commandDescription {
     return @"  t:text  Will TYPE the given TEXT into the frontmost application.\n"
             "          If the text includes space(s), it must be enclosed in quotes.\n"
             "          Example: “type:Test” will type “Test” \n"
             "          Example: “type:'Viele Grüße'” will type “Viele Grüße”";
 }
 
-
 #pragma mark - KeyBaseAction
 
--(void)performActionWithKeycode:(CGKeyCode)code {
+- (void)performActionWithKeycode:(CGKeyCode)code {
     CGEventRef e1 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, true);
     CGEventPost(kCGSessionEventTap, e1);
     CFRelease(e1);
@@ -56,8 +55,8 @@
     CFRelease(e2);
 }
 
--(void)performActionWithData:(NSString *)data
-                 withOptions:(struct ExecutionOptions)options {
+- (void)performActionWithData:(NSString *)data
+                  withOptions:(struct ExecutionOptions)options {
 
     struct timespec waitingtime;
     waitingtime.tv_sec = 0;
@@ -84,7 +83,7 @@
     NSArray *keyCodeInfos = [ki keyCodesForString:data];
 
     NSUInteger j, jj;
-    
+
     for (j = 0, jj = [keyCodeInfos count]; j < jj; ++j) {
 
         NSArray *keyCodeInfo = [keyCodeInfos objectAtIndex:j];

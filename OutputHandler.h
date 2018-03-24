@@ -33,6 +33,7 @@
 }
 
 - (id)initWithTarget:(NSString *)target;
+
 - (void)write:(NSString *)message;
 
 @end

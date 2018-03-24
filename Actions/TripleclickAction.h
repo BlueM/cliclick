@@ -34,10 +34,10 @@
 
 }
 
-+(NSString *)commandShortcut;
++ (NSString *)commandShortcut;
 
--(NSString *)actionDescriptionString:(NSString *)locationDescription;
+- (NSString *)actionDescriptionString:(NSString *)locationDescription;
 
--(void)performActionAtPoint:(CGPoint) p;
+- (void)performActionAtPoint:(CGPoint) p;
 
 @end

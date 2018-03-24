@@ -32,7 +32,7 @@
 
 #pragma mark - KeyBaseAction
 
-+(NSDictionary *)getSupportedKeycodes {
++ (NSDictionary *)getSupportedKeycodes {
     return [NSDictionary dictionaryWithObjectsAndKeys:
             @"59", @"ctrl",
             @"55", @"cmd",

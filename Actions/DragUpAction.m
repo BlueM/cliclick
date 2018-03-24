@@ -33,11 +33,11 @@
 
 #pragma mark - ActionProtocol
 
-+(NSString *)commandShortcut {
++ (NSString *)commandShortcut {
     return @"du";
 }
 
-+(NSString *)commandDescription {
++ (NSString *)commandDescription {
     return @"  du:x,y  Will release to END A DRAG at the given coordinates.\n"
     "          Example: “du:112,134” will release at the point with x\n"
     "          coordinate 112 and y coordinate 134.";
@@ -45,18 +45,18 @@
 
 #pragma mark - MouseBaseAction
 
--(NSString *)actionDescriptionString:(NSString *)locationDescription {
+- (NSString *)actionDescriptionString:(NSString *)locationDescription {
     return [NSString stringWithFormat:@"Drag release at %@", locationDescription];
 }
 
--(void)performActionAtPoint:(CGPoint) p {
+- (void)performActionAtPoint:(CGPoint) p {
     // Left button up
     CGEventRef leftUp = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseUp, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
     CGEventPost(kCGHIDEventTap, leftUp);
     CFRelease(leftUp);
 }
 
--(uint32_t)getMoveEventConstant {
+- (uint32_t)getMoveEventConstant {
     return kCGEventLeftMouseDragged;
 }
 

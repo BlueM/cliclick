@@ -31,7 +31,7 @@
 #import "KeyDownUpBaseAction.h"
 
 @interface KeyUpAction : KeyDownUpBaseAction <ActionProtocol> {
-    
+
 }
 
 @end

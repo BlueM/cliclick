@@ -32,25 +32,24 @@
 
 #pragma mark - ActionProtocol
 
-+(NSString *)commandShortcut {
++ (NSString *)commandShortcut {
     return @"dd";
 }
 
-+(NSString *)commandDescription {
++ (NSString *)commandDescription {
     return @"  dd:x,y  Will press down to START A DRAG at the given coordinates.\n"
     "          Example: “dd:12,34” will press down at the point with x\n"
     "          coordinate 12 and y coordinate 34. Instead of x and y values,\n"
     "          you may also use “.”, which means: the current position.";
 }
 
-
 #pragma mark - MouseBaseAction
 
--(NSString *)actionDescriptionString:(NSString *)locationDescription {
+- (NSString *)actionDescriptionString:(NSString *)locationDescription {
     return [NSString stringWithFormat:@"Drag press down at %@", locationDescription];
 }
 
--(void)performActionAtPoint:(CGPoint) p {
+- (void)performActionAtPoint:(CGPoint) p {
     // Left button down, but don't release
     CGEventRef leftDown = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDown, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
     CGEventPost(kCGHIDEventTap, leftDown);

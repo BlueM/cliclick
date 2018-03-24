@@ -34,8 +34,9 @@ static KeycodeInformer *sharedInstance = nil;
 
 + (id)sharedInstance {
     @synchronized(self) {
-        if(sharedInstance == nil)
+        if (sharedInstance == nil) {
             sharedInstance = [[super allocWithZone:NULL] init];
+        }
     }
     return sharedInstance;
 }
@@ -47,12 +48,12 @@ static KeycodeInformer *sharedInstance = nil;
 - (KeycodeInformer *)init {
     self = [super init];
     if (self) {
-        keyboard       = TISCopyCurrentKeyboardInputSource();
-        keyLayoutData  = TISGetInputSourceProperty(keyboard, kTISPropertyUnicodeKeyLayoutData);
+        keyboard = TISCopyCurrentKeyboardInputSource();
+        keyLayoutData = TISGetInputSourceProperty(keyboard, kTISPropertyUnicodeKeyLayoutData);
 
         if (NULL == keyLayoutData) {
             keyboard = TISCopyCurrentASCIICapableKeyboardInputSource();
-            keyLayoutData  = TISGetInputSourceProperty(keyboard, kTISPropertyUnicodeKeyLayoutData);
+            keyLayoutData = TISGetInputSourceProperty(keyboard, kTISPropertyUnicodeKeyLayoutData);
             if (NULL == keyLayoutData) {
                 [NSException raise:@"KeyboardLayoutException"
                             format:@"Sorry, cliclick cannot handle your keyboard layout, so emulating typing is not possible."];
@@ -120,9 +121,9 @@ static KeycodeInformer *sharedInstance = nil;
 
 - (NSArray *)keyCodesForString:(NSString *)string {
     NSMutableArray *keyCodes = [[NSMutableArray alloc] initWithCapacity:[string length]];
-    string                   = [[self prepareString:string] decomposedStringWithCanonicalMapping];
+    string = [[self prepareString:string] decomposedStringWithCanonicalMapping];
     NSUInteger i, ii;
-    
+
     for (i = 0, ii = [string length]; i < ii; i++) {
 
         NSRange range = [string rangeOfComposedCharacterSequenceAtIndex:i];
@@ -136,8 +137,8 @@ static KeycodeInformer *sharedInstance = nil;
             [keyCodes addObject:keyCodeInfo];
         } else {
             NSFileHandle *fh = [NSFileHandle fileHandleWithStandardError];
-            NSString    *url = [NSString stringWithFormat:CHARINFO_URL_TEMPLATE, VERSION];
-            NSString    *msg = [NSString stringWithFormat:@"Unable to get key code for %@ (see %@)\n", [string substringWithRange:range], url];
+            NSString *url = [NSString stringWithFormat:CHARINFO_URL_TEMPLATE, VERSION];
+            NSString *msg = [NSString stringWithFormat:@"Unable to get key code for %@ (see %@)\n", [string substringWithRange:range], url];
             [fh writeData:[msg dataUsingEncoding:NSUTF8StringEncoding]];
         }
     }
@@ -146,10 +147,10 @@ static KeycodeInformer *sharedInstance = nil;
 }
 
 - (NSString *)prepareString:(NSString *)string {
-    NSString *layoutName         = TISGetInputSourceProperty(keyboard, kTISPropertyLocalizedName);
+    NSString *layoutName = TISGetInputSourceProperty(keyboard, kTISPropertyLocalizedName);
     NSDictionary *replacementMap = [self getReplacementMapForKeyboardLayoutNamed:layoutName];
-    NSMutableString *tmp         = [NSMutableString stringWithString:string];
-    NSEnumerator *enumerator     = [replacementMap keyEnumerator];
+    NSMutableString *tmp = [NSMutableString stringWithString:string];
+    NSEnumerator *enumerator = [replacementMap keyEnumerator];
     NSString *key;
 
     DLog(@"Current keyboard layout: %@", layoutName);

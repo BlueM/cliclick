@@ -32,11 +32,11 @@
 
 #pragma mark - ActionProtocol
 
-+(NSString *)commandShortcut {
++ (NSString *)commandShortcut {
     return @"p";
 }
 
-+(NSString *)commandDescription {
++ (NSString *)commandDescription {
     return @"  p[:str] Will PRINT the given string. If the string is “.”, the current\n"
     "          MOUSE POSITION is printed. As a convenience, you can skip the\n"
     "          string completely and just write “p” to get the current position.\n"
@@ -44,8 +44,8 @@
     "          Example: “p:'Hello world'” will print “Hello world”";
 }
 
--(void)performActionWithData:(NSString *)data
-                 withOptions:(struct ExecutionOptions)options {
+- (void)performActionWithData:(NSString *)data
+                  withOptions:(struct ExecutionOptions)options {
 
     if ([data isEqualToString:@""] ||
         [data isEqualToString:@"."]) {
@@ -53,14 +53,14 @@
             [options.verbosityOutputHandler write:@"Print the current mouse position"];
         } else {
             CGEventRef ourEvent = CGEventCreate(NULL);
-            CGPoint ourLoc   = CGEventGetLocation(ourEvent);
-            NSPoint point    = NSPointFromCGPoint(ourLoc);
+            CGPoint ourLoc = CGEventGetLocation(ourEvent);
+            NSPoint point = NSPointFromCGPoint(ourLoc);
             [options.commandOutputHandler write:[NSString stringWithFormat: @"%.0f,%.0f", point.x, point.y]];
             CFRelease(ourEvent);
         }
         return;
     }
-    
+
     if (MODE_TEST == options.mode) {
         [options.verbosityOutputHandler write:[NSString stringWithFormat: @"Print message “%@”", data]];
     } else {

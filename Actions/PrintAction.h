@@ -33,11 +33,11 @@
 
 }
 
-+(NSString *)commandShortcut;
++ (NSString *)commandShortcut;
 
-+(NSString *)commandDescription;
++ (NSString *)commandDescription;
 
--(void)performActionWithData:(NSString *)data
-                 withOptions:(struct ExecutionOptions)options;
+- (void)performActionWithData:(NSString *)data
+                  withOptions:(struct ExecutionOptions)options;
 
 @end

@@ -31,13 +31,13 @@
 
 @implementation KeyBaseAction
 
-+(NSDictionary *)getSupportedKeycodes {
++ (NSDictionary *)getSupportedKeycodes {
     [NSException raise:@"InvalidCommandException"
                 format:@"To be implemented by subclasses"];
     return [NSDictionary dictionaryWithObject:@"Will never be reached, but makes Xcode happy" forKey:@"Foo"];
 }
 
-+(NSString *)getSupportedKeysIndentedWith:(NSString *)indent {
++ (NSString *)getSupportedKeysIndentedWith:(NSString *)indent {
 
     NSArray *sortedkeyNames = [[[[self class] getSupportedKeycodes] allKeys] sortedArrayUsingComparator:^(id obj1, id obj2) {
         return [obj1 compare:obj2 options:NSNumericSearch];
@@ -46,21 +46,21 @@
     return [NSString stringWithFormat:@"%@%@", indent, [sortedkeyNames componentsJoinedByString:[@"\n" stringByAppendingString:indent]]];
 }
 
--(NSString *)actionDescriptionString:(NSString *)keyName {
+- (NSString *)actionDescriptionString:(NSString *)keyName {
     [NSException raise:@"InvalidCommandException"
                 format:@"To be implemented by subclasses"];
     return @"Will never be reached, but makes Xcode happy";
 }
 
--(void)performActionWithKeycode:(CGKeyCode)code {
+- (void)performActionWithKeycode:(CGKeyCode)code {
     [NSException raise:@"InvalidCommandException"
                 format:@"To be implemented by subclasses"];
 }
 
 #pragma mark - ActionProtocol
 
--(void)performActionWithData:(NSString *)data
-                 withOptions:(struct ExecutionOptions)options {
+- (void)performActionWithData:(NSString *)data
+                  withOptions:(struct ExecutionOptions)options {
 
     NSString *shortcut = [[self class] commandShortcut];
 
@@ -79,8 +79,8 @@
     }
 
     NSDictionary *keycodes = [[self class] getSupportedKeycodes];
-    NSArray *keys          = [data componentsSeparatedByString:@","];
-    NSUInteger i, count    = [keys count];
+    NSArray *keys = [data componentsSeparatedByString:@","];
+    NSUInteger i, count = [keys count];
 
     // First, validate the key names
     for (i = 0; i < count; i++) {
@@ -91,7 +91,7 @@
                                keyname, shortcut, [[self class] getSupportedKeysIndentedWith:@"  - "]];
         }
     }
-    
+
     // Then, perform whatever action is requested
     for (i = 0; i < count; i++) {
         unsigned code = [[keycodes objectForKey:[keys objectAtIndex:i]] intValue];

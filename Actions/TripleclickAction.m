@@ -33,11 +33,11 @@
 
 #pragma mark - ActionProtocol
 
-+(NSString *)commandShortcut {
++ (NSString *)commandShortcut {
     return @"tc";
 }
 
-+(NSString *)commandDescription {
++ (NSString *)commandDescription {
     return @"  tc:x,y  Will TRIPLE-CLICK at the point with the given coordinates.\n"
     "          Example: “tc:12,34” will triple-click at the point with x\n"
     "          coordinate 12 and y coordinate 34. Instead of x and y values,\n"
@@ -48,16 +48,16 @@
 
 #pragma mark - MouseBaseAction
 
--(NSString *)actionDescriptionString:(NSString *)locationDescription {
+- (NSString *)actionDescriptionString:(NSString *)locationDescription {
     return [NSString stringWithFormat:@"Triple-click at %@", locationDescription];
 }
 
--(void)performActionAtPoint:(CGPoint) p {
-    
+- (void)performActionAtPoint:(CGPoint) p {
+
     // Left button down
     CGEventRef mouseEvent = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDown, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
     CGEventPost(kCGHIDEventTap, mouseEvent);
-    
+
     // Left button up
     CGEventSetType(mouseEvent, kCGEventLeftMouseUp);
     CGEventPost(kCGHIDEventTap, mouseEvent);
@@ -66,14 +66,14 @@
 
     // 2nd/3rd click
     CGEventSetIntegerValueField(mouseEvent, kCGMouseEventClickState, 3);
-    
-    CGEventSetType(mouseEvent, kCGEventLeftMouseDown);  
-    CGEventPost(kCGHIDEventTap, mouseEvent);  
-    
-    CGEventSetType(mouseEvent, kCGEventLeftMouseUp); 
-    CGEventPost(kCGHIDEventTap, mouseEvent); 
-    
-    CFRelease(mouseEvent);    
+
+    CGEventSetType(mouseEvent, kCGEventLeftMouseDown);
+    CGEventPost(kCGHIDEventTap, mouseEvent);
+
+    CGEventSetType(mouseEvent, kCGEventLeftMouseUp);
+    CGEventPost(kCGHIDEventTap, mouseEvent);
+
+    CFRelease(mouseEvent);
 }
 
 @end

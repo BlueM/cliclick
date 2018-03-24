@@ -33,11 +33,11 @@
 
 #pragma mark - ActionProtocol
 
-+(NSString *)commandShortcut {
++ (NSString *)commandShortcut {
     return @"rc";
 }
 
-+(NSString *)commandDescription {
++ (NSString *)commandDescription {
     return @"  rc:x,y  Will RIGHT-CLICK at the point with the given coordinates.\n"
     "          Example: “rc:12,34” will right-click at the point with x coordinate\n"
     "          12 and y coordinate 34. Instead of x and y values, you may\n"
@@ -47,11 +47,11 @@
 
 #pragma mark - MouseBaseAction
 
--(NSString *)actionDescriptionString:(NSString *)locationDescription {
+- (NSString *)actionDescriptionString:(NSString *)locationDescription {
     return [NSString stringWithFormat:@"Right-click at %@", locationDescription];
 }
 
--(void)performActionAtPoint:(CGPoint) p {
+- (void)performActionAtPoint:(CGPoint) p {
     // Right button down
     CGEventRef rightDown = CGEventCreateMouseEvent(NULL, kCGEventRightMouseDown, CGPointMake(p.x, p.y), kCGMouseButtonRight);
     CGEventPost(kCGHIDEventTap, rightDown);

@@ -32,11 +32,11 @@
 
 #pragma mark - ActionProtocol
 
-+(NSString *)commandShortcut {
++ (NSString *)commandShortcut {
     return @"kp";
 }
 
-+(NSString *)commandDescription {
++ (NSString *)commandDescription {
     NSString *keyList = [[self class] getSupportedKeysIndentedWith:@"            - "];
     NSString *format = @"  kp:key  Will emulate PRESSING A KEY (key down + key up). Possible keys are:\n%@\n"
                        "          Example: “kp:return” will hit the return key.";
@@ -45,7 +45,7 @@
 
 #pragma mark - KeyBaseAction
 
-+(NSDictionary *)getSupportedKeycodes {
++ (NSDictionary *)getSupportedKeycodes {
     return [NSDictionary dictionaryWithObjectsAndKeys:
             // See /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/Headers/Events.h
             @"36", @"return",
@@ -100,21 +100,21 @@
             @"76",  @"num-enter",
 
             // "NSSystemDefined" events, see list in IOKit/hidsystem/ev_keymap.h
-            [NSString stringWithFormat:@"%i", NX_KEYTYPE_MUTE],  @"mute",
-            [NSString stringWithFormat:@"%i", NX_KEYTYPE_SOUND_UP],  @"volume-up",
-            [NSString stringWithFormat:@"%i", NX_KEYTYPE_SOUND_DOWN],  @"volume-down",
-            [NSString stringWithFormat:@"%i", NX_KEYTYPE_BRIGHTNESS_UP],  @"brightness-up",
-            [NSString stringWithFormat:@"%i", NX_KEYTYPE_BRIGHTNESS_DOWN],  @"brightness-down",
-            [NSString stringWithFormat:@"%i", NX_KEYTYPE_PLAY],  @"play-pause",
-            [NSString stringWithFormat:@"%i", NX_KEYTYPE_PREVIOUS],  @"play-previous",
-            [NSString stringWithFormat:@"%i", NX_KEYTYPE_NEXT],  @"play-next",
-            [NSString stringWithFormat:@"%i", NX_KEYTYPE_ILLUMINATION_TOGGLE],  @"keys-light-toggle",
-            [NSString stringWithFormat:@"%i", NX_KEYTYPE_ILLUMINATION_UP],  @"keys-light-up",
-            [NSString stringWithFormat:@"%i", NX_KEYTYPE_ILLUMINATION_DOWN],  @"keys-light-down",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_MUTE], @"mute",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_SOUND_UP], @"volume-up",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_SOUND_DOWN], @"volume-down",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_BRIGHTNESS_UP], @"brightness-up",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_BRIGHTNESS_DOWN], @"brightness-down",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_PLAY], @"play-pause",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_PREVIOUS], @"play-previous",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_NEXT], @"play-next",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_ILLUMINATION_TOGGLE], @"keys-light-toggle",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_ILLUMINATION_UP], @"keys-light-up",
+            [NSString stringWithFormat:@"%i", NX_KEYTYPE_ILLUMINATION_DOWN], @"keys-light-down",
             nil];
 }
 
--(BOOL)keyCodeRequiresSystemDefinedEvent:(CGKeyCode)code {
+- (BOOL)keyCodeRequiresSystemDefinedEvent:(CGKeyCode)code {
     return code == NX_KEYTYPE_SOUND_UP ||
            code == NX_KEYTYPE_SOUND_DOWN ||
            code == NX_KEYTYPE_MUTE ||
@@ -130,7 +130,7 @@
            ;
 }
 
--(void)performActionWithKeycode:(CGKeyCode)code {
+- (void)performActionWithKeycode:(CGKeyCode)code {
 
     if ([self keyCodeRequiresSystemDefinedEvent:code]) {
         NSEvent *e1 = [NSEvent otherEventWithType:NSSystemDefined
@@ -165,7 +165,7 @@
     }
 }
 
--(NSString *)actionDescriptionString:(NSString *)keyName {
+- (NSString *)actionDescriptionString:(NSString *)keyName {
     return [NSString stringWithFormat:@"Press + release %@ key", keyName];
 }
 

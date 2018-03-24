@@ -111,7 +111,7 @@ int main (int argc, const char * argv[]) {
                 return EXIT_FAILURE;
         }
     }
-    
+
     @try {
         executionOptions.commandOutputHandler = [[OutputHandler alloc] initWithTarget:commandOutputDestination];
         executionOptions.verbosityOutputHandler = [[OutputHandler alloc] initWithTarget:verbosityOutputDestination];

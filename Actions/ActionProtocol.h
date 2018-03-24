@@ -32,31 +32,33 @@
 @protocol ActionProtocol
 
 /**
- Returns the command's shortcut.
-
- The command shortcut is the string which has to be used as command-line argument (typically followed by “:” plus some arguments) to invoke the command.
- @note The command shortcut is unique for each command.
- @return Command shortcut
+ * Returns the command's shortcut
+ *
+ * The command shortcut is the string which has to be used as command-line argument (typically followed by “:” plus some arguments) to invoke the command.
+ *
+ * @note The command shortcut has to be unique for each command.
+ * @return Command shortcut
  */
-+(NSString *)commandShortcut;
++ (NSString *)commandShortcut;
 
 /**
- Returns the command description
- 
- The command description is to be included in the help output and is formatted (i.e.: indented). It should include a description as well as at least one usage example.
- @return Command shortcut
+ * Returns the command description
+ *
+ * The command description is to be included in the help output and is formatted (i.e.: indented). It should include a description as well as at least one usage example.
+ *
+ * @return Command description
  */
-+(NSString *)commandDescription;
++ (NSString *)commandDescription;
 
 /**
- Performs the action
-
- Depending on the `mode` argument, this can be the action, printing a description of the action to STDOUT or both.
- 
- @param data Part of the argument remaining after stripping the leading command identifier
- @param options
+ * Performs the action
+ *
+ * Depending on the `mode` argument, this can be the action, printing a description of the action to STDOUT or both.
+ *
+ * @param data Part of the argument remaining after stripping the leading command identifier
+ * @param options
  */
--(void)performActionWithData:(NSString *)data
-                 withOptions:(struct ExecutionOptions)options;
+- (void)performActionWithData:(NSString *)data
+                  withOptions:(struct ExecutionOptions)options;
 
 @end

@@ -33,8 +33,8 @@
 
 @implementation MouseBaseAction
 
-+(int)getCoordinate:(NSString *)unparsedValue
-            forAxis:(CLICLICKAXIS)axis {
++ (int)getCoordinate:(NSString *)unparsedValue
+             forAxis:(CLICLICKAXIS)axis {
 
     [[self class] validateAxisValue:unparsedValue forAxis:axis];
 
@@ -42,9 +42,9 @@
         [[unparsedValue substringToIndex:1] isEqualToString:@"-"]) {
         // Relative value
         CGEventRef dummyEvent = CGEventCreate(NULL);
-        CGPoint ourLoc        = CGEventGetLocation(dummyEvent);
-        int positionDiff      = [unparsedValue intValue];
-        int currentPosition   = axis == XAXIS ? (int)ourLoc.x : (int)ourLoc.y;
+        CGPoint ourLoc = CGEventGetLocation(dummyEvent);
+        int positionDiff = [unparsedValue intValue];
+        int currentPosition = axis == XAXIS ? (int)ourLoc.x : (int)ourLoc.y;
         CFRelease(dummyEvent);
 
         return (int) currentPosition + positionDiff;
@@ -59,8 +59,8 @@
     return [unparsedValue intValue];
 }
 
-+(void)validateAxisValue:(NSString *)string
-                 forAxis:(CLICLICKAXIS)axis {
++ (void)validateAxisValue:(NSString *)string
+                  forAxis:(CLICLICKAXIS)axis {
     NSString *regex = @"^=?[+-]?\\d+$";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     if ([predicate evaluateWithObject:string] != YES) {
@@ -69,28 +69,28 @@
     }
 }
 
--(NSString *)actionDescriptionString:(NSString *)locationDescription {
+- (NSString *)actionDescriptionString:(NSString *)locationDescription {
     [NSException raise:@"InvalidCommandException"
                 format:@"To be implemented by subclasses"];
     return @"Will never be reached, but makes Xcode happy ;-)";
 }
 
--(void)performActionAtPoint:(CGPoint)p {
+- (void)performActionAtPoint:(CGPoint)p {
     [NSException raise:@"InvalidCommandException"
                 format:@"To be implemented by subclasses"];
 }
 
 #pragma mark - ActionProtocol
 
--(void)performActionWithData:(NSString *)data
+- (void)performActionWithData:(NSString *)data
                  withOptions:(struct ExecutionOptions)options {
-    
+
     CGPoint p;
     NSString *shortcut = [[self class] commandShortcut];
     NSString *verboseLoc;
 
-    CGEventRef ourEvent        = CGEventCreate(NULL);
-    CGPoint    currentLocation = CGEventGetLocation(ourEvent);
+    CGEventRef ourEvent = CGEventCreate(NULL);
+    CGPoint currentLocation = CGEventGetLocation(ourEvent);
     CFRelease(ourEvent);
 
     if ([data isEqualToString:@""]) {
@@ -104,7 +104,7 @@
         verboseLoc = @"current location";
     } else {
         NSArray *coords = [data componentsSeparatedByString:@","];
-        
+
         if ([coords count] != 2 ||
             [[coords objectAtIndex:0] isEqualToString:@""] ||
             [[coords objectAtIndex:1] isEqualToString:@""])
@@ -113,17 +113,17 @@
                         format:@"Invalid argument “%@” to command “%@”: Expected two coordinates (separated by a comma) or “.”. Examples: “%@:123,456” or “%@:.”",
                                data, shortcut, shortcut, shortcut];
         }
-        
-        p.x = [[self class] getCoordinate:[coords objectAtIndex:0] forAxis:XAXIS];        
+
+        p.x = [[self class] getCoordinate:[coords objectAtIndex:0] forAxis:XAXIS];
         p.y = [[self class] getCoordinate:[coords objectAtIndex:1] forAxis:YAXIS];
 
         verboseLoc = [NSString stringWithFormat:@"%@,%@", [coords objectAtIndex:0], [coords objectAtIndex:1]];
     }
-    
+
     if (MODE_REGULAR != options.mode) {
         [options.verbosityOutputHandler write:[self actionDescriptionString:verboseLoc]];
     }
-    
+
     if (MODE_TEST == options.mode) {
         return;
     }
@@ -143,13 +143,13 @@
     [self performActionAtPoint:p];
 }
 
--(uint32_t)getMoveEventConstant {
+- (uint32_t)getMoveEventConstant {
     return kCGEventMouseMoved;
 }
 
--(void)postHumanizedMouseEventsWithEasingFactor:(unsigned)easing
-                                            toX:(float)endX
-                                            toY:(float)endY {
+- (void)postHumanizedMouseEventsWithEasingFactor:(unsigned)easing
+                                             toX:(float)endX
+                                             toY:(float)endY {
 
     CGEventRef ourEvent = CGEventCreate(NULL);
     CGPoint currentLocation = CGEventGetLocation(ourEvent);
@@ -158,7 +158,7 @@
     float startX = currentLocation.x;
     float startY = currentLocation.y;
     float distance = [self distanceBetweenPoint:currentLocation andPoint:NSMakePoint(endX, endY)];
-    
+
     unsigned steps = ((int)(distance * easing / 100)) + 1;
     float xDiff = (endX - startX);
     float yDiff = (endY - startY);
@@ -188,7 +188,7 @@
 // Expects [whatever action] to be split up into small steps represented
 // by a float from 0 (start) to 1 (end). Method is to be called with the float
 // and returns an "eased float" for it.
--(float)cubicEaseInOut:(float)p {
+- (float)cubicEaseInOut:(float)p {
     if (p < 0.5) {
         return 4 * p * p * p;
     } else {

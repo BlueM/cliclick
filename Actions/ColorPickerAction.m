@@ -33,19 +33,19 @@
 
 #pragma mark - ActionProtocol
 
-+(NSString *)commandShortcut {
++ (NSString *)commandShortcut {
     return @"cp";
 }
 
-+(NSString *)commandDescription {
++ (NSString *)commandDescription {
     return @"  cp:str  Will PRINT THE COLOR value at the given screen location.\n"
     "          The color value is printed as three decimal 8-bit values,\n"
     "          representing, in order, red, green, and blue.\n"
     "          Example: “cp:123,456” might print “127 63 0”";
 }
 
--(void)performActionWithData:(NSString *)data
-                 withOptions:(struct ExecutionOptions)options {
+- (void)performActionWithData:(NSString *)data
+                  withOptions:(struct ExecutionOptions)options {
 
     NSString *shortcut = [[self class] commandShortcut];
 
@@ -92,7 +92,6 @@
             [options.commandOutputHandler write:[NSString stringWithFormat:@"%d %d %d\n", (int)(color.redComponent*255), (int)(color.greenComponent*255), (int)(color.blueComponent*255)]];
         }
     }
-
 }
 
 @end

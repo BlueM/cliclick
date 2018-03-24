@@ -34,11 +34,11 @@
 
 }
 
-+(void)executeActions:(NSArray *)actions
-          withOptions:(struct ExecutionOptions)options;
++ (void)executeActions:(NSArray *)actions
+           withOptions:(struct ExecutionOptions)options;
 
-+(NSDictionary *)shortcuts;
++ (NSDictionary *)shortcuts;
 
-+(NSArray *)actionClasses;
++ (NSArray *)actionClasses;
 
 @end

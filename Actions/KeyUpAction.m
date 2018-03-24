@@ -32,11 +32,11 @@
 
 #pragma mark - ActionProtocol
 
-+(NSString *)commandShortcut {
++ (NSString *)commandShortcut {
     return @"ku";
 }
 
-+(NSString *)commandDescription {
++ (NSString *)commandDescription {
     NSString *keyList = [[self class] getSupportedKeysIndentedWith:@"            - "];
     NSString *format = @"  ku:keys Will trigger a KEY UP event for a comma-separated list of\n"
                         "          modifier keys. Possible keys are:\n%@\n"
@@ -48,13 +48,13 @@
 
 #pragma mark - KeyBaseAction
 
--(void)performActionWithKeycode:(CGKeyCode)code {
+- (void)performActionWithKeycode:(CGKeyCode)code {
     CGEventRef e = CGEventCreateKeyboardEvent(NULL, code, false);
     CGEventPost(kCGSessionEventTap, e);
     CFRelease(e);
 }
 
--(NSString *)actionDescriptionString:(NSString *)keyName {
+- (NSString *)actionDescriptionString:(NSString *)keyName {
     return [NSString stringWithFormat:@"Release %@ key", keyName];
 }
 

@@ -32,14 +32,14 @@
 
 @implementation ActionExecutor
 
-+(void)executeActions:(NSArray *)actions
-          withOptions:(struct ExecutionOptions)options {
++ (void)executeActions:(NSArray *)actions
+           withOptions:(struct ExecutionOptions)options {
 
     NSDictionary *shortcuts = [self shortcuts];
 
     struct timespec waitingtime;
     waitingtime.tv_sec = 0;
-    
+
     if (options.waitTime < 100) {
         options.waitTime = 100;
     }
@@ -51,7 +51,7 @@
         waitingtime.tv_sec = 0;
         waitingtime.tv_nsec = options.waitTime * 1000000;
     }
-    
+
     NSUInteger i, count = [actions count];
     for (i = 0; i < count; i++) {
         NSArray *action = [[actions objectAtIndex:i] componentsSeparatedByString:@":"];
@@ -65,9 +65,9 @@
                             format:@"Unrecognized action shortcut “%@” in “%@”", [action objectAtIndex:0], [actions objectAtIndex:i]];
             }
         }
-        
+
         id actionClassInstance = [[actionClass alloc] init];
-        
+
         if (![actionClassInstance conformsToProtocol:@protocol(ActionProtocol)]) {
             [NSException raise:@"InvalidCommandException"
                         format:@"%@ does not conform to ActionProtocol", actionClass];
@@ -83,7 +83,7 @@
             [actionClassInstance performActionWithData:@""
                                            withOptions:options];
         }
-        
+
         [actionClassInstance release];
 
         if (!options.isLastAction) {
@@ -92,17 +92,17 @@
     }
 }
 
-+(NSArray *)actionClasses {
++ (NSArray *)actionClasses {
     NSArray *actionClasses = [NSArray arrayWithObjects:ACTION_CLASSES];
     return actionClasses;
 }
 
-+(NSDictionary *)shortcuts {
-    
++ (NSDictionary *)shortcuts {
+
     NSArray *actionClasses = [[self class] actionClasses];
     NSMutableDictionary *shortcuts = [NSMutableDictionary dictionaryWithCapacity:[actionClasses count]];
-    NSUInteger i, ii;    
-    
+    NSUInteger i, ii;
+
     for (i = 0, ii = [actionClasses count]; i < ii; i++) {
         NSString *classname = [actionClasses objectAtIndex:i];
         Class actionClass = NSClassFromString(classname);
@@ -110,10 +110,10 @@
         if (nil != [shortcuts objectForKey:shortcut]) {
             [NSException raise:@"ShortcutConflictException"
                         format:@"Shortcut “%@” is used by more than one action class", shortcut];
-        }        
+        }
         [shortcuts setObject:actionClass forKey:shortcut];
     }
-    
+
     return [[shortcuts retain] autorelease];
 }
 

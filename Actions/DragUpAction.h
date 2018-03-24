@@ -31,15 +31,15 @@
 #import "MouseBaseAction.h"
 
 @interface DragUpAction : MouseBaseAction <ActionProtocol> {
-    
+
 }
 
-+(NSString *)commandShortcut;
++ (NSString *)commandShortcut;
 
-+(NSString *)commandDescription;
++ (NSString *)commandDescription;
 
--(NSString *)actionDescriptionString:(NSString *)locationDescription;
+- (NSString *)actionDescriptionString:(NSString *)locationDescription;
 
--(void)performActionAtPoint:(CGPoint) p;
+- (void)performActionAtPoint:(CGPoint) p;
 
 @end

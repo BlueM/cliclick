@@ -32,35 +32,35 @@
 
 #pragma mark - ActionProtocol
 
-+(NSString *)commandShortcut {
++ (NSString *)commandShortcut {
     return @"w";
 }
 
-+(NSString *)commandDescription {
++ (NSString *)commandDescription {
     return @"  w:ms    Will WAIT/PAUSE for the given number of milliseconds.\n"
     "          Example: “w:500” will pause command execution for half a second";
 }
 
--(void)performActionWithData:(NSString *)data
-                 withOptions:(struct ExecutionOptions)options {
+- (void)performActionWithData:(NSString *)data
+                  withOptions:(struct ExecutionOptions)options {
 
     unsigned milliseconds = abs([data intValue]);
     NSString *shortcut = [[self class] commandShortcut];
-    
+
     if ([data isEqualToString:@""] ||
         !milliseconds) {
         [NSException raise:@"InvalidCommandException"
                     format:@"Invalid or missing argument to command “%@”: Expected number of milliseconds. Example: “%@:50”", shortcut, shortcut];
     }
-    
+
     if (MODE_REGULAR != options.mode) {
         [options.verbosityOutputHandler write:[NSString stringWithFormat:@"Wait %i milliseconds", milliseconds]];
     }
-    
+
     if (MODE_TEST == options.mode) {
         return;
     }
-    
+
     struct timespec waitingtime;
     if (milliseconds > 999) {
         waitingtime.tv_sec = (int)floor(milliseconds / 1000);
@@ -69,8 +69,8 @@
         waitingtime.tv_sec = 0;
         waitingtime.tv_nsec = milliseconds * 1000000;
     }
-    
-    nanosleep(&waitingtime, NULL);    
+
+    nanosleep(&waitingtime, NULL);
 }
 
 @end
