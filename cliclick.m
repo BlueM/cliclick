@@ -284,7 +284,7 @@ void help() {
     NSString *author = [NSString stringWithFormat:@"Version %@, released %@\n"
                         "Author: Carsten Blüm, <carsten@bluem.net>\n"
                         "List of contributors: https://github.com/BlueM/cliclick/graphs/contributors\n"
-                        "Website: www.bluem.net/jump/cliclick/\n\n",
+                        "Website: https://www.bluem.net/jump/cliclick/\n\n",
                         VERSION,
                         RELEASEDATE];
     printf("%s", [author UTF8String]);
