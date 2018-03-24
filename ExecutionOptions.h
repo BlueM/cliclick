@@ -35,6 +35,8 @@ struct ExecutionOptions {
     unsigned mode;
     unsigned easing;
     unsigned waitTime;
+    BOOL isFirstAction;
+    BOOL isLastAction;
     OutputHandler *verbosityOutputHandler;
     OutputHandler *commandOutputHandler;
 };

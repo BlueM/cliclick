@@ -64,9 +64,13 @@
 
     NSString *shortcut = [[self class] commandShortcut];
 
+    // Wait before executing the key event(s). If this is the very first action, use a longer
+    // delay (as it could be observed that an initial keyboard was swallowed, cf. issue #39),
+    // otherwise only a short delay.
     struct timespec waitingtime;
     waitingtime.tv_sec = 0;
-    waitingtime.tv_nsec = 5 * 1000000; // Milliseconds
+    waitingtime.tv_nsec = (options.isFirstAction ? 65 : 20) * 1000000; // Milliseconds
+    nanosleep(&waitingtime, NULL);
 
     if ([data isEqualToString:@""]) {
         [NSException raise:@"InvalidCommandException"
@@ -97,7 +101,6 @@
         }
 
         if (MODE_TEST != options.mode) {
-            nanosleep(&waitingtime, NULL);
             [self performActionWithKeycode:(CGKeyCode)code];
         }
     }

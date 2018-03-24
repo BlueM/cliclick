@@ -72,7 +72,10 @@
             [NSException raise:@"InvalidCommandException"
                         format:@"%@ does not conform to ActionProtocol", actionClass];
         }
-        
+
+        options.isFirstAction = i == 0;
+        options.isLastAction = i == count - 1;
+
         if ([action count] > 1) {
             [actionClassInstance performActionWithData:[[action subarrayWithRange:NSMakeRange(1, [action count] - 1)] componentsJoinedByString:@":"]
                                            withOptions:options];
@@ -83,7 +86,9 @@
         
         [actionClassInstance release];
 
-        nanosleep(&waitingtime, NULL);
+        if (!options.isLastAction) {
+            nanosleep(&waitingtime, NULL);
+        }
     }
 }
 
