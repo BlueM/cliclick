@@ -1,42 +1,53 @@
 cliclick Overview
 =========================
 
-cliclick (short for “Command Line Interface Click”) is a tool for executing mouse- and keyboard-related actions from the shell/Terminal. It is written in Objective-C and runs on OS X 10.6 or later.
+cliclick (short for “Command Line Interface Click”) is a tool for executing mouse- and keyboard-related actions from the shell/Terminal. It is written in Objective-C and runs on OS X 10.9 or later.
 
-For more information or for downloading a compiled binary, please take a look at [cliclick’s homepage](http://www.bluem.net/jump/cliclick/)
+For more information or for downloading a compiled binary, please take a look at [cliclick’s homepage](https://www.bluem.net/jump/cliclick/)
 
-Author: Carsten Blüm, Website: [www.bluem.net](http://www.bluem.net/)
+Author: Carsten Blüm, Website: [www.bluem.net](https://www.bluem.net/)
 
 Usage
 ---------
 To get a quick first impression, this is what you will get when you invoke `cliclick -h`:
 
     USAGE
-      cliclick [-m <mode>] [-f <file>] [-w <num>] [-r] command1 [command2] [...]
+      cliclick [-r] [-m <mode>] [-d <target>] [-e <num>] [-f <file>] [-w <num>] command1 [command2] [...]
 
     OPTIONS
-      -r        Restore initial mouse location when finished
-      -m <mode> The mode can be either “verbose” (cliclick will print a
-                description of each action to stdout just before it is
-                performed) or “test” (cliclick will only print the
-                description, but not perform the action)
-      -f <file> Instead of passing commands as arguments, you may instead
-                specify a file from which cliclick will read the commands
-                (or stdin, when - is given as filename).
-                Each line in the file is expected to contain a command
-                in the same format/syntax as commands given as arguments
-                at the shell. Additionally, lines starting with the hash
-                character # are regarded as comments, i.e.: ignored. Leading
-                and trailing whitespace is ignored, too.
-      -w <num>  Wait the given number of milliseconds after each event.
-                If you find that you use the “wait” command too often,
-                using -w could make things easier. Please note that “wait”
-                is not affected by -w. This means that invoking
-                “cliclick -w 200 wait:500” will wait for 700 milliseconds.
-                The default (and minimum) value for -w is 20.
-      -V        Show cliclick version number and release date
-      -o        Open version history in a browser
-      -n        Send a donation
+      -r          Restore initial mouse location when finished
+      -m <mode>   The mode can be either “verbose” (cliclick will print a
+                  description of each action to stdout just before it is
+                  performed) or “test” (cliclick will only print the
+                  description, but not perform the action)
+      -d <target> Specify the target when using the “p” (“print”) command.
+                  Possible values are: stdout, stderr, clipboard or the path 
+                  to a file (which will be overwritten if it exists).
+                  By default (if option not given), stdout is used for printing
+      -e <easing> Set an easing factor for mouse movements. The higher this
+                  value is (default: 0), the more will mouse movements seem
+                  “natural” or “human-like”, which also implies: will be slower.
+                  If this option is used, the actual speed will also depend
+                  on the distance between the start and the end position, i.e.
+                  the time needed for moving will be higher if the distance
+                  is larger.
+      -f <file>   Instead of passing commands as arguments, you may instead
+                  specify a file from which cliclick will read the commands
+                  (or stdin, when - is given as filename).
+                  Each line in the file is expected to contain a command
+                  in the same format/syntax as commands given as arguments
+                  at the shell. Additionally, lines starting with the hash
+                  character # are regarded as comments, i.e.: ignored. Leading
+                  and trailing whitespace is ignored, too.
+      -w <num>    Wait the given number of milliseconds after each event.
+                  If you find that you use the “wait” command too often,
+                  using -w could make things easier. Please note that “wait”
+                  is not affected by -w. This means that invoking
+                  “cliclick -w 200 wait:500” will wait for 700 milliseconds.
+                  The default (and minimum) value for -w is 20.
+      -V          Show cliclick version number and release date
+      -o          Open version history in a browser
+      -n          Send a donation
 
     COMMANDS
     To use cliclick, you pass an arbitrary number of commands as arguments. A command consists of a command identifier (a string that tells cliclick what kind of action to perform) and usually one or more arguments to the command, which are separated from the command identifier with a colon. Example: “c:123,456” is the command for clicking (the “c” is the command identifier for clicking) at the position with x coordinate 123 and y coordinate 456. See below for a list of all commands and the arguments they expect.
@@ -184,6 +195,7 @@ To get a quick first impression, this is what you will get when you invoke `clic
       w:ms    Will WAIT/PAUSE for the given number of milliseconds.
               Example: “w:500” will pause command execution for half a second
 
+
 Limitations
 -----------
 It is not possible to use cliclick before a user logs in, i.e.: to control the login window.
@@ -193,7 +205,7 @@ Building cliclick
 -----------------
 Either build in Xcode, as usual, or build from the shell by `cd`ing into the project directory and then invoking either `xcodebuild` or `make` (whatever you prefer). In either case, cliclick will not be installed, but you will simply get an executable called “cliclick” in the project directory which you can then move wherever you want to have it. (You can put it anywhere you like.) To install it to `/usr/local/bin`, you can also simply invoke `sudo make install`, which will do this for you.
 
-Please note that while the code will run on 10.6 (Intel or PPC) and later, Base SDK and architectures selected in the Xcode project are set to the 10.7 SDK and Intel32/64. Therefore, if you want to build for an older system, be sure to change these settings accordingly. If, on the other hand, you are on a system where only newer SDKs are available, simply change the project settings accordingly. Anything from 10.6 to 10.12 should work. If you have problems when building and get a message complaining about undefined symbols, chances are that this can be fixed by disabling “Implicitly link Objective-C Runtime Support” in the build settings.
+Please note that while the code will run on OS X 10.9 and later, Base SDK and architectures selected in the Xcode project are set to the current SDK. Therefore, if you want to build for an older system, be sure to change these settings accordingly. If you have problems when building and get a message complaining about undefined symbols, chances are that this can be fixed by disabling “Implicitly link Objective-C Runtime Support” in the build settings.
 
 Contributing
 ------------
