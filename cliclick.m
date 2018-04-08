@@ -223,7 +223,7 @@ void help() {
     "executing mouse- and keyboard-related actions from the shell/Terminal\n"
     "\n"
     "USAGE\n"
-    "  cliclick [-m <mode>] [-f <file>] [-w <num>] [-r] command1 [command2] [...]\n"
+    "  cliclick [-r] [-m <mode>] [-d <target>] [-e <num>] [-f <file>] [-w <num>] command1 [command2]\n"
     "\n"
     "OPTIONS\n"
     "  -r          Restore initial mouse location when finished\n"
