@@ -96,6 +96,13 @@
     for (i = 0; i < count; i++) {
         unsigned code = [[keycodes objectForKey:[keys objectAtIndex:i]] intValue];
 
+        if (i > 0) {
+            // If non-first key, wait a little, as otherwise, the event will be swallowed
+            waitingtime.tv_sec = 0;
+            waitingtime.tv_nsec = 20 * 1000000; // Milliseconds
+            nanosleep(&waitingtime, NULL);
+        }
+
         if (MODE_REGULAR != options.mode) {
             [options.verbosityOutputHandler write:[self actionDescriptionString:[keys objectAtIndex:i]]];
         }
