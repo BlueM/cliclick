@@ -157,7 +157,7 @@
     uint32_t eventConstant = [self getMoveEventConstant];
     float startX = currentLocation.x;
     float startY = currentLocation.y;
-    float distance = [self distanceBetweenPoint:currentLocation andPoint:NSMakePoint(endX, endY)];
+    float distance = [self distanceBetweenPoint:NSPointFromCGPoint(currentLocation) andPoint:NSMakePoint(endX, endY)];
 
     unsigned steps = ((int)(distance * easing / 100)) + 1;
     float xDiff = (endX - startX);
