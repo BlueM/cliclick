@@ -135,7 +135,7 @@
                                                    toY:(float)p.y];
     } else {
         // Move
-        CGEventRef move = CGEventCreateMouseEvent(NULL, [self getMoveEventConstant], CGPointMake(p.x, p.y), kCGMouseButtonLeft); // kCGMouseButtonLeft is ignored
+        CGEventRef move = CGEventCreateMouseEvent(NULL, [self getMoveEventConstant], p, kCGMouseButtonLeft); // kCGMouseButtonLeft is ignored
         CGEventPost(kCGHIDEventTap, move);
         CFRelease(move);
     }

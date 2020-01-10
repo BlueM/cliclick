@@ -51,7 +51,7 @@
 
 - (void)performActionAtPoint:(CGPoint) p {
     // Left button down, but don't release
-    CGEventRef leftDown = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDown, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
+    CGEventRef leftDown = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseDown, p, kCGMouseButtonLeft);
     CGEventPost(kCGHIDEventTap, leftDown);
     CFRelease(leftDown);
 }
