@@ -134,7 +134,7 @@
 
     if ([self keyCodeRequiresSystemDefinedEvent:code]) {
         NSEvent *e1 = [NSEvent otherEventWithType:NSSystemDefined
-                                         location:NSPointFromCGPoint(CGPointZero)
+                                         location:NSZeroPoint
                                     modifierFlags:0xa00
                                         timestamp:0
                                      windowNumber:0
@@ -145,7 +145,7 @@
         CGEventPost(0, [e1 CGEvent]);
 
         NSEvent *e2 = [NSEvent otherEventWithType:NSSystemDefined
-                                         location:NSPointFromCGPoint(CGPointZero)
+                                         location:NSZeroPoint
                                     modifierFlags:0xb00
                                         timestamp:0
                                      windowNumber:0
