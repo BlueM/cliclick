@@ -27,7 +27,7 @@ cliclick: Actions/ClickAction.o \
           KeycodeInformer.o \
           OutputHandler.o \
           cliclick.o
-	gcc -o cliclick $^ -framework Cocoa -framework Carbon
+	$(CC) -o cliclick $^ -framework Cocoa -framework Carbon
 
 install: macros cliclick
 	cp cliclick /usr/local/bin/
