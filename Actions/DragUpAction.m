@@ -51,7 +51,7 @@
 
 - (void)performActionAtPoint:(CGPoint) p {
     // Left button up
-    CGEventRef leftUp = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseUp, CGPointMake(p.x, p.y), kCGMouseButtonLeft);
+    CGEventRef leftUp = CGEventCreateMouseEvent(NULL, kCGEventLeftMouseUp, p, kCGMouseButtonLeft);
     CGEventPost(kCGHIDEventTap, leftUp);
     CFRelease(leftUp);
 }
