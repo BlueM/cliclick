@@ -79,7 +79,7 @@
             @"119", @"end",
             @"116", @"page-up",
             @"121", @"page-down",
-            // The following keys are also from Events.h, but are hardware-dependend (= represent physical
+            // The following keys are also from Events.h, but are hardware-dependent (= represent physical
             // keys, what is probably wanted when triggering numpad keys)
             @"82",  @"num-0",
             @"83",  @"num-1",
