@@ -156,8 +156,8 @@
 
         CGEventPost(0, [e2 CGEvent]);
     } else {
-        CGEventRef e1 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, true);
-        CGEventRef e2 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, false);
+        CGEventRef e1 = CGEventCreateKeyboardEvent(NULL, code, true);
+        CGEventRef e2 = CGEventCreateKeyboardEvent(NULL, code, false);
         CGEventPost(kCGSessionEventTap, e1);
         CGEventPost(kCGSessionEventTap, e2);
         CFRelease(e1);
