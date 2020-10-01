@@ -162,7 +162,7 @@
     unsigned steps = ((int)(distance * easing / 100)) + 1;
     float xDiff = (endX - startX);
     float yDiff = (endY - startY);
-    float stepSize = 1.0 / (float)steps;
+    float stepSize = (float)1.0 / (float)steps;
 
     for (unsigned i = 0; i < steps; i ++) {
         float factor = [self cubicEaseInOut:(stepSize * i)];
@@ -176,7 +176,7 @@
 - (float) distanceBetweenPoint:(NSPoint)a andPoint:(NSPoint)b {
     float dX = a.x - b.x,
           dY = a.y - b.y;
-    return sqrt(dX * dX + dY * dY);
+    return sqrtf(dX * dX + dY * dY);
 }
 
 // Modeled after the piecewise cubic
@@ -193,7 +193,7 @@
         return 4 * p * p * p;
     } else {
         float f = ((2 * p) - 2);
-        return 0.5 * f * f * f + 1;
+        return (float)0.5 * f * f * f + 1;
     }
 }
 
