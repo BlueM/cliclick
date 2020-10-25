@@ -46,11 +46,11 @@
 #pragma mark - KeyBaseAction
 
 - (void)performActionWithKeycode:(CGKeyCode)code {
-    CGEventRef e1 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, true);
+    CGEventRef e1 = CGEventCreateKeyboardEvent(NULL, code, true);
     CGEventPost(kCGSessionEventTap, e1);
     CFRelease(e1);
 
-    CGEventRef e2 = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)code, false);
+    CGEventRef e2 = CGEventCreateKeyboardEvent(NULL, code, false);
     CGEventPost(kCGSessionEventTap, e2);
     CFRelease(e2);
 }
@@ -106,11 +106,11 @@
 
         nanosleep(&waitingtime, NULL);
 
-        CGEventRef keyDownEvent = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)keyCode, true);
+        CGEventRef keyDownEvent = CGEventCreateKeyboardEvent(NULL, keyCode, true);
         CGEventPost(kCGSessionEventTap, keyDownEvent);
         CFRelease(keyDownEvent);
 
-        CGEventRef keyUpEvent = CGEventCreateKeyboardEvent(NULL, (CGKeyCode)keyCode, false);
+        CGEventRef keyUpEvent = CGEventCreateKeyboardEvent(NULL, keyCode, false);
         CGEventPost(kCGSessionEventTap, keyUpEvent);
         CFRelease(keyUpEvent);
 
