@@ -164,7 +164,8 @@
     float yDiff = (endY - startY);
     float stepSize = (float)1.0 / (float)steps;
 
-    for (unsigned i = 0; i < steps; i ++) {
+    unsigned i;
+    for (i = 0; i < steps; i ++) {
         float factor = [self cubicEaseInOut:(stepSize * i)];
         CGEventRef eventRef = CGEventCreateMouseEvent(NULL, eventConstant, CGPointMake(startX + (factor * xDiff), startY + (factor * yDiff)), 0);
         CGEventPost(kCGHIDEventTap, eventRef);
