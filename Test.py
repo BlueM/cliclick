@@ -254,6 +254,21 @@ assertOutput(
     ""
 )
 
+# Assertions for drag move / dm command
+assertOutput(
+    "When using “drag move” (“dm”) command without coordinates, should write nothing to stdout and error to stderr",
+    "dm",
+    "",
+    "Missing argument to command “dm”"
+)
+
+assertOutput(
+    "When using “drag move (“dm”) in testing mode, should write action to stdout and nothing to stderr",
+    "-m test dm:1129,64",
+    "Drag move to 1129,64",
+    ""
+)
+
 # Assertions for wait / w command
 assertOutput(
     "When using “wait” (“w”) command without argument, should write nothing to stdout and error to stderr",
