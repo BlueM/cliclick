@@ -11,6 +11,7 @@ cliclick: Actions/ClickAction.o \
           Actions/DoubleclickAction.o \
           Actions/DragDownAction.o \
           Actions/DragUpAction.o \
+          Actions/DragMoveAction.o \
           Actions/KeyBaseAction.o \
           Actions/KeyDownAction.o \
           Actions/KeyDownUpBaseAction.o \
