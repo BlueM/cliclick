@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007-2018, Carsten Blüm <carsten@bluem.net>
+ * Copyright (c) 2007-2021, Carsten Blüm <carsten@bluem.net>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
