@@ -309,7 +309,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -e \"$PROJECT_DIR/generate-characterinfo.php\" ]\nthen\n    # Make the script executable. It may not be, if it was just freshly checked out from VCS\n    chmod +x \"$PROJECT_DIR/generate-characterinfo.php\"\n    \"$PROJECT_DIR/generate-characterinfo.php\" > \"$PROJECT_DIR/README-Characters.md\"\nfi";
+			shellScript = "if [ -e \"$PROJECT_DIR/generate-characterinfo.php\" ]\nthen\n    # Make the script executable. It may not be, if it was just freshly checked out from VCS\n    chmod +x \"$PROJECT_DIR/generate-characterinfo.php\"\n    \"$PROJECT_DIR/generate-characterinfo.php\" > \"$PROJECT_DIR/README-Characters.md\"\nfi\n";
 		};
 		223CF13319ABCD6800689351 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -348,7 +348,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Note: This references a script used for packaging releases.\n# If you have checked out the project from GitHub, it is correct that this file does not exist.\nif [ -e \"$PROJECT_DIR/../bin/finalize.sh\" ]\nthen\n    # Make the script executable. It may not be, if it was just freshly checked out from VCS\n    chmod +x \"$PROJECT_DIR/../bin/finalize.sh\"\n\n    \"$PROJECT_DIR/../bin/finalize.sh\" \"$PROJECT_DIR\" \"$TARGETNAME\" \"$BUILT_PRODUCTS_DIR\" \"$CONFIGURATION\"\nfi";
+			shellScript = "# Note: This references a script used for packaging releases.\n# If you have checked out the project from GitHub, it is correct that this file does not exist.\nif [ -e \"$PROJECT_DIR/../bin/finalize.sh\" ]\nthen\n    # Make the script executable. It may not be, if it was just freshly checked out from VCS\n    chmod +x \"$PROJECT_DIR/../bin/finalize.sh\"\n\n    \"$PROJECT_DIR/../bin/finalize.sh\" \"$PROJECT_DIR\" \"$TARGETNAME\" \"$BUILT_PRODUCTS_DIR\" \"$CONFIGURATION\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -399,6 +399,7 @@
 				GCC_PREFIX_HEADER = cliclick_Prefix.pch;
 				INSTALL_PATH = "$(HOME)/bin";
 				PRODUCT_NAME = cliclick;
+				SDKROOT = macosx;
 				ZERO_LINK = YES;
 			};
 			name = Debug;
@@ -414,6 +415,7 @@
 				GCC_PREFIX_HEADER = cliclick_Prefix.pch;
 				INSTALL_PATH = "$(HOME)/bin";
 				PRODUCT_NAME = cliclick;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -448,7 +450,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DDEBUG=1";
 				PREBINDING = NO;
@@ -486,7 +488,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = "";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				OTHER_CFLAGS = "";
 				PREBINDING = NO;
 				SDKROOT = macosx;
