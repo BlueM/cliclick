@@ -165,7 +165,9 @@ int main (int argc, const char * argv[]) {
     }
 
     if (restoreOption) {
-        NSString *positionString = [NSString stringWithFormat:@"%d,%d", (int)initialMousePosition.x, (int)initialMousePosition.y];
+        // Note: we have to prefix the coordinates with "=" to ensure they are not interpreted
+        // as relative values, see https://github.com/BlueM/cliclick/issues/119
+        NSString *positionString = [NSString stringWithFormat:@"=%d,=%d", (int)initialMousePosition.x, (int)initialMousePosition.y];
         id moveAction = [[MoveAction alloc] init];
         [moveAction performActionWithData:positionString
                               withOptions:executionOptions];
