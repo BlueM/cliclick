@@ -201,7 +201,8 @@ To get a quick first impression, this is what you will get when you invoke `clic
 
 Limitations
 -----------
-It is not possible to use cliclick before a user logs in, i.e.: to control the login window.
+* It is not possible to use cliclick before a user logs in, i.e.: to control the login window.
+* In Citrix Viewer, clicks are not recognized. Moving the mouse works, but this seems futile without being able to click.
 
 
 Building cliclick
