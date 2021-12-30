@@ -3,9 +3,13 @@ cliclick Overview
 
 cliclick (short for “Command Line Interface Click”) is a tool for executing mouse- and keyboard-related actions from the shell/Terminal. It is written in Objective-C and runs on OS X 10.15 or later.
 
-For more information or for downloading a compiled binary, please take a look at [cliclick’s homepage](https://www.bluem.net/jump/cliclick/)
+Author: Carsten Blüm, [www.bluem.net](https://www.bluem.net/)
 
-Author: Carsten Blüm, Website: [www.bluem.net](https://www.bluem.net/)
+Installation
+--------------
+You can either build cliclick yourself (see below), choose a binary from the [releases](https://github.com/BlueM/cliclick/releases) or install it using either [Homebrew](https://formulae.brew.sh/formula/cliclick) or [MacPorts](https://ports.macports.org/port/cliclick/).
+
+*Important:* it is necessary to give Terminal the permission to control the computer. This can be done in System Preferences ➔ Security ➔ Accessibility. If you invoke cliclick and nothing happens, the permission is probably missing.
 
 Usage
 ---------
