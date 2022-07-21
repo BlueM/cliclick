@@ -58,6 +58,12 @@ int main (int argc, const char * argv[]) {
     BOOL restoreOption = NO;
     int optchar;
 
+    if (! AXIsProcessTrusted()) {
+        fprintf(stderr, "WARNING: Accessibility privileges not enabled. Many actions may fail.\n");
+        fprintf(stderr, "         Enable the checkbox for the containing app in:\n");
+        fprintf(stderr, "         System Preferences → Security & Privacy → Accessibility\n");
+    }
+
     while ((optchar = getopt(argc, (char * const *)argv, "horVne:f:d:m:w:")) != -1) {
         switch(optchar) {
             case 'h':
