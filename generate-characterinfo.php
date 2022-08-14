@@ -1,9 +1,9 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php
 
 $filename = 'KeycodeInformer.m';
-$code     = file_get_contents(__DIR__ . "/$filename");
-$layouts  = array();
+$code = file_get_contents(__DIR__ . "/$filename");
+$layouts = [];
 
 preg_match_all('=#SUPPORTED ([^:]+?):(.*)\n=', $code, $matches, PREG_SET_ORDER);
 foreach ($matches as $langMatches) {
@@ -38,4 +38,3 @@ foreach ($layouts as $layoutName => $info) {
         $info[1]
     );
 }
-
