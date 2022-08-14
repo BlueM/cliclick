@@ -28,7 +28,7 @@
 #define KEYCODE_ALT 58
 
 #define CHARINFO_URL_TEMPLATE @"https://github.com/BlueM/cliclick/blob/%@/README-Characters.md"
-#define HISTORY_URL @"https://www.bluem.net/jump/cliclick-versions/"
+#define HISTORY_URL @"https://github.com/BlueM/cliclick/releases"
 #define DONATIONS_URL @"https://www.bluem.net/jump/donations/"
 
 #ifdef DEBUG
