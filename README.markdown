@@ -1,7 +1,7 @@
 cliclick Overview
 =========================
 
-cliclick (short for “Command Line Interface Click”) is a tool for executing mouse- and keyboard-related actions from the shell/Terminal. It is written in Objective-C and runs on OS X 10.15 or later.
+cliclick (short for “Command Line Interface Click”) is a tool for executing mouse- and keyboard-related actions from the shell/Terminal. It is written in Objective-C and runs on macOS 10.15 or later.
 
 Author: Carsten Blüm, [www.bluem.net](https://www.bluem.net/)
 
@@ -9,7 +9,7 @@ Installation
 --------------
 You can either build cliclick yourself (see below), choose a binary from the [releases](https://github.com/BlueM/cliclick/releases) or install it using either [Homebrew](https://formulae.brew.sh/formula/cliclick) or [MacPorts](https://ports.macports.org/port/cliclick/).
 
-*Important:* it is necessary to give Terminal the permission to control the computer. This can be done in System Preferences ➔ Security ➔ Accessibility. If you invoke cliclick and nothing happens, the permission is probably missing.
+*Important:* it is necessary to give Terminal (or iTerm or whatever you use) the permission to control the computer. This can be done in System Preferences ➔ Security ➔ Accessibility. If you invoke cliclick and nothing happens, the permission is probably missing. Since cliclick 5.1, in this case a warning will be written to stderr.
 
 Usage
 ---------
@@ -17,7 +17,7 @@ To get a quick first impression, this is what you will get when you invoke `clic
 
     USAGE
       cliclick [-r] [-m <mode>] [-d <target>] [-e <num>] [-f <file>] [-w <num>] command1 [command2]
-    
+
     OPTIONS
       -r          Restore initial mouse location when finished
       -m <mode>   The mode can be either “verbose” (cliclick will print a
@@ -25,7 +25,7 @@ To get a quick first impression, this is what you will get when you invoke `clic
                   performed) or “test” (cliclick will only print the
                   description, but not perform the action)
       -d <target> Specify the target when using the “p” (“print”) command.
-                  Possible values are: stdout, stderr, clipboard or the path 
+                  Possible values are: stdout, stderr, clipboard or the path
                   to a file (which will be overwritten if it exists).
                   By default (if option not given), stdout is used for printing
       -e <easing> Set an easing factor for mouse movements. The higher this
@@ -52,23 +52,23 @@ To get a quick first impression, this is what you will get when you invoke `clic
       -V          Show cliclick version number and release date
       -o          Open version history in a browser
       -n          Send a donation
-    
+
     COMMANDS
     To use cliclick, you pass an arbitrary number of commands as arguments. A command consists of a command identifier (a string that tells cliclick what kind of action to perform) and usually one or more arguments to the command, which are separated from the command identifier with a colon. Example: “c:123,456” is the command for clicking (the “c” is the command identifier for clicking) at the position with x coordinate 123 and y coordinate 456. See below for a list of all commands and the arguments they expect.
     Whenever a command expects a pair of coordinates, you may provide relative values by prefixing the number with “+” or “-”. For example, “m:+50,+0” will move the mouse 50 pixels to the right. Of course, relative and absolute values can be mixed, and negative values are possible, so “c:100,-20” would be perfectly valid. (If you need to specify absolute negative values in case you have a setup with a second display arranged to the left of your main display, prefix the number with “=”, for instance “c:100,=-200”.)
-    
+
     LIST OF COMMANDS
-    
+
       rc:x,y  Will RIGHT-CLICK at the point with the given coordinates.
               Example: “rc:12,34” will right-click at the point with x coordinate
               12 and y coordinate 34. Instead of x and y values, you may
               also use “.”, which means: the current position. Using “.” is
               equivalent to using relative zero values “c:+0,+0”.
-    
+
       m:x,y   Will MOVE the mouse to the point with the given coordinates.
               Example: “m:12,34” will move the mouse to the point with
               x coordinate 12 and y coordinate 34.
-    
+
       kd:keys Will trigger a KEY DOWN event for a comma-separated list of
               modifier keys. Possible keys are:
                 - alt
@@ -79,7 +79,7 @@ To get a quick first impression, this is what you will get when you invoke `clic
               Example: “kd:cmd,alt” will press the command key and the
               option key (and will keep them down until you release them
               with another command)
-    
+
       kp:key  Will emulate PRESSING A KEY (key down + key up). Possible keys are:
                 - arrow-down
                 - arrow-left
@@ -141,14 +141,14 @@ To get a quick first impression, this is what you will get when you invoke `clic
                 - volume-down
                 - volume-up
               Example: “kp:return” will hit the return key.
-    
+
       tc:x,y  Will TRIPLE-CLICK at the point with the given coordinates.
               Example: “tc:12,34” will triple-click at the point with x
               coordinate 12 and y coordinate 34. Instead of x and y values,
               you may also use “.”, which means: the current position.
               Note: If you find that this does not work in a target application,
               please try if double-clicking plus single-clicking does.
-    
+
       ku:keys Will trigger a KEY UP event for a comma-separated list of
               modifier keys. Possible keys are:
                 - alt
@@ -159,48 +159,48 @@ To get a quick first impression, this is what you will get when you invoke `clic
               Example: “ku:cmd,ctrl” will release the command key and the
               control key (which will only have an effect if you performed
               a “key down” before)
-    
+
       dm:x,y  Will continue the DRAG event to the given coordinates.
               Example: “dm:112,134” will drag and continue to the point with x
               coordinate 112 and y coordinate 134.
-    
+
       c:x,y   Will CLICK at the point with the given coordinates.
               Example: “c:12,34” will click at the point with x coordinate
               12 and y coordinate 34. Instead of x and y values, you may
               also use “.”, which means: the current position. Using “.” is
               equivalent to using relative zero values “c:+0,+0”.
-    
+
       dd:x,y  Will press down to START A DRAG at the given coordinates.
               Example: “dd:12,34” will press down at the point with x
               coordinate 12 and y coordinate 34. Instead of x and y values,
               you may also use “.”, which means: the current position.
-    
+
       w:ms    Will WAIT/PAUSE for the given number of milliseconds.
               Example: “w:500” will pause command execution for half a second
-    
+
       p[:str] Will PRINT the given string. If the string is “.”, the current
               MOUSE POSITION is printed. As a convenience, you can skip the
               string completely and just write “p” to get the current position.
               Example: “p:.” or “p” will print the current mouse position
               Example: “p:'Hello world'” will print “Hello world”
-    
+
       du:x,y  Will release to END A DRAG at the given coordinates.
               Example: “du:112,134” will release at the point with x
               coordinate 112 and y coordinate 134.
-    
+
       cp:str  Will PRINT THE COLOR value at the given screen location.
               The color value is printed as three decimal 8-bit values,
               representing, in order, red, green, and blue.
               Example: “cp:123,456” might print “127 63 0”
-    
+
       dc:x,y  Will DOUBLE-CLICK at the point with the given coordinates.
               Example: “dc:12,34” will double-click at the point with x
               coordinate 12 and y coordinate 34. Instead of x and y values,
               you may also use “.”, which means: the current position.
-    
+
       t:text  Will TYPE the given TEXT into the frontmost application.
               If the text includes space(s), it must be enclosed in quotes.
-              Example: “type:Test” will type “Test” 
+              Example: “type:Test” will type “Test”
               Example: “type:'Viele Grüße'” will type “Viele Grüße”
 
 Limitations
@@ -221,4 +221,4 @@ If you would like to contribute a new feature, a bugfix or other improvement, pl
 
 * There is one pull request per topic. I.e.: if you would like to contribute a new feature and two bugfixes, open three pull requests.
 * All commit messages are in English.
-* Ideally, all non-obvious features or changes should be shortly explained. This might not only include *what* you committed, but also *why* you did it (motivation, usage scenario, …). 
+* Ideally, all non-obvious features or changes should be shortly explained. This might not only include *what* you committed, but also *why* you did it (motivation, usage scenario, …).
