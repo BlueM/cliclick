@@ -24,6 +24,7 @@ cliclick: Actions/ClickAction.o \
           Actions/TripleclickAction.o \
           Actions/TypeAction.o \
           Actions/WaitAction.o \
+          Actions/ScheduleAction.o \
           ActionExecutor.o \
           KeycodeInformer.o \
           OutputHandler.o \
