@@ -160,15 +160,21 @@
     float startX = currentLocation.x;
     float startY = currentLocation.y;
     float distance = [self distanceBetweenPoint:NSPointFromCGPoint(currentLocation) andPoint:NSMakePoint(endX, endY)];
+    bool speederIsEnabled =  speed >= 10;
 
-    unsigned steps = (((int)(distance * easing / (100 / speed))) + 1);
+    unsigned steps = ((int)(distance * easing / 100)) + 1;
+    
+    if (speederIsEnabled) {
+        steps = steps * speed;
+    };
+    
     float xDiff = (endX - startX);
     float yDiff = (endY - startY);
     float stepSize = (float)1.0 / (float)steps;
-
+    
     unsigned i;
     for (i = 0; i < steps; i ++) {
-        float factor = [self cubicEaseInOut:(stepSize * i)];
+        float factor = speederIsEnabled ? stepSize * i :  [self cubicEaseInOut:(stepSize * i)];
         CGEventRef eventRef = CGEventCreateMouseEvent(NULL, eventConstant, CGPointMake(startX + (factor * xDiff), startY + (factor * yDiff)), 0);
         CGEventPost(kCGHIDEventTap, eventRef);
         CFRelease(eventRef);

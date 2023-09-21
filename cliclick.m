@@ -47,7 +47,7 @@ int main (int argc, const char * argv[]) {
 
     struct ExecutionOptions executionOptions;
     executionOptions.easing = 0;
-    executionOptions.speed = 1;
+    executionOptions.speed = 10;
     executionOptions.waitTime = 0;
     executionOptions.mode = MODE_REGULAR;
     NSArray *modeOptionArg;
@@ -114,7 +114,7 @@ int main (int argc, const char * argv[]) {
                 executionOptions.waitTime = atoi(optarg) > 0 ? atoi(optarg) : 0;
                 break;
             case 's':
-                executionOptions.easing = 0;
+                executionOptions.easing = 1;
                 executionOptions.speed = atoi(optarg) > 1 ? atoi(optarg) : 1;
                 break;
             default:
