@@ -131,6 +131,7 @@
     if (options.easing) {
         // Eased move
         [self postHumanizedMouseEventsWithEasingFactor:options.easing
+                                           speedFactor:options.speed
                                                    toX:(float)p.x
                                                    toY:(float)p.y];
     } else {
@@ -148,6 +149,7 @@
 }
 
 - (void)postHumanizedMouseEventsWithEasingFactor:(unsigned)easing
+                                     speedFactor:(unsigned)speed
                                              toX:(float)endX
                                              toY:(float)endY {
 
@@ -159,7 +161,7 @@
     float startY = currentLocation.y;
     float distance = [self distanceBetweenPoint:NSPointFromCGPoint(currentLocation) andPoint:NSMakePoint(endX, endY)];
 
-    unsigned steps = ((int)(distance * easing / 100)) + 1;
+    unsigned steps = (((int)(distance * easing / (100 / speed))) + 1);
     float xDiff = (endX - startX);
     float yDiff = (endY - startY);
     float stepSize = (float)1.0 / (float)steps;

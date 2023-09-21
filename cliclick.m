@@ -47,6 +47,7 @@ int main (int argc, const char * argv[]) {
 
     struct ExecutionOptions executionOptions;
     executionOptions.easing = 0;
+    executionOptions.speed = 1;
     executionOptions.waitTime = 0;
     executionOptions.mode = MODE_REGULAR;
     NSArray *modeOptionArg;
@@ -64,7 +65,7 @@ int main (int argc, const char * argv[]) {
         fprintf(stderr, "         System Preferences → Security & Privacy → Accessibility\n");
     }
 
-    while ((optchar = getopt(argc, (char * const *)argv, "horVne:f:d:m:w:")) != -1) {
+    while ((optchar = getopt(argc, (char * const *)argv, "horVne:f:d:m:w:s:")) != -1) {
         switch(optchar) {
             case 'h':
                 help();
@@ -111,6 +112,10 @@ int main (int argc, const char * argv[]) {
                 break;
             case 'w':
                 executionOptions.waitTime = atoi(optarg) > 0 ? atoi(optarg) : 0;
+                break;
+            case 's':
+                executionOptions.easing = 0;
+                executionOptions.speed = atoi(optarg) > 1 ? atoi(optarg) : 1;
                 break;
             default:
                 [pool release];
@@ -217,12 +222,12 @@ NSArray* parseCommandsFile(NSString *filepath) {
     return [commands autorelease];
 }
 
-void error() {
+void error(void) {
     fprintf(stderr, "You did not pass any commands as argument to cliclick.\n");
     fprintf(stderr, "Call cliclick with option -h to see usage instructions.\n");
 }
 
-void help() {
+void help(void) {
 
     NSArray *actionClasses = [ActionExecutor actionClasses];
     NSUInteger i, count = [actionClasses count];
@@ -250,6 +255,7 @@ void help() {
     "              on the distance between the start and the end position, i.e.\n"
     "              the time needed for moving will be higher if the distance\n"
     "              is larger.\n"
+    "  -s <speed>  You can change speed of movement by changing this value\n"
     "  -f <file>   Instead of passing commands as arguments, you may instead\n"
     "              specify a file from which cliclick will read the commands\n"
     "              (or stdin, when - is given as filename).\n"
