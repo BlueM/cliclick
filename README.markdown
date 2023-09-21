@@ -35,6 +35,7 @@ To get a quick first impression, this is what you will get when you invoke `clic
                   on the distance between the start and the end position, i.e.
                   the time needed for moving will be higher if the distance
                   is larger.
+      -s <speed>  You can change speed of movement by changing this value           
       -f <file>   Instead of passing commands as arguments, you may instead
                   specify a file from which cliclick will read the commands
                   (or stdin, when - is given as filename).
