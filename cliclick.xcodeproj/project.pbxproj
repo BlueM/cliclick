@@ -32,6 +32,10 @@
 		5B9FEE9A1DDF5E6F0020F6F6 /* RightClickAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9FEE991DDF5E6F0020F6F6 /* RightClickAction.m */; };
 		8DD76F9A0486AA7600D96B5E /* cliclick.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* cliclick.m */; settings = {ATTRIBUTES = (); }; };
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
+		CFE12B432C88FCC2004B36C5 /* ScrollDownAction.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE12B422C88FCC2004B36C5 /* ScrollDownAction.m */; };
+		CFE12B462C88FCF9004B36C5 /* ScrollDownPixelAction.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE12B452C88FCF9004B36C5 /* ScrollDownPixelAction.m */; };
+		CFE12B492C88FD1B004B36C5 /* ScrollUpAction.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE12B482C88FD1B004B36C5 /* ScrollUpAction.m */; };
+		CFE12B4C2C88FD39004B36C5 /* ScrollUpPixelAction.m in Sources */ = {isa = PBXBuildFile; fileRef = CFE12B4B2C88FD39004B36C5 /* ScrollUpPixelAction.m */; };
 		F0A674F818EE2D0C0062FD29 /* DragDownAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A674F718EE2D0C0062FD29 /* DragDownAction.m */; };
 		F0A674FB18EE3F220062FD29 /* DragUpAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A674FA18EE3F220062FD29 /* DragUpAction.m */; };
 /* End PBXBuildFile section */
@@ -98,6 +102,14 @@
 		5B9FEE981DDF5E6F0020F6F6 /* RightClickAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RightClickAction.h; path = Actions/RightClickAction.h; sourceTree = "<group>"; };
 		5B9FEE991DDF5E6F0020F6F6 /* RightClickAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RightClickAction.m; path = Actions/RightClickAction.m; sourceTree = "<group>"; };
 		8DD76FA10486AA7600D96B5E /* cliclick */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cliclick; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFE12B412C88FCAF004B36C5 /* ScrollDownAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScrollDownAction.h; path = Actions/ScrollDownAction.h; sourceTree = "<group>"; };
+		CFE12B422C88FCC2004B36C5 /* ScrollDownAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScrollDownAction.m; path = Actions/ScrollDownAction.m; sourceTree = "<group>"; };
+		CFE12B442C88FCD4004B36C5 /* ScrollDownPixelAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScrollDownPixelAction.h; path = Actions/ScrollDownPixelAction.h; sourceTree = "<group>"; };
+		CFE12B452C88FCF9004B36C5 /* ScrollDownPixelAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScrollDownPixelAction.m; path = Actions/ScrollDownPixelAction.m; sourceTree = "<group>"; };
+		CFE12B472C88FD08004B36C5 /* ScrollUpAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScrollUpAction.h; path = Actions/ScrollUpAction.h; sourceTree = "<group>"; };
+		CFE12B482C88FD1B004B36C5 /* ScrollUpAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScrollUpAction.m; path = Actions/ScrollUpAction.m; sourceTree = "<group>"; };
+		CFE12B4A2C88FD2B004B36C5 /* ScrollUpPixelAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScrollUpPixelAction.h; path = Actions/ScrollUpPixelAction.h; sourceTree = "<group>"; };
+		CFE12B4B2C88FD39004B36C5 /* ScrollUpPixelAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScrollUpPixelAction.m; path = Actions/ScrollUpPixelAction.m; sourceTree = "<group>"; };
 		F0A674F618EE2D0C0062FD29 /* DragDownAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DragDownAction.h; path = Actions/DragDownAction.h; sourceTree = "<group>"; };
 		F0A674F718EE2D0C0062FD29 /* DragDownAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DragDownAction.m; path = Actions/DragDownAction.m; sourceTree = "<group>"; };
 		F0A674F918EE3F220062FD29 /* DragUpAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DragUpAction.h; path = Actions/DragUpAction.h; sourceTree = "<group>"; };
@@ -199,6 +211,14 @@
 				22E5626416BA589200CD5D86 /* MoveAction.m */,
 				5B9FEE981DDF5E6F0020F6F6 /* RightClickAction.h */,
 				5B9FEE991DDF5E6F0020F6F6 /* RightClickAction.m */,
+				CFE12B412C88FCAF004B36C5 /* ScrollDownAction.h */,
+				CFE12B422C88FCC2004B36C5 /* ScrollDownAction.m */,
+				CFE12B442C88FCD4004B36C5 /* ScrollDownPixelAction.h */,
+				CFE12B452C88FCF9004B36C5 /* ScrollDownPixelAction.m */,
+				CFE12B472C88FD08004B36C5 /* ScrollUpAction.h */,
+				CFE12B482C88FD1B004B36C5 /* ScrollUpAction.m */,
+				CFE12B4A2C88FD2B004B36C5 /* ScrollUpPixelAction.h */,
+				CFE12B4B2C88FD39004B36C5 /* ScrollUpPixelAction.m */,
 				22E5626716BA589200CD5D86 /* TripleclickAction.h */,
 				22E5626816BA589200CD5D86 /* TripleclickAction.m */,
 			);
@@ -365,6 +385,7 @@
 				22E5626E16BA589200CD5D86 /* KeyPressAction.m in Sources */,
 				22E5626F16BA589200CD5D86 /* KeyUpAction.m in Sources */,
 				22C68A501825A8960083A722 /* KeyDownUpBaseAction.m in Sources */,
+				CFE12B4C2C88FD39004B36C5 /* ScrollUpPixelAction.m in Sources */,
 				22E5627016BA589200CD5D86 /* MouseBaseAction.m in Sources */,
 				22760C932052632600467D47 /* OutputHandler.m in Sources */,
 				2250A92A1966D39000150E07 /* KeycodeInformer.m in Sources */,
@@ -374,10 +395,13 @@
 				22E5627316BA589200CD5D86 /* TripleclickAction.m in Sources */,
 				22998C7D197A85A300A4C691 /* TypeAction.m in Sources */,
 				22E5627416BA589200CD5D86 /* WaitAction.m in Sources */,
+				CFE12B462C88FCF9004B36C5 /* ScrollDownPixelAction.m in Sources */,
 				5B9FEE9A1DDF5E6F0020F6F6 /* RightClickAction.m in Sources */,
 				226347791B998B80003C5D71 /* ColorPickerAction.m in Sources */,
 				22C0ECEE16BAFD9800E3A46C /* KeyBaseAction.m in Sources */,
+				CFE12B492C88FD1B004B36C5 /* ScrollUpAction.m in Sources */,
 				F0A674F818EE2D0C0062FD29 /* DragDownAction.m in Sources */,
+				CFE12B432C88FCC2004B36C5 /* ScrollDownAction.m in Sources */,
 				F0A674FB18EE3F220062FD29 /* DragUpAction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
