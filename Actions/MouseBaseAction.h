@@ -86,6 +86,7 @@ typedef enum {
                   withOptions:(struct ExecutionOptions)options;
 
 - (void)postHumanizedMouseEventsWithEasingFactor:(unsigned)easing
+                                     speedFactor:(unsigned)speed
                                              toX:(float)endX
                                              toY:(float)endY;
 

@@ -34,6 +34,7 @@
 struct ExecutionOptions {
     unsigned mode;
     unsigned easing;
+    unsigned speed;
     unsigned waitTime;
     BOOL isFirstAction;
     BOOL isLastAction;

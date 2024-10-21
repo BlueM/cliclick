@@ -16,7 +16,7 @@ Usage
 To get a quick first impression, this is what you will get when you invoke `cliclick -h`:
 
     USAGE
-      cliclick [-r] [-m <mode>] [-d <target>] [-e <num>] [-f <file>] [-w <num>] command1 [command2]
+      cliclick [-r] [-m <mode>] [-d <target>] [-e <num>]  [-s <num>] [-f <file>] [-w <num>] command1 [command2]
 
     OPTIONS
       -r          Restore initial mouse location when finished
@@ -35,6 +35,9 @@ To get a quick first impression, this is what you will get when you invoke `clic
                   on the distance between the start and the end position, i.e.
                   the time needed for moving will be higher if the distance
                   is larger.
+      -s <speed>  Allows slowing the mouse movement to a constant rate.
+                  Minimum accepted value is 10. Higher the value, 
+                  slower the mouse movement. Do not use together with -e option.           
       -f <file>   Instead of passing commands as arguments, you may instead
                   specify a file from which cliclick will read the commands
                   (or stdin, when - is given as filename).
