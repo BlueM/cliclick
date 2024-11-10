@@ -46,52 +46,6 @@
 
 - (void)performActionWithData:(NSString *)data
                   withOptions:(struct ExecutionOptions)options {
-
-    NSString *shortcut = [[self class] commandShortcut];
-
-    if ([data isEqualToString:@""]) {
-        [NSException raise:@"InvalidCommandException"
-                    format:@"Missing argument to command “%@”: Expected two coordinates (separated by a comma) or “.”. Example: “%@:123,456” or “%@:.”",
-                           shortcut, shortcut, shortcut];
-    } else {
-        NSArray *coords;
-
-        if ([data isEqualToString:@"."]) {
-            coords = [NSArray arrayWithObjects: @"+0", @"+0", nil];
-        } else {
-            coords = [data componentsSeparatedByString:@","];
-
-            if ([coords count] != 2 ||
-                [[coords objectAtIndex:0] isEqualToString:@""] ||
-                [[coords objectAtIndex:1] isEqualToString:@""])
-            {
-                [NSException raise:@"InvalidCommandException"
-                            format:@"Invalid argument “%@” to command “%@”: Expected two coordinates (separated by a comma) or “.”. Example: “%@:123,456” or “%@:.”",
-                                   data, shortcut, shortcut, shortcut];
-            }
-        }
-
-        if (MODE_TEST == options.mode) {
-            if ([data isEqualToString:@"."]) {
-                [options.verbosityOutputHandler write:@"Print color at current mouse position"];
-            } else {
-                [options.verbosityOutputHandler write:[NSString stringWithFormat:@"Print color at location %i,%i\n", [[coords objectAtIndex:0] intValue], [[coords objectAtIndex:1] intValue]]];
-            }
-        } else {
-            CGPoint p;
-            p.x = [MouseBaseAction getCoordinate:[coords objectAtIndex:0] forAxis:XAXIS];
-            p.y = [MouseBaseAction getCoordinate:[coords objectAtIndex:1] forAxis:YAXIS];
-
-            CGRect imageRect = CGRectMake(p.x, p.y, 1, 1);
-            CGImageRef imageRef = CGWindowListCreateImage(imageRect, kCGWindowListOptionOnScreenOnly, kCGNullWindowID, kCGWindowImageDefault);
-            NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:imageRef];
-            CGImageRelease(imageRef);
-            NSColor *color = [bitmap colorAtX:0 y:0];
-            [bitmap release];
-
-            [options.commandOutputHandler write:[NSString stringWithFormat:@"%d %d %d\n", (int)(color.redComponent*255), (int)(color.greenComponent*255), (int)(color.blueComponent*255)]];
-        }
-    }
 }
 
 @end
