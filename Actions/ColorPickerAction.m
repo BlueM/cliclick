@@ -28,6 +28,7 @@
 
 #import "ColorPickerAction.h"
 #import "MouseBaseAction.h"
+#import <ScreenCaptureKit/ScreenCaptureKit.h>
 
 @implementation ColorPickerAction
 
@@ -82,12 +83,17 @@
             p.x = [MouseBaseAction getCoordinate:[coords objectAtIndex:0] forAxis:XAXIS];
             p.y = [MouseBaseAction getCoordinate:[coords objectAtIndex:1] forAxis:YAXIS];
 
-            CGRect imageRect = CGRectMake(p.x, p.y, 1, 1);
-            CGImageRef imageRef = CGWindowListCreateImage(imageRect, kCGWindowListOptionOnScreenOnly, kCGNullWindowID, kCGWindowImageDefault);
-            NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:imageRef];
-            CGImageRelease(imageRef);
+            // Use ScreenCaptureKit to capture the screen
+            SCStreamConfiguration *config = [[SCStreamConfiguration alloc] init];
+            config.width = 1;
+            config.height = 1;
+            SCStream *stream = [[SCStream alloc] initWithDisplay:[SCDisplay mainDisplay] configuration:config];
+            [stream startCapture];
+
+            // Capture the color at the specified point
+            NSBitmapImageRep *bitmap = [stream bitmapImageRepForRect:CGRectMake(p.x, p.y, 1, 1)];
             NSColor *color = [bitmap colorAtX:0 y:0];
-            [bitmap release];
+            [stream stopCapture];
 
             [options.commandOutputHandler write:[NSString stringWithFormat:@"%d %d %d\n", (int)(color.redComponent*255), (int)(color.greenComponent*255), (int)(color.blueComponent*255)]];
         }
