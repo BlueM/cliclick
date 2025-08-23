@@ -86,7 +86,11 @@
 
         [actionClassInstance release];
 
-        if (!options.isLastAction) {
+        if (options.isLastAction) {
+            waitingtime.tv_sec = 0;
+            waitingtime.tv_nsec = 1000000;
+            nanosleep(&waitingtime, NULL);
+        } else {
             nanosleep(&waitingtime, NULL);
         }
     }
