@@ -32,6 +32,7 @@
 		5B9FEE9A1DDF5E6F0020F6F6 /* RightClickAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9FEE991DDF5E6F0020F6F6 /* RightClickAction.m */; };
 		8DD76F9A0486AA7600D96B5E /* cliclick.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* cliclick.m */; settings = {ATTRIBUTES = (); }; };
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
+		D0FEF3302E5A0A2C005F311B /* ScreenCaptureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0FEF32F2E5A0A2C005F311B /* ScreenCaptureKit.framework */; };
 		F0A674F818EE2D0C0062FD29 /* DragDownAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A674F718EE2D0C0062FD29 /* DragDownAction.m */; };
 		F0A674FB18EE3F220062FD29 /* DragUpAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A674FA18EE3F220062FD29 /* DragUpAction.m */; };
 /* End PBXBuildFile section */
@@ -98,6 +99,7 @@
 		5B9FEE981DDF5E6F0020F6F6 /* RightClickAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RightClickAction.h; path = Actions/RightClickAction.h; sourceTree = "<group>"; };
 		5B9FEE991DDF5E6F0020F6F6 /* RightClickAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RightClickAction.m; path = Actions/RightClickAction.m; sourceTree = "<group>"; };
 		8DD76FA10486AA7600D96B5E /* cliclick */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cliclick; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0FEF32F2E5A0A2C005F311B /* ScreenCaptureKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScreenCaptureKit.framework; path = System/Library/Frameworks/ScreenCaptureKit.framework; sourceTree = SDKROOT; };
 		F0A674F618EE2D0C0062FD29 /* DragDownAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DragDownAction.h; path = Actions/DragDownAction.h; sourceTree = "<group>"; };
 		F0A674F718EE2D0C0062FD29 /* DragDownAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DragDownAction.m; path = Actions/DragDownAction.m; sourceTree = "<group>"; };
 		F0A674F918EE3F220062FD29 /* DragUpAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DragUpAction.h; path = Actions/DragUpAction.h; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				220F5BDB0C0717C2005EC17E /* ApplicationServices.framework in Frameworks */,
 				22B4D99C15D6CB0A002C8478 /* Carbon.framework in Frameworks */,
 				228B7AA81B54179A003D6960 /* IOKit.framework in Frameworks */,
+				D0FEF3302E5A0A2C005F311B /* ScreenCaptureKit.framework in Frameworks */,
 				226A924F16AC9D7B0079165A /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,6 +130,7 @@
 				C6859EA2029092E104C91782 /* Documentation */,
 				08FB779DFE84155DC02AAC07 /* External Frameworks and Libraries */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
+				D0FEF32E2E5A0A2C005F311B /* Frameworks */,
 			);
 			name = cliclick;
 			sourceTree = "<group>";
@@ -242,6 +246,14 @@
 			children = (
 			);
 			name = Documentation;
+			sourceTree = "<group>";
+		};
+		D0FEF32E2E5A0A2C005F311B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D0FEF32F2E5A0A2C005F311B /* ScreenCaptureKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
