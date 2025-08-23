@@ -7,9 +7,10 @@ Author: Carsten Blüm, [www.bluem.net](https://www.bluem.net/)
 
 Installation
 --------------
-You can either build cliclick yourself (see below), choose a binary from the [releases](https://github.com/BlueM/cliclick/releases) or install it using either [Homebrew](https://formulae.brew.sh/formula/cliclick) or [MacPorts](https://ports.macports.org/port/cliclick/).
+If you don’t want to build cliclick yourself (see below), it is strongly recommended to install using [Homebrew](https://formulae.brew.sh/formula/cliclick). 
+Cliclick is also available on [MacPorts](https://ports.macports.org/port/cliclick/), but at the time of writing this, MacPorts does not offer the most recent version. You could also choose a binary from the [releases](https://github.com/BlueM/cliclick/releases) page, you will likely run into trouble running it (especially on a Mac with Apple Silicon processor), thanks to macOS’s security mechanisms.
 
-*Important:* it is necessary to give Terminal (or iTerm or whatever you use) the permission to control the computer. This can be done in System Preferences ➔ Security ➔ Accessibility. If you invoke cliclick and nothing happens, the permission is probably missing. Since cliclick 5.1, in this case a warning will be written to stderr.
+*In either case:* it is necessary to give Terminal (or iTerm or whatever you use) the permission to control the computer. This can be done in System Preferences ➔ Security ➔ Accessibility. If you invoke cliclick and nothing happens, the permission is probably missing. Since cliclick 5.1, in this case a warning will be written to stderr.
 
 Usage
 ---------
