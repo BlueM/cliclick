@@ -21,6 +21,9 @@ cliclick: Actions/ClickAction.o \
           Actions/MoveAction.o \
           Actions/PrintAction.o \
           Actions/RightClickAction.o \
+          Actions/RightDragDownAction.o \
+          Actions/RightDragUpAction.o \
+          Actions/RightDragMoveAction.o \
           Actions/TripleclickAction.o \
           Actions/TypeAction.o \
           Actions/WaitAction.o \
