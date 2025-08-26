@@ -91,4 +91,8 @@ typedef enum {
 
 - (uint32_t)getMoveEventConstant;
 
+- (float)distanceBetweenPoint:(NSPoint)a andPoint:(NSPoint)b;
+
+- (float)cubicEaseInOut:(float)p;
+
 @end
