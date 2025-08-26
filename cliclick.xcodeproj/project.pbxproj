@@ -32,6 +32,7 @@
 		5B9FEE9A1DDF5E6F0020F6F6 /* RightClickAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B9FEE991DDF5E6F0020F6F6 /* RightClickAction.m */; };
 		8DD76F9A0486AA7600D96B5E /* cliclick.m in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* cliclick.m */; settings = {ATTRIBUTES = (); }; };
 		8DD76F9C0486AA7600D96B5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08FB779EFE84155DC02AAC07 /* Foundation.framework */; };
+		9B5B99E7291E7C6700C0B243 /* ScheduleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5B99E6291E7C6700C0B243 /* ScheduleAction.m */; };
 		F0A674F818EE2D0C0062FD29 /* DragDownAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A674F718EE2D0C0062FD29 /* DragDownAction.m */; };
 		F0A674FB18EE3F220062FD29 /* DragUpAction.m in Sources */ = {isa = PBXBuildFile; fileRef = F0A674FA18EE3F220062FD29 /* DragUpAction.m */; };
 /* End PBXBuildFile section */
@@ -98,6 +99,8 @@
 		5B9FEE981DDF5E6F0020F6F6 /* RightClickAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RightClickAction.h; path = Actions/RightClickAction.h; sourceTree = "<group>"; };
 		5B9FEE991DDF5E6F0020F6F6 /* RightClickAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RightClickAction.m; path = Actions/RightClickAction.m; sourceTree = "<group>"; };
 		8DD76FA10486AA7600D96B5E /* cliclick */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cliclick; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B5B99E5291E7C6700C0B243 /* ScheduleAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ScheduleAction.h; path = Actions/ScheduleAction.h; sourceTree = "<group>"; };
+		9B5B99E6291E7C6700C0B243 /* ScheduleAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ScheduleAction.m; path = Actions/ScheduleAction.m; sourceTree = "<group>"; };
 		F0A674F618EE2D0C0062FD29 /* DragDownAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DragDownAction.h; path = Actions/DragDownAction.h; sourceTree = "<group>"; };
 		F0A674F718EE2D0C0062FD29 /* DragDownAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DragDownAction.m; path = Actions/DragDownAction.m; sourceTree = "<group>"; };
 		F0A674F918EE3F220062FD29 /* DragUpAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DragUpAction.h; path = Actions/DragUpAction.h; sourceTree = "<group>"; };
@@ -233,6 +236,8 @@
 				22E5626616BA589200CD5D86 /* PrintAction.m */,
 				22E5626916BA589200CD5D86 /* WaitAction.h */,
 				22E5626A16BA589200CD5D86 /* WaitAction.m */,
+				9B5B99E5291E7C6700C0B243 /* ScheduleAction.h */,
+				9B5B99E6291E7C6700C0B243 /* ScheduleAction.m */,
 			);
 			name = OtherActions;
 			sourceTree = "<group>";
@@ -322,7 +327,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "KEYWORDS=\"TODO:|FIXME:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" \\) -print0 | \\\n     xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | \\\n     perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"";
+			shellScript = "KEYWORDS=\"TODO:|FIXME:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" \\) -print0 | \\\n     xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | \\\n     perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"\n";
 		};
 		22D9A7B019A46A00004F4CEE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -335,7 +340,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "./generate-action-classes-macro.sh";
+			shellScript = "./generate-action-classes-macro.sh\n";
 		};
 		22F0E20215D9AAC600158334 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -377,6 +382,7 @@
 				5B9FEE9A1DDF5E6F0020F6F6 /* RightClickAction.m in Sources */,
 				226347791B998B80003C5D71 /* ColorPickerAction.m in Sources */,
 				22C0ECEE16BAFD9800E3A46C /* KeyBaseAction.m in Sources */,
+				9B5B99E7291E7C6700C0B243 /* ScheduleAction.m in Sources */,
 				F0A674F818EE2D0C0062FD29 /* DragDownAction.m in Sources */,
 				F0A674FB18EE3F220062FD29 /* DragUpAction.m in Sources */,
 			);
