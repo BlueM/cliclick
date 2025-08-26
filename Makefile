@@ -6,7 +6,11 @@ all: macros cliclick
 macros:
 	./generate-action-classes-macro.sh
 
-cliclick: Actions/ClickAction.o \
+cliclick: Actions/CenterClickAction.o \
+          Actions/CenterDragDownAction.o \
+          Actions/CenterDragUpAction.o \
+          Actions/CenterDragMoveAction.o \
+          Actions/ClickAction.o \
           Actions/ColorPickerAction.o \
           Actions/DoubleclickAction.o \
           Actions/DragDownAction.o \
