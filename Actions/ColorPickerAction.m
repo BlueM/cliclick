@@ -28,6 +28,7 @@
 
 #import "ColorPickerAction.h"
 #import "MouseBaseAction.h"
+#import "ScreenCaptureCompat.h"
 
 @implementation ColorPickerAction
 
@@ -82,14 +83,27 @@
             p.x = [MouseBaseAction getCoordinate:[coords objectAtIndex:0] forAxis:XAXIS];
             p.y = [MouseBaseAction getCoordinate:[coords objectAtIndex:1] forAxis:YAXIS];
 
-            CGRect imageRect = CGRectMake(p.x, p.y, 1, 1);
-            CGImageRef imageRef = CGWindowListCreateImage(imageRect, kCGWindowListOptionOnScreenOnly, kCGNullWindowID, kCGWindowImageDefault);
-            NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithCGImage:imageRef];
-            CGImageRelease(imageRef);
-            NSColor *color = [bitmap colorAtX:0 y:0];
-            [bitmap release];
-
-            [options.commandOutputHandler write:[NSString stringWithFormat:@"%d %d %d\n", (int)(color.redComponent*255), (int)(color.greenComponent*255), (int)(color.blueComponent*255)]];
+            // Use compatibility layer for screen capture
+            NSColor *color = SCCompatGetColorAtPoint(p);
+            
+            if (color != nil) {
+                [options.commandOutputHandler write:[NSString stringWithFormat:@"%d %d %d\n", 
+                    (int)(color.redComponent * 255), 
+                    (int)(color.greenComponent * 255), 
+                    (int)(color.blueComponent * 255)]];
+            } else {
+                // Enhanced error reporting with compatibility info
+                NSString *compatMode = SCCompatGetCaptureModeDescription();
+                NSString *errorMsg;
+                
+                if (!SCCompatIsScreenCaptureAvailable()) {
+                    errorMsg = [NSString stringWithFormat:@"Screen capture not available. %@ Please grant Screen Recording permission in System Preferences → Security & Privacy → Privacy → Screen Recording.", compatMode];
+                } else {
+                    errorMsg = [NSString stringWithFormat:@"Failed to capture pixel at coordinates %i,%i using %@. The location may be off-screen or inaccessible.", (int)p.x, (int)p.y, compatMode];
+                }
+                
+                [NSException raise:@"ColorCaptureException" format:@"%@", errorMsg];
+            }
         }
     }
 }
